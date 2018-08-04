@@ -1,0 +1,1 @@
+/home/niko/.config/polybar/polybar.sh
