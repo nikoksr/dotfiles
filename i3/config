@@ -33,13 +33,13 @@ exec_always udiskie
 
 # Font
 # font pango:Noto Sans 8
-font pango: DejaVu Sans Mono for Powerline
+font pango: RobotoMono Nerd Font 11
 
 # Background
-exec_always feh --bg-scale /usr/share/pixmaps/backgrounds/space/space.png
+exec_always feh --bg-scale /usr/share/pixmaps/backgrounds/misc/triangle_shape_dark_figure_88540_1920x1080.jpg
 
 # Compton
-exec_always --no-startup-id compton -b --backend glx --vsync opengl
+exec_always --no-startup-id compton -b --backend glx --vsync opengl --inactive-dim 0.3 --focus-exclude '_NET_WM_NAME@:s = "rofi"'
 
 # Gaps 
 smart_gaps on
@@ -157,7 +157,7 @@ set $workspace6 "6"
 set $workspace7 "7"
 set $workspace8 "8"
 set $workspace9 "9"
-set $workspace10 "10: Music"
+set $workspace10 "10"
 
 # Switch To Workspace
 bindsym $mod+1 workspace $workspace1
@@ -182,11 +182,6 @@ bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
-
-#assign [class="Firefox"] $workspace1
-#assign [class="URxvt"] $workspace2
-assign [class="Pulseeffects"] $workspace10
-assign [class="ncmpcpp"] $workspace10
 
 # ===== Lock =========================================================================================
 
@@ -232,10 +227,6 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # Screenshot
 bindsym $mod+F8 exec "scrot -q 100 '%d-%m-%Y@%T.png' -e 'mv $f ~/pictures/screenshots'"
-
-# Cpu-Power
-# bindsym $sup+S exec "cpupower frequency-set -g powersave"
-# bindsym $sup+P exec "cpupower frequency-set -g performance"
 
 # Browser
 bindsym $sup+w exec firefox

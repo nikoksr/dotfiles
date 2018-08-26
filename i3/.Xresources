@@ -7,7 +7,7 @@ urxvt.saveLines: 1000000
 urxvt.scrollBar: false
 urxvt.depth: 32
 
-urxvt.background: [70]#000000 
+urxvt.background: [100]#000000 
 urxvt.foreground: #d0d0d0 
 urxvt.color0: #4e4e4e
 urxvt.color1: #d68787 
