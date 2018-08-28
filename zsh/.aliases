@@ -1,7 +1,3 @@
-## vim
-alias vi="nvim"
-alias vim="nvim"
-
 ## update
 alias upd='trizen -Syu'
 
