@@ -1,47 +1,92 @@
-
 ### Added by Zplugin's installer
 source '/home/niko/.zplugin/bin/zplugin.zsh'
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 ### End of Zplugin's installer chunk
-zplugin load zdharma/history-search-multi-word
 
-zplugin ice compile"*.lzui" from"notabug"
-zplugin load zdharma/zui
+zplugin ice wait'0' lucid
+zplugin light thetic/extract
 
-# Binary release in archive, from Github-releases page; after automatic unpacking it provides program "fzf"
+zplugin ice wait'0' lucid
+zplugin light MichaelAquilina/zsh-you-should-use
 
-zplugin ice from"gh-r" as"program"; zplugin load junegunn/fzf-bin
+zplugin ice wait'0' blockf lucid
+zplugin light zsh-users/zsh-completions
 
-# One other binary release, it needs renaming from `docker-compose-Linux-x86_64`.
-# This is done by ice-mod `mv'{from} -> {to}'. There are multiple packages per
-# single version, for OS X, Linux and Windows – so ice-mod `bpick' is used to
-# select Linux package – in this case this is not needed, Zplugin will grep
-# operating system name and architecture automatically when there's no `bpick'
-
-zplugin ice from"gh-r" as"program" mv"docker* -> docker-compose" bpick"*linux*"; zplugin load docker/compose
-
-# Scripts that are built at install (there's single default make target, "install",
-# and it constructs scripts by `cat'ing a few files). The make"" ice could also be:
-# `make"install PREFIX=$ZPFX"`, if "install" wouldn't be the only, default target
-
-zplugin ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
-zplugin light tj/git-extras
-
-# Two regular plugins loaded in default way (no `zplugin ice ...` modifiers)
-
+zplugin ice wait'0' atload"_zsh_autosuggest_start" lucid
 zplugin light zsh-users/zsh-autosuggestions
-zplugin light zdharma/fast-syntax-highlighting
 
-# Load the pure theme, with zsh-async library that's bundled with it
-# zplugin ice pick"async.zsh" src"pure.zsh"; zplugin light sindresorhus/pure
+zplugin ice wait'0' lucid
+zplugin light zdharma/history-search-multi-word
 
-zplugin ice pick"async.zsh" src"pure.zsh"
+#zplugin ice wait'0' as"program" mv"wd.sh -> wd" pick"wd" lucid
+#zplugin light mfaerevaag/wd
+
+# theme
+zplugin ice pick"async.zsh" src"pure.zsh" lucid
 zplugin light sindresorhus/pure
 
-zplugin light mafredri/zsh-async
-zplugin light thetic/extract
-zplugin light srijanshetty/zsh-pip-completion
-zplugin light MichaelAquilina/zsh-you-should-use
+# oh-my-zsh
+# libs
+zplugin ice wait'0' lucid
+zplugin snippet OMZ::lib/git.zsh
+
+zplugin ice wait'0' lucid
+zplugin snippet OMZ::lib/history.zsh
+
+zplugin ice wait'0' lucid
+zplugin snippet OMZ::lib/completion.zsh
+
+zplugin ice wait'0' lucid
+zplugin snippet OMZ::lib/key-bindings.zsh
+
+zplugin ice wait'0' lucid
+zplugin snippet OMZ::lib/functions.zsh
+
+zplugin ice wait'0' lucid
+zplugin snippet OMZ::lib/correction.zsh
+
+setopt promptsubst
+
+# plugins
+zplugin ice wait'0' atload"unalias grv" lucid
+zplugin snippet OMZ::plugins/git/git.plugin.zsh
+
+zplugin ice wait'0' lucid
+zplugin snippet OMZ::plugins/pip/pip.plugin.zsh
+
+zplugin ice wait'0' lucid
+zplugin snippet OMZ::plugins/web-search/web-search.plugin.zsh
+
+zplugin ice wait'0' lucid
+zplugin snippet OMZ::plugins/taskwarrior/taskwarrior.plugin.zsh
+
+zplugin ice wait'0' lucid
+zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
+
+zplugin ice wait'0' lucid
+zplugin snippet OMZ::plugins/cp/cp.plugin.zsh
+
+zplugin ice wait'0' lucid
+zplugin snippet OMZ::plugins/history/history.plugin.zsh
+
+zplugin ice wait'0' lucid
+zplugin snippet OMZ::plugins/dirpersist/dirpersist.plugin.zsh
+
+#zplugin ice wait'0' lucid
+#zplugin snippet OMZ::plugins/wd/wd.plugin.zsh
+
+# needs to be loaded last
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+zle -N history-substring-search-up
+zle -N history-substring-search-down
+
+zplugin ice wait'0' lucid
+zplugin light zsh-users/zsh-history-substring-search
+
+zplugin ice wait'0' atinit"zpcompinit; zpcdreplay" lucid
+zplugin light zdharma/fast-syntax-highlighting
 
 source $HOME/.aliases
