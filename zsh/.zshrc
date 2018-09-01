@@ -73,6 +73,9 @@ zplugin snippet OMZ::plugins/history/history.plugin.zsh
 zplugin ice wait'0' lucid
 zplugin snippet OMZ::plugins/dirpersist/dirpersist.plugin.zsh
 
+zplugin ice wait'0' lucid
+zplugin snippet OMZ::plugins/rsync/rsync.plugin.zsh
+
 #zplugin ice wait'0' lucid
 #zplugin snippet OMZ::plugins/wd/wd.plugin.zsh
 
@@ -90,3 +93,4 @@ zplugin ice wait'0' atinit"zpcompinit; zpcdreplay" lucid
 zplugin light zdharma/fast-syntax-highlighting
 
 source $HOME/.aliases
+source $HOME/.functions
