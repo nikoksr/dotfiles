@@ -21,11 +21,11 @@ foreground = ${colors.foreground}
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = RobotoMono Nerd Font:pixelsize=11;2
+font-0 = RobotoMono Nerd Font:pixelsize=11;3
 
 modules-left = i3
-modules-center = 
-modules-right = network battery backlight pulseaudio time
+modules-center = date time 
+modules-right = updates-arch-combined network battery light pulseaudio powermenu
 
 [module/i3]
 type = internal/i3
@@ -53,40 +53,22 @@ label-urgent = %index%
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 3
 
-[module/backlight]
-type = internal/backlight
-card = intel_backlight
-
-format = <label>
-
-label =  %percentage%%
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-3 = 
-ramp-4 = 
-
-bar-width = 10
-bar-indicator = |
-bar-fill = ─
-bar-empty = ─
-
 [module/time]
 type = internal/date
 interval = 1
 time = %H:%M
-label =  %time%
+label =  %time%
+
 format = <label>
 format-foreground = ${colors.foreground}
 
 [module/date]
 type = internal/date
 interval = 1
-date = "%d/%m/%Y"
-label = %date%
+date = %d.%m.%Y
+label =  %date%
 
-format = <label>"
+format = <label>
 format-foreground = ${colors.foreground}
 
 [module/battery]
@@ -95,18 +77,14 @@ type = internal/battery
 battery = BAT0
 adapter = AC
 full-at = 98
-poll-interval = 1
-time-format = %H:%M
+poll-interval = 1.0
 
-format-charging = <animation-charging> <label-charging>
-
+format-charging = <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
 
-label-charging = Charging %percentage%%
-
-label-discharging = Discharging %percentage%%
-
-label-full =  Fully charged
+label-charging =  %percentage%%
+label-discharging = %percentage%%
+label-full =  %percentage%%
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -137,10 +115,10 @@ interval = 1.0
 format-connected = <ramp-signal> <label-connected>
 format-disconnected = <label-disconnected>
 
-label-connected = %essid%
+label-connected = %signal%%
 label-connected-foreground = ${colors.foreground} 
 
-label-disconnected = not connected
+label-disconnected =  
 label-disconnected-foreground = ${colors.foreground}
 
 ramp-signal-0 = 
@@ -157,11 +135,12 @@ interval = 5
 
 format-volume = <ramp-volume> <label-volume>
 
-label-muted =  muted
+label-muted =  muted
 label-muted-foreground = ${colors.foreground}
 
-ramp-volume-0 = 
-ramp-volume-1 = 
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
 
 [settings]
 screenchange-reload = true
@@ -169,5 +148,54 @@ screenchange-reload = true
 [global/wm]
 margin-top = 5
 margin-bottom = 5
+
+[module/updates-arch-combined]
+type = custom/script
+exec = ~/.config/polybar/scripts/updates-arch-combined.sh
+interval = 600
+
+[module/system-usb-udev]
+type = custom/script
+exec = ~/.config/polybar/scripts/system-usb-udev.sh
+tail = true
+click-left = ~/polybar-scripts/system-usb-udev.sh --mount
+click-right = ~/polybar-scripts/system-usb-udev.sh --unmount
+
+[module/light]
+type = custom/script
+exec = ~/.config/polybar/scripts/light.sh
+interval = 0
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = false
+
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+
+label-open = 
+label-close = 
+
+label-close-foreground = ${colors.foreground}
+label-separator = " | "
+label-separator-foreground = ${colors.foreground-alt}
+
+; lock
+menu-0-3 = 
+menu-0-3-exec = betterlockscreen -l blur
+menu-0-3-foreground = ${colors.foreground}
+; logout
+menu-0-2 = 
+menu-0-2-exec = i3-msg exit
+menu-0-2-foreground = ${colors.foreground}
+; reboot
+menu-0-1 = 
+menu-0-1-exec = systemctl reboot
+menu-0-1-foreground = ${colors.foreground}
+; shutdown
+menu-0-0 = 
+menu-0-0-exec = systemctl poweroff
+menu-0-0-foreground = ${colors.foreground}
 
 ; vim:ft=dosini
