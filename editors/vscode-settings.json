@@ -1,9 +1,0 @@
-{
-    "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Dracula",
-    "telemetry.enableTelemetry": false,
-    "telemetry.enableCrashReporter": false,
-    "workbench.startupEditor": "newUntitledFile",
-    "editor.fontFamily": "'DejaVu Sans'",
-    "editor.fontLigatures": true
-}
