@@ -13,6 +13,7 @@ autoload -Uz _zplugin
 ##############################
 
 
+source $HOME/.zprofile
 source $HOME/.aliases
 source $HOME/.functions
 
