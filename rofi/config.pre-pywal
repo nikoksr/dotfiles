@@ -1,0 +1,133 @@
+! "Enabled modi" Set from: File
+rofi.modi:                           drun,run,ssh
+
+! "Window width" Set from: Default
+rofi.width:                          30
+
+! "Number of lines" Set from: Default
+rofi.lines:                          10
+
+! "Number of columns" Set from: Default
+rofi.columns:                        1
+
+! "Font to use" Set from: File
+rofi.font:                           RobotoMono Nerd Font 12 
+
+! "Border width" Set from: Default
+! rofi.bw:                             1
+
+! "Location on screen" Set from: Default
+rofi.location:                       0
+
+! "Padding" Set from: Default
+! rofi.padding:                        5
+
+! "Y-offset relative to location" Set from: Default
+! rofi.yoffset:                        0
+
+! "X-offset relative to location" Set from: Default
+! rofi.xoffset:                        0
+
+! "Always show number of lines" Set from: Default
+!rofi.fixed-num-lines:                true
+
+! "Whether to load and show icons" Set from: Default
+rofi.show-icons:                     true
+
+! "Terminal to use" Set from: Default
+rofi.terminal:                       termite 
+
+! "Ssh client to use" Set from: Default
+rofi.ssh-client:                     ssh
+
+! "Ssh command to execute" Set from: Default
+rofi.ssh-command:                    {terminal} -e {ssh-client} {host}
+
+! "Run command to execute" Set from: Default
+! rofi.run-command:                    {cmd}
+
+! "Command to get extra run targets" Set from: Default
+! rofi.run-list-command:               
+
+! "Run command to execute that runs in shell" Set from: Default
+! rofi.run-shell-command:              {terminal} -e {cmd}
+
+! "Command executed on accep-entry-custom for window modus" Set from: Default
+! rofi.window-command:                 xkill -id {window}
+
+! "Window fields to match in window mode" Set from: Default
+! rofi.window-match-fields:            all
+
+! "Theme to use to look for icons" Set from: Default
+rofi.drun-icon-theme:               default                
+
+! "Desktop entry fields to match in drun" Set from: Default
+! rofi.drun-match-fields:              name,generic,exec,categories
+
+! "Disable history in run/ssh" Set from: Default
+rofi.disable-history:               false 
+
+! "Use sorting" Set from: Default
+rofi.sort:                           true
+
+! "Set case-sensitivity" Set from: Default
+rofi.case-sensitive:                 false
+
+! "Cycle through the results list" Set from: Default
+rofi.cycle:                          true
+
+! "Enable sidebar-mode" Set from: Default
+!rofi.sidebar-mode:                   true
+
+! "Enable auto select mode" Set from: Default
+rofi.auto-select:                    false
+
+! "Parse hosts file for ssh mode" Set from: Default
+rofi.parse-hosts:                    true
+
+! "Parse known_hosts file for ssh mode" Set from: Default
+rofi.parse-known-hosts:              true
+
+! "Set the matching algorithm. (normal, regex, glob, fuzzy)" Set from: Default
+! rofi.matching:                       normal
+
+! "Fullscreen" Set from: Default
+!rofi.fullscreen:                    true 
+
+! "Threads to use for string matching" Set from: Default
+rofi.threads:                        2
+
+! "Scrolling method. (0: Page, 1: Centered)" Set from: Default
+! rofi.scroll-method:                  0
+
+! "Background to use for fake transparency. (background or screenshot)" Set from: Default
+! rofi.fake-background:                screenshot
+
+! "Window Format. w (desktop name), t (title), n (name), r (role), c (class) *DEPRECATED*" Set from: Default
+! rofi.window-format:                  {w}    {i}{c}   {t}
+
+! "Click outside the window to exit" Set from: Default
+rofi.click-to-exit:                  true
+
+! "Indicate how it match by underlining it." Set from: Default
+rofi.show-match:                     true
+
+! "New style theme file" Set from: File
+
+! "Color scheme for normal row" Set from: Default
+! rofi.color-normal:                   
+
+! "Color scheme for urgent row" Set from: Default
+! rofi.color-urgent:                   
+
+! "Color scheme for active row" Set from: Default
+! rofi.color-active:                   
+
+! "Color scheme window" Set from: Default
+! rofi.color-window:                   
+
+!rofi.hide-scrollbar: true
+
+! "Max history size (WARNING: can cause slowdowns when set to high)." Set from: Default
+rofi.max-history-size:               {lines}
+rofi.theme: /usr/share/rofi/themes/gruvbox-dark-soft.rasi

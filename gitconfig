@@ -1,0 +1,16 @@
+# ~/.gitconfig
+
+
+[user]
+	name = Niko Köser
+	email = koeserniko@gmail.com
+[core]
+	editor = vim
+	symlinks = false
+[color]
+	status = auto
+	branch = auto
+	interactive = auto
+	diff = auto
+[credential]
+	helper = cache --timeout 3600

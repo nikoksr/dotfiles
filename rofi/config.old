@@ -1,0 +1,21 @@
+! "Enabled modi" Set from: Default
+rofi.modi:                              run,ssh
+
+! "Window opacity" Set from: Default
+rofi.opacity:                           50
+
+! "Window width" Set from: Default
+! rofi.width:                          50
+
+! "Number of lines" Set from: Default
+! rofi.lines:                          15
+
+! "Number of columns" Set from: Default
+! rofi.columns:                        1
+
+! "Font to use" Set from: Default
+rofi.font:                              RobotoMono Nerd Font 11
+
+rofi.show-icons
+
+rofi.theme: /usr/share/rofi/themes/gruvbox-dark.rasi
