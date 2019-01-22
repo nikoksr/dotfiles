@@ -1,0 +1,130 @@
+# ~/.aliases
+
+
+##############################
+#
+# UPDATES
+#
+##############################
+
+
+# update system
+alias upd='trizen -Syu'
+
+# update and clean system
+alias updac='trizen -Syu; trizen -Rns $(trizen -Qtdq); trizen -Sc'
+
+# update and clean system with noconfirm
+alias updacnc='trizen -Syu --noconfirm; trizen -Rns $(trizen -Qtdq) --noconfirm; trizen -Sc --noconfirm'
+
+# refresh pacman mirrors 
+alias refresh_mirrors='sudo reflector --country 'Germany' --latest 50 --age 24 --sort rate --save /etc/pacman.d/mirrorlist; sudo rm -f /etc/pacman.d/mirrorlist.pacnew; sudo pacman -Syy'
+
+# update zplugin
+alias updzsh='zplg self-update;zplg update --all;zplg compile --all'
+
+# update firmware
+alias updfw='fwupdmgr get-devices; fwupdmgr refresh; fwupdmgr get-updates; fwupdmgr update'
+
+
+##############################
+#
+# DEVELOPMENT                      
+#
+##############################
+
+
+# create .c blueprint file
+alias blueprint='cp ~/dev/.blueprint.c ./blueprint.c'
+
+# gcc flags
+alias gcc='gcc -std=c11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -fcf-protection -O2 -pipe -Wall -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
+
+# g++ flags
+alias g++='g++ -std=c++11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -fcf-protection -O2 -pipe -Wall -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
+
+# install and upgrade pip package as user
+alias pi='pip install --user --upgrade '
+
+
+##############################
+#
+# COLORS                     
+#
+##############################
+
+
+# grep color
+alias grep='grep --color=auto'
+
+# diff color
+alias diff='diff --color=auto'
+
+# ls color
+alias ls='ls -h --color=auto'
+
+# k
+alias k='k -h'
+
+
+##############################
+#
+# REMOTE                     
+#
+##############################
+
+
+# wake betty
+alias wake_betty='wol D0:50:99:C3:DF:2F'
+
+# ping betty
+alias ping_betty='ping 192.168.10.250'
+
+# ssh admin@blackbetty
+alias ssh_admin@betty='ssh -4 admin@192.168.10.250'
+
+# ssh niko@blackbetty
+alias ssh_niko@betty='ssh -4 niko@192.168.10.250'
+
+# ssh borg@blackbetty
+alias ssh_borg@betty='ssh -4 borg@192.168.10.250'
+
+
+##############################
+#
+# FZF                     
+#
+##############################
+
+
+alias fzf_p='fzf --preview "head -100 {}"'
+
+
+##############################
+#
+# MOUNT                     
+#
+##############################
+
+
+# betty share
+alias mount_betty_share='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
+
+# betty niko
+alias mount_betty_niko='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
+
+# betty vm
+alias mount_betty_vm='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
+
+
+##############################
+#
+# NVIDIA               
+#
+##############################
+
+
+# primusrun
+alias primusrun_opt='PRIMUS_SYNC=1 vblank_mode=0 primusrun'
+
+
