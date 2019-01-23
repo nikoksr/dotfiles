@@ -84,11 +84,11 @@ cp_dotfiles() {
   echo "Copying general files..."
   rsync -uq ~/.zshrc ~/dev/github/dotfiles/zshrc
   rsync -uq ~/.zprofile ~/dev/github/dotfiles/zprofile
-  rsync -uq ~/.vimrc.heavy ~/dev/github/dotfiles/vimrc.heavy
-  rsync -uq ~/.vimrc.light ~/dev/github/dotfiles/vimrc.light
+  rsync -uq ~/.vimrc.heavy ~/dev/github/dotfiles/vim/vimrc.heavy
+  rsync -uq ~/.vimrc.light ~/dev/github/dotfiles/vim/vimrc.light
   rsync -uq ~/.spacemacs ~/dev/github/dotfiles/spacemacs
   rsync -uq ~/.gitconfig ~/dev/github/dotfiles/gitconfig
-  rsync -uq ~/.ycm_extra_conf.py ~/dev/github/dotfiles/ycm_extra_conf.py
+  rsync -uq ~/.ycm_extra_conf.py ~/dev/github/dotfiles/vim/ycm_extra_conf.py
   rsync -uq ~/.config/termite/config ~/dev/github/dotfiles/termite_config
 
   echo "Copying system specific files..."
