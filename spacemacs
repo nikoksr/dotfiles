@@ -34,15 +34,18 @@ values."
      sql
      java
      c-c++
-     (c-c++ :variables c-c++-enable-clang-support t)
-     (c-c++ :variables c-c++-default-mode-for-headers 'c++-mode)
+     (c-c++ :variables
+              c-c++-enable-clang-support t
+              c-c++ :variables c-c++-default-mode-for-headers 'c++-mode)
      go
-     (go :variables go-format-before-save t)
-     (go :variables gofmt-command "goimports")
+     (go :variables 
+          go-format-before-save t
+          gofmt-command "goimports")
      python
-     (python :variables python-enable-yapf-format-on-save t)
-     (python :variables python-sort-imports-on-save t)
-     (python :variables python-test-runner 'pytest)
+     (python :variables 
+              python-enable-yapf-format-on-save t
+              python-sort-imports-on-save t
+              python-test-runner 'pytest)
      helm
      auto-completion
      better-defaults
@@ -266,7 +269,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers nil
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
