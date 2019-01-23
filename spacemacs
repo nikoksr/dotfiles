@@ -36,7 +36,7 @@ values."
      c-c++
      (c-c++ :variables
               c-c++-enable-clang-support t
-              c-c++ :variables c-c++-default-mode-for-headers 'c++-mode)
+              c-c++-default-mode-for-headers 'c++-mode)
      go
      (go :variables 
           go-format-before-save t
