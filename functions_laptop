@@ -88,7 +88,7 @@ cp_dotfiles() {
   rsync -uq ~/.vimrc.heavy ~/dev/github/dotfiles/vim/vimrc.heavy
   rsync -uq ~/.spacemacs ~/dev/github/dotfiles/spacemacs
   rsync -uq ~/.gitconfig ~/dev/github/dotfiles/gitconfig
-  rsync -uq ~/.ycm_extra_conf.py ~/dev/github/dotfiles/ycm_extra_conf.py
+  rsync -uq ~/.ycm_extra_conf.py ~/dev/github/dotfiles/vim/ycm_extra_conf.py
   rsync -uq ~/.config/compton.conf ~/dev/github/dotfiles/compton.conf
   rsync -uq ~/.config/dunst/dunstrc ~/dev/github/dotfiles/dunstrc
   rsync -uq ~/.config/termite/config ~/dev/github/dotfiles/termite_config
