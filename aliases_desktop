@@ -44,7 +44,7 @@ alias gcc='gcc -std=c11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS 
 alias g++='g++ -std=c++11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -fcf-protection -O2 -pipe -Wall -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
 
 # install and upgrade pip package as user
-alias pi='pip install --user --upgrade '
+alias piuu='pip install --user --upgrade '
 
 
 ##############################
@@ -88,6 +88,9 @@ alias ssh_niko@betty='ssh -4 niko@192.168.10.250'
 
 # ssh borg@blackbetty
 alias ssh_borg@betty='ssh -4 borg@192.168.10.250'
+
+# ssh admin@rocketchat
+alias ssh_admin@rc='ssh -4 admin@192.168.10.53'
 
 
 ##############################
