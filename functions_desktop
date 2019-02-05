@@ -34,12 +34,12 @@ function decompress() {
 ##############################
 
 
-# Downloading via Aria2c
+# Downloading a file via Aria2c
 # @param $1 - destination
 # @param $2 - url to download
-function dwnld() {
+function dwnld_file() {
     if [ -n "$1" ] && [ -n "$2" ]; then
-        aria2c --file-allocation=none -c -x 10 -s 10 -d $1 $2
+        aria2c --file-allocation=none -c -x 10 -s 10 -d "$1" "$2"
     fi
 }
 
