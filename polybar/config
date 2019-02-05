@@ -133,6 +133,8 @@ sink = alsa_output.pci-0000_12_00.3.analog-stereo
 use-ui-max = true
 interval = 5
 
+click-right = exec /usr/bin/pavucontrol &
+
 format-volume = <ramp-volume> <label-volume>
 
 label-muted =  muted
@@ -166,11 +168,6 @@ type = custom/script
 exec = ~/.config/polybar/scripts/light.sh
 interval = 0.2
 
-[module/ufw]
-type = custom/script
-exec = ~/.config/polybar/scripts/ufw.sh
-interval = 0.2
-
 [module/powermenu]
 type = custom/menu
 
@@ -179,8 +176,8 @@ expand-right = false
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 
-label-open = 
-label-close = 
+label-open = 
+label-close = 
 
 label-close-foreground = ${colors.foreground}
 label-separator = " | "
@@ -199,7 +196,7 @@ menu-0-1 = 
 menu-0-1-exec = systemctl reboot
 menu-0-1-foreground = ${colors.foreground}
 ; shutdown
-menu-0-0 = |||  
+menu-0-0 = || 
 menu-0-0-exec = systemctl poweroff
 menu-0-0-foreground = ${colors.foreground}
 
