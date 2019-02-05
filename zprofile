@@ -17,7 +17,7 @@ export GEM_HOME=$HOME/.gem
 
 export LANG=en_US.UTF-8
 
-export VISUAL=vim
-export EDITOR="$VISUAL"
+export VISUAL=emacs
+export EDITOR=vim
 
 
