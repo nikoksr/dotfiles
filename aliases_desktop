@@ -14,6 +14,9 @@ alias upd='trizen -Syu'
 # update and clean system
 alias updac='trizen -Syu; trizen -Rns $(trizen -Qtdq); trizen -Sc'
 
+# update with noconfirm
+alias updnc='trizen -Syu --noconfirm'
+
 # update and clean system with noconfirm
 alias updacnc='trizen -Syu --noconfirm; trizen -Rns $(trizen -Qtdq) --noconfirm; trizen -Sc --noconfirm'
 
@@ -38,10 +41,10 @@ alias updfw='fwupdmgr get-devices; fwupdmgr refresh; fwupdmgr get-updates; fwupd
 alias blueprint='cp ~/dev/.blueprint.c ./blueprint.c'
 
 # gcc flags
-alias gcc='gcc -std=c11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -fcf-protection -O2 -pipe -Wall -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
+alias gcc='gcc -std=c11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -fcf-protection -O3 -pipe -Wall -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
 
 # g++ flags
-alias g++='g++ -std=c++11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -fcf-protection -O2 -pipe -Wall -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
+alias g++='g++ -std=c++11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -fcf-protection -O3 -pipe -Wall -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
 
 # install and upgrade pip package as user
 alias piuu='pip install --user --upgrade '
