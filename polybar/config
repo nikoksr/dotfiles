@@ -115,7 +115,7 @@ interval = 5.0
 format-connected = <ramp-signal> <label-connected>
 format-disconnected = <label-disconnected>
 
-label-connected = %signal%%
+label-connected = %essid%(%signal%%)
 label-connected-foreground = ${colors.foreground} 
 
 label-disconnected =  
