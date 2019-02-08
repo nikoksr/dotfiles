@@ -21,7 +21,7 @@ alias updnc='trizen -Syu --noconfirm'
 alias updacnc='trizen -Syu --noconfirm; trizen -Rns $(trizen -Qtdq) --noconfirm; trizen -Sc --noconfirm'
 
 # refresh pacman mirrors 
-alias refresh_mirrors='sudo reflector --country 'Germany' --latest 50 --age 24 --sort rate --save /etc/pacman.d/mirrorlist; sudo rm -f /etc/pacman.d/mirrorlist.pacnew; sudo pacman -Syy'
+alias refresh_mirrors='reflector --country 'Germany' --latest 50 --age 24 --sort rate --save /etc/pacman.d/mirrorlist;rm -f /etc/pacman.d/mirrorlist.pacnew;pacman -Syy'
 
 # update zplugin
 alias updzsh='zplg self-update;zplg update --all;zplg compile --all'
@@ -121,16 +121,5 @@ alias mount_betty_niko='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -
 
 # betty vm
 alias mount_betty_vm='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
-
-
-##############################
-#
-# NVIDIA               
-#
-##############################
-
-
-# primusrun
-alias primusrun_opt='PRIMUS_SYNC=1 vblank_mode=0 primusrun'
 
 
