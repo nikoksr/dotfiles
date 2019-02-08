@@ -18,7 +18,7 @@ alias updac='trizen -Syu; trizen -Rns $(trizen -Qtdq); trizen -Sc'
 alias updacnc='trizen -Syu --noconfirm; trizen -Rns $(trizen -Qtdq) --noconfirm; trizen -Sc --noconfirm'
 
 # refresh pacman mirrors 
-alias refresh_mirrors='sudo reflector --country 'Germany' --latest 50 --age 24 --sort rate --save /etc/pacman.d/mirrorlist; sudo rm -f /etc/pacman.d/mirrorlist.pacnew; sudo pacman -Syy'
+alias refresh_mirrors='reflector --country 'Germany' --latest 50 --age 24 --sort rate --save /etc/pacman.d/mirrorlist;rm -f /etc/pacman.d/mirrorlist.pacnew;pacman -Syy'
 
 # update zplugin
 alias updzsh='zplg self-update;zplg update --all;zplg compile --all'
