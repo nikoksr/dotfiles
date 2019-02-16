@@ -123,3 +123,22 @@ alias mount_betty_niko='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -
 alias mount_betty_vm='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
 
 
+###########################
+#
+# BORG BACKUP
+#
+###########################
+
+# run service manually
+alias borg_run_backup='sudo systemctl start borg-backup.service'
+
+# service status
+alias borg_status_backup='watch -n 1 sudo systemctl status borg-backup.service'
+
+# info about repo
+alias borg_info_repo='borg info borg@192.168.10.250:/betty/vault/backups/niko-pc'
+
+# list backups
+alias borg_list_backups='borg list borg@192.168.10.250:/betty/vault/backups/niko-pc'
+
+
