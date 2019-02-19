@@ -18,7 +18,7 @@ alias updac='trizen -Syu; trizen -Rns $(trizen -Qtdq); trizen -Sc'
 alias updacnc='trizen -Syu --noconfirm; trizen -Rns $(trizen -Qtdq) --noconfirm; trizen -Sc --noconfirm'
 
 # refresh pacman mirrors 
-alias refresh_mirrors='reflector --country 'Germany' --latest 50 --age 24 --sort rate --save /etc/pacman.d/mirrorlist;rm -f /etc/pacman.d/mirrorlist.pacnew;pacman -Syy'
+alias refresh_mirrors='sudo reflector --country 'Germany' --latest 50 --age 24 --sort rate --save /etc/pacman.d/mirrorlist; sudo rm -f /etc/pacman.d/mirrorlist.pacnew; sudo pacman -Syy'
 
 # update zplugin
 alias updzsh='zplg self-update;zplg update --all;zplg compile --all'
@@ -89,6 +89,9 @@ alias ssh_niko@betty='ssh -4 niko@192.168.10.250'
 # ssh borg@blackbetty
 alias ssh_borg@betty='ssh -4 borg@192.168.10.250'
 
+# ssh admin@rocketchat
+alias ssh_admin@rc='ssh -4 admin@192.168.10.53'
+
 
 ##############################
 #
@@ -128,3 +131,23 @@ alias mount_betty_vm='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o 
 alias primusrun_opt='PRIMUS_SYNC=1 vblank_mode=0 primusrun'
 
 
+###########################
+#
+# BORG BACKUP
+#
+###########################
+
+# run service manually
+alias borg_run_backup='sudo systemctl start borg-backup.service'
+
+# service status
+alias borg_status_backup='sudo systemctl status borg-backup.service'
+
+# watch service status live
+alias borg_watch_live='watch -n 1 sudo systemctl status borg-backup.service'
+
+# info about repo
+alias borg_info_repo='borg info user@server:<repo-pfad>'
+
+# list backups
+alias borg_list_backups='borg list user@server:<repo-pfad>'
