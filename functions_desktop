@@ -101,3 +101,23 @@ cp_dotfiles() {
 
   echo "Done..."
 }
+
+
+#####################################################
+#
+# BORG BACKUP
+#
+# Mounten eines Remote-Borg-Backups.
+#
+# @param $1 Name des zu mountenden Remote-Archives
+# @param $2 Mount Pfad
+#
+#####################################################
+
+function borg_mount_backup() {
+    if [ -n "$1" ] && [ -n "$2" ]; then
+        borg mount borg@192.168.10.250:/betty/vault/backups/niko-pc::"$1" "$2"
+    fi
+}
+
+

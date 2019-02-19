@@ -21,7 +21,7 @@ alias updnc='trizen -Syu --noconfirm'
 alias updacnc='trizen -Syu --noconfirm; trizen -Rns $(trizen -Qtdq) --noconfirm; trizen -Sc --noconfirm'
 
 # refresh pacman mirrors 
-alias refresh_mirrors='reflector --country 'Germany' --latest 50 --age 24 --sort rate --save /etc/pacman.d/mirrorlist;rm -f /etc/pacman.d/mirrorlist.pacnew;pacman -Syy'
+alias refresh_mirrors='sudo reflector --country 'Germany' --latest 50 --age 24 --sort rate --save /etc/pacman.d/mirrorlist;sudo rm -f /etc/pacman.d/mirrorlist.pacnew;trizen -Syy'
 
 # update zplugin
 alias updzsh='zplg self-update;zplg update --all;zplg compile --all'
@@ -121,5 +121,24 @@ alias mount_betty_niko='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -
 
 # betty vm
 alias mount_betty_vm='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
+
+
+###########################
+#
+# BORG BACKUP
+#
+###########################
+
+# run service manually
+alias borg_run_backup='sudo systemctl start borg-backup.service'
+
+# service status
+alias borg_status_backup='watch -n 1 sudo systemctl status borg-backup.service'
+
+# info about repo
+alias borg_info_repo='borg info borg@192.168.10.250:/betty/vault/backups/niko-pc'
+
+# list backups
+alias borg_list_backups='borg list borg@192.168.10.250:/betty/vault/backups/niko-pc'
 
 
