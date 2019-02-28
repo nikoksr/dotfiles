@@ -124,3 +124,43 @@ function borg_mount_backup() {
         borg mount borg@192.168.10.250:/betty/vault/backups/niko-laptop::"$1" "$2"
     fi
 }
+
+
+#####################################################
+#
+# CREATE PROJECT
+#
+# Create an empty folder structure for dev projects
+#
+# @param $1 path and name
+#
+#####################################################
+
+function create-empty-project() {
+    if [ -n "$1" ]; then
+        # Get current working dir
+        cwd=${pwd}
+
+        # Create main project folder and cd to it
+        mkdir -p "$1"
+        cd "$1"
+
+        # Create subfolders
+        mkdir -p src
+        mkdir -p include
+        mkdir -p build
+        mkdir -p build/debug
+        mkdir -p build/release
+        mkdir -p doc
+        touch README.md
+
+        # Git init, add and commit project
+        git init .
+        git add .
+        git commit -m "Create new project"
+
+        # Cd back to origin
+        cd $cwd
+        echo "\nCreated empty project $1"
+    fi
+}
