@@ -37,7 +37,7 @@ function decompress() {
 # Downloading a file via Aria2c
 # @param $1 - destination
 # @param $2 - url to download
-function dwnld_file() {
+function dwnld-file() {
     if [ -n "$1" ] && [ -n "$2" ]; then
         aria2c --file-allocation=none -c -x 10 -s 10 -d "$1" "$2"
     fi
@@ -80,7 +80,7 @@ fglog() {
 ##############################
 
 
-cp_dotfiles() {
+cp-dotfiles() {
   echo "Copying general files..."
   rsync -uq ~/.zshrc ~/dev/github/dotfiles/zshrc
   rsync -uq ~/.zprofile ~/dev/github/dotfiles/zprofile
@@ -114,7 +114,7 @@ cp_dotfiles() {
 #
 #####################################################
 
-function borg_mount_backup() {
+function borg-mount-backup() {
     if [ -n "$1" ] && [ -n "$2" ]; then
         borg mount borg@192.168.10.250:/betty/vault/backups/niko-pc::"$1" "$2"
     fi
