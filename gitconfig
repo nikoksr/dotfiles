@@ -1,16 +1,53 @@
 # ~/.gitconfig
 
-
+# User
 [user]
 	name = Niko Köser
 	email = koeserniko@gmail.com
+
+# Core
 [core]
 	editor = vim
 	symlinks = false
-[color]
-	status = auto
-	branch = auto
-	interactive = auto
-	diff = auto
+  pager = less -x4
+  autocrlf = input
+  ignorecase = true
+
+# Credential
 [credential]
 	helper = cache --timeout 3600
+
+# Color
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true
+
+# Alias
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+	br = branch
+	df = diff
+	lg = log -p
+	rso = remote show origin
+  me = config user.name
+  unstage = reset HEAD
+  undo = reset --soft HEAD^
+
+# Urls
+[url "https://github.com/"]
+    insteadOf = gh:
+
+[url "https://gist.github.com/"]
+    insteadOf = gist:
+
+[url "https://bitbucket.org/"]
+    insteadOf = bb:
+
+[url "http://192.168.10.250/"]
+    insteadOf = betty:
