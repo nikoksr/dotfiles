@@ -44,8 +44,8 @@ zplugin light zsh-users/zsh-autosuggestions
 zplugin ice wait'0' lucid
 zplugin light zdharma/history-search-multi-word
 
-# zplugin ice wait'0' lucid
-# zplugin light supercrabtree/k
+zplugin ice wait'0' lucid
+zplugin light supercrabtree/k
 
 
 ##############################
@@ -67,9 +67,6 @@ zplugin light sindresorhus/pure
 
 
 setopt promptsubst
-
-zplugin ice wait'0' lucid
-zplugin snippet OMZ::lib/git.zsh
 
 zplugin ice wait'0' lucid
 zplugin snippet OMZ::lib/history.zsh
@@ -94,17 +91,11 @@ zplugin snippet OMZ::lib/correction.zsh
 ##############################
 
 
-zplugin ice wait'0' atload"unalias grv" lucid
-zplugin snippet OMZ::plugins/git/git.plugin.zsh
-
 zplugin ice wait'0' lucid
 zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
 zplugin ice wait'0' lucid
 zplugin snippet OMZ::plugins/history/history.plugin.zsh
-
-zplugin ice wait'0' lucid
-zplugin snippet OMZ::plugins/taskwarrior/taskwarrior.plugin.zsh
 
 
 ##############################
