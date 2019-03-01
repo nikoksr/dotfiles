@@ -9,9 +9,9 @@
 [core]
 	editor = vim
 	symlinks = false
-  pager = less -x4
-  autocrlf = input
-  ignorecase = true
+    pager = less -x4
+    autocrlf = input
+    ignorecase = true
 
 # Credential
 [credential]
@@ -19,25 +19,31 @@
 
 # Color
 [color]
-  diff = auto
-  status = auto
-  branch = auto
-  interactive = auto
-  ui = true
-  pager = true
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = true
+    pager = true
 
 # Alias
 [alias]
-	st = status
+    pu = push
+    puom = push -u origin master
+    pl = pull
+    plr = pull --rebase
+    st = status
 	co = checkout
 	ci = commit
 	br = branch
 	df = diff
 	lg = log -p
 	rso = remote show origin
-  me = config user.name
-  unstage = reset HEAD
-  undo = reset --soft HEAD^
+    rv = remote -v
+    me = config user.name
+    unstage = reset HEAD
+    undo = reset --soft HEAD~1
+    undo-hard = git reset --hard HEAD~1
 
 # Urls
 [url "https://github.com/"]
