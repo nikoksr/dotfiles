@@ -2,20 +2,20 @@
 
 # User
 [user]
-	name = Niko Köser
-	email = koeserniko@gmail.com
+    name = Niko Köser
+    email = koeserniko@gmail.com
 
 # Core
 [core]
-	editor = vim
-	symlinks = false
+    editor = vim
+    symlinks = false
     pager = less -x4
     autocrlf = input
     ignorecase = true
 
 # Credential
 [credential]
-	helper = cache --timeout 3600
+    helper = cache --timeout 3600
 
 # Color
 [color]
@@ -33,12 +33,12 @@
     pl = pull
     plr = pull --rebase
     st = status
-	co = checkout
-	ci = commit
-	br = branch
-	df = diff
-	lg = log -p
-	rso = remote show origin
+    co = checkout
+    ci = commit
+    br = branch
+    df = diff
+    lg = log -p
+    rso = remote show origin
     rv = remote -v
     me = config user.name
     unstage = reset HEAD
