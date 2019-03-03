@@ -132,30 +132,44 @@ function borg-mount-backup() {
 #####################################################
 
 function create-empty-project() {
-    if [ -n "$1" ]; then
-        # Get current working dir
-        cwd=${pwd}
-
-        # Create main project folder and cd to it
+    if [ -n "$1" ] && [ -n "$2" ]
+    then
+        # Create main project folder and cd into it
         mkdir -p "$1"
         cd "$1"
 
         # Create subfolders
-        mkdir -p src
-        mkdir -p include
         mkdir -p build
-        mkdir -p build/debug
-        mkdir -p build/release
         mkdir -p doc
+        mkdir -p include/"$1"
+        mkdir -p lib 
+        mkdir -p src
+        mkdir -p test
+
+        # Create files
         touch README.md
+        touch .gitignore
+        
+        # Create language specific blueprint files
+        if [ "$2" = "cpp" ]
+        then
+            cp ~/dev/.blueprints/blueprint.cpp src/"$1".cpp
+            cp ~/dev/.blueprints/CMakeLists-cpp.txt CMakeLists.txt
+        elif [ "$2" = "c" ]
+        then
+            cp ~/dev/.blueprints/blueprint.c src/"$1".c
+            cp ~/dev/.blueprints/CMakeLists-c.txt CMakeLists.txt
+        fi
+
+        # Add build-dirs to ignore
+        echo build*/ >> .gitignore
 
         # Git init, add and commit project
         git init .
         git add .
-        git commit -m "Create new project"
+        git commit -m "Create project $1"
 
-        # Cd back to origin
-        cd $cwd
-        echo "\nCreated empty project $1"
+        # Success message
+        echo "\nCreated project $1..."
     fi
 }
