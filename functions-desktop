@@ -176,6 +176,7 @@ function create-empty-project() {
     # Check parameter
     if [ ! -n "$1" ] || [ ! -n "$2" ]; then
         echo "Error: Missing parameter"
+        echo "Syntax: create-empty-project <projectname> <language>"
         return 1
     fi
 
@@ -188,6 +189,7 @@ function create-empty-project() {
     # Create main project folder and cd into it
     mkdir -p "$1"
     cd "$1"
+
     # Create subfolders
     mkdir -p build
     mkdir -p doc
@@ -195,6 +197,7 @@ function create-empty-project() {
     mkdir -p lib
     mkdir -p src
     mkdir -p test
+
     # Create files
     touch README.md
     touch .gitignore
@@ -210,10 +213,12 @@ function create-empty-project() {
 
     # Add build-dirs to ignore
     echo build*/ >> .gitignore
+
     # Git init, add and commit project
     git init .
     git add .
     git commit -m "Create project $1"
+
     # Success message
     echo "\nCreated project $1..."
 }
