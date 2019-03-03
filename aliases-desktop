@@ -37,8 +37,23 @@ alias updfw='fwupdmgr get-devices; fwupdmgr refresh; fwupdmgr get-updates; fwupd
 ##############################
 
 
-# create .c blueprint file
-alias blueprint='cp ~/dev/.blueprint.c ./blueprint.c'
+# Create .c blueprint file
+alias blueprint-c='cp ~/dev/.blueprints/blueprint.c blueprint.c'
+
+# Create .cpp blueprint file
+alias blueprint-cpp='cp ~/dev/.blueprints/blueprint.cpp blueprint.cpp'
+
+# Create CMakeLists.txt blueprint file for C
+alias blueprint-cmake-c='cp ~/dev/.blueprints/CMakeLists-c.txt CMakeLists.txt'
+
+# Create CMakeLists.txt blueprint file for CPP
+alias blueprint-cmake-cpp='cp ~/dev/.blueprints/CMakeLists-cpp.txt CMakeLists.txt'
+
+# CMake Debug
+alias cmake-debug='cmake -DCMAKE_BUILD_TYPE=Debug '
+
+# CMake Release
+alias cmake-release='cmake -DCMAKE_BUILD_TYPE=Release '
 
 # gcc flags
 alias gcc='gcc -std=c11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -fcf-protection -O3 -pipe -Wall -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
@@ -46,7 +61,7 @@ alias gcc='gcc -std=c11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS 
 # g++ flags
 alias g++='g++ -std=c++14 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -fcf-protection -O3 -pipe -Wall -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
 
-# install and upgrade pip package as user
+# Install and upgrade pip package as user
 alias piuu='pip install --user --upgrade '
 
 
