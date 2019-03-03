@@ -192,6 +192,8 @@ function create-empty-project() {
 
     # Create subfolders
     mkdir -p build
+    mkdir -p build/debug
+    mkdir -p build/release
     mkdir -p doc
     mkdir -p include/"$1"
     mkdir -p lib
