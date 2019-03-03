@@ -219,6 +219,7 @@ function create-empty-project() {
     git add .
     git commit -m "Create project $1"
 
-    # Success message
+    # Change back to origin folder and send success message
+    cd ..
     echo "\nCreated project $1..."
 }
