@@ -1,0 +1,219 @@
+# ~/.functions
+
+
+##############################
+#
+# COMPRESSION
+#
+##############################
+
+
+# Multithreaded compression via tar and pigz
+# @param $1 - file or directory to compress
+function compress() {
+    # Check parameter
+    if [ ! -n "$1" ]; then
+        echo "Error: You have to specify a file or folder to compress"
+        echo "Syntax: compress <file>"
+        return 1
+    fi
+
+    # Execute compression
+    tar cf - "$1" | pigz --best > "$1".tar.gz
+}
+
+# Decompression via tar and pigz
+# @param $1 - compressed input
+function decompress() {
+    # Check parameter
+    if [ ! -n "$1" ]; then
+        echo "Error: You have to specify a file or folder to compress"
+        echo "Syntax: decompress <file>"
+        return 1
+    fi
+
+    # Execute decompression
+    pigz -dc "$1" | tar xf -
+}
+
+
+##############################
+#
+# DOWNLOAD
+#
+##############################
+
+
+# Downloading a file via Aria2c
+# @param $1 - destination
+# @param $2 - url to download
+function dwnld-file() {
+    # Check parameter
+    if [ ! -n "$1" ] || [ ! -n "$2" ]; then
+        echo "Error: Missing parameter"
+        echo "Syntax: dwnld-file <url> <destination>"
+        return 1
+    fi
+
+    # Execute download via aria2
+    aria2c --file-allocation=none -c -x 10 -s 10 -d "$1" "$2"
+}
+
+
+##############################
+#
+# FZF
+#
+##############################
+
+
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+f() {
+  local files
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0 --preview '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (highlight -O ansi -l {} || cat {}) 2> /dev/null | head -500' --color dark))
+  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
+
+# fglog - git commit browser
+fglog() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --header "Press CTRL-S to toggle sort" \
+      --preview "echo {} | grep -o '[a-f0-9]\{7\}' | head -1 |
+                 xargs -I % sh -c 'git show --color=always % | head -$LINES'" \
+      --bind "enter:execute:echo {} | grep -o '[a-f0-9]\{7\}' | head -1 |
+              xargs -I % sh -c 'vim fugitive://\$(git rev-parse --show-toplevel)/.git//% < /dev/tty'"
+}
+
+
+##############################
+#
+# DOTFILES
+#
+##############################
+
+
+cp-dotfiles() {
+  echo "Copying general files..."
+  rsync -uq ~/.zshrc ~/dev/github/dotfiles/zshrc
+  rsync -uq ~/.zprofile ~/dev/github/dotfiles/zprofile
+  rsync -uq ~/.vimrc.heavy ~/dev/github/dotfiles/vim/vimrc.heavy
+  rsync -uq ~/.vimrc.light ~/dev/github/dotfiles/vim/vimrc.light
+  rsync -uq ~/.spacemacs ~/dev/github/dotfiles/spacemacs
+  rsync -uq ~/.gitconfig ~/dev/github/dotfiles/gitconfig
+  rsync -uq ~/.ycm_extra_conf.py ~/dev/github/dotfiles/vim/ycm_extra_conf.py
+  rsync -uq ~/.config/termite/config ~/dev/github/dotfiles/termite_config
+
+  echo "Copying system specific files..."
+  rsync -uq ~/.Xresources ~/dev/github/dotfiles/Xresources-desktop
+  rsync -uq ~/.aliases ~/dev/github/dotfiles/aliases-desktop
+  rsync -uq ~/.functions ~/dev/github/dotfiles/functions-desktop
+
+  echo "Copying folders..."
+  rsync -auq ~/.vim/ftplugin ~/dev/github/dotfiles/vim/
+
+  echo "Done..."
+}
+
+
+#####################################################
+#
+# BORG BACKUP
+#
+#####################################################
+
+
+# Mounten eines Remote-Borg-Backups.
+# @param $1 Name des zu mountenden Remote-Archivs
+# @param $2 Mount Pfad
+function borg-mount-backup() {
+    # Check parameter
+    if [ ! -n "$1" ] || [ ! -n "$2" ]; then
+        echo "Error: Missing parameter"
+        echo "Syntax: borg-mount-backup <repo-name> <mount-path>"
+        return 1
+    fi
+    
+    # Execute borg mount
+    borg mount borg@192.168.10.250:/betty/vault/backups/niko-pc::"$1" "$2"    
+}
+
+
+# Extrahieren eines Remote-Borg-Backups.
+# @param $1 Name des zu mountenden Remote-Archivs
+# Optional: @param $2 Unterordner des Archivs
+function borg-extract-backup() {
+    # Check parameter
+    if [ ! -n "$1" ] && [ ! -n "$2" ]; then
+        echo "Error: Missing parameter"
+        echo "Syntax: borg-extract-backup <repo-name> [Optional: archive-folder]"
+        return 1
+    fi
+
+    # Execute borg extract
+    if [ -n "$1" ] && [ -n "$2" ]; then
+        borg extract borg@192.168.10.250:/betty/vault/backups/niko-pc::"$1" "$2"
+    else
+        borg extract borg@192.168.10.250:/betty/vault/backups/niko-pc::"$1"
+    fi
+}
+
+
+#####################################################
+#
+# CREATE PROJECT
+#
+# Create an empty folder structure for dev projects
+#
+# @param $1 path and name
+#
+#####################################################
+
+function create-empty-project() {
+    # Check parameter
+    if [ ! -n "$1" ] || [ ! -n "$2" ]; then
+        echo "Error: Missing parameter"
+        return 1
+    fi
+
+    # Check if directory exists
+    if [ -d "$1" ]; then
+        echo "Warning: Directory already exists"
+        return 2
+    fi
+
+    # Create main project folder and cd into it
+    mkdir -p "$1"
+    cd "$1"
+    # Create subfolders
+    mkdir -p build
+    mkdir -p doc
+    mkdir -p include/"$1"
+    mkdir -p lib
+    mkdir -p src
+    mkdir -p test
+    # Create files
+    touch README.md
+    touch .gitignore
+
+    # Create language specific blueprint files
+    if [ "$2" = "cpp" ]; then
+        cp ~/dev/.blueprints/blueprint.cpp src/"$1".cpp
+        cp ~/dev/.blueprints/CMakeLists-cpp.txt CMakeLists.txt
+    elif [ "$2" = "c" ]; then
+        cp ~/dev/.blueprints/blueprint.c src/"$1".c
+        cp ~/dev/.blueprints/CMakeLists-c.txt CMakeLists.txt
+    fi
+
+    # Add build-dirs to ignore
+    echo build*/ >> .gitignore
+    # Git init, add and commit project
+    git init .
+    git add .
+    git commit -m "Create project $1"
+    # Success message
+    echo "\nCreated project $1..."
+}
