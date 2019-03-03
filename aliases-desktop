@@ -55,6 +55,9 @@ alias cmake-debug='cmake -DCMAKE_BUILD_TYPE=Debug '
 # CMake Release
 alias cmake-release='cmake -DCMAKE_BUILD_TYPE=Release '
 
+# Make multicore
+alias make='make -j6'
+
 # gcc flags
 alias gcc='gcc -std=c11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -fcf-protection -O3 -pipe -Wall -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
 
