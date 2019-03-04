@@ -17,7 +17,7 @@ alias updac='trizen -Syu; trizen -Rns $(trizen -Qtdq); trizen -Sc'
 # update and clean system with noconfirm
 alias updacnc='trizen -Syu --noconfirm; trizen -Rns $(trizen -Qtdq) --noconfirm; trizen -Sc --noconfirm'
 
-# refresh pacman mirrors 
+# refresh pacman mirrors
 alias refresh_mirrors='sudo reflector --country 'Germany' --latest 50 --age 24 --sort rate --save /etc/pacman.d/mirrorlist; sudo rm -f /etc/pacman.d/mirrorlist.pacnew; sudo pacman -Syy'
 
 # update zplugin
@@ -29,7 +29,7 @@ alias updfw='fwupdmgr get-devices; fwupdmgr refresh; fwupdmgr get-updates; fwupd
 
 ##############################
 #
-# DEVELOPMENT                      
+# DEVELOPMENT
 #
 ##############################
 
@@ -44,12 +44,12 @@ alias gcc='gcc -std=c11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS 
 alias g++='g++ -std=c++11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -fcf-protection -O2 -pipe -Wall -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
 
 # install and upgrade pip package as user
-alias pi='pip install --user --upgrade '
+alias piuu='pip install --user --upgrade '
 
 
 ##############################
 #
-# COLORS                     
+# COLORS
 #
 ##############################
 
@@ -63,72 +63,69 @@ alias diff='diff --color=auto'
 # ls color
 alias ls='ls -h --color=auto'
 
-# k
-alias k='k -h'
-
 
 ##############################
 #
-# REMOTE                     
+# REMOTE
 #
 ##############################
 
 
 # wake betty
-alias wake_betty='wol D0:50:99:C3:DF:2F'
+alias wake-betty='wol D0:50:99:C3:DF:2F'
 
 # ping betty
-alias ping_betty='ping 192.168.10.250'
+alias ping-betty='ping 192.168.10.250'
 
 # ssh admin@blackbetty
-alias ssh_admin@betty='ssh -4 admin@192.168.10.250'
+alias ssh-admin@betty='ssh -4 admin@192.168.10.250'
 
 # ssh niko@blackbetty
-alias ssh_niko@betty='ssh -4 niko@192.168.10.250'
+alias ssh-niko@betty='ssh -4 niko@192.168.10.250'
 
 # ssh borg@blackbetty
-alias ssh_borg@betty='ssh -4 borg@192.168.10.250'
+alias ssh-borg@betty='ssh -4 borg@192.168.10.250'
 
 # ssh admin@rocketchat
-alias ssh_admin@rc='ssh -4 admin@192.168.10.53'
+alias ssh-admin@rc='ssh -4 admin@192.168.10.53'
 
 
 ##############################
 #
-# FZF                     
+# FZF
 #
 ##############################
 
 
-alias fzf_p='fzf --preview "head -100 {}"'
+alias fzf-p='fzf --preview "head -100 {}"'
 
 
 ##############################
 #
-# MOUNT                     
+# MOUNT
 #
 ##############################
 
 
 # betty share
-alias mount_betty_share='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
+alias mount-betty-share='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
 
 # betty niko
-alias mount_betty_niko='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
+alias mount-betty-niko='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
 
 # betty vm
-alias mount_betty_vm='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
+alias mount-betty-vm='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
 
 
 ##############################
 #
-# NVIDIA               
+# NVIDIA
 #
 ##############################
 
 
 # primusrun
-alias primusrun_opt='PRIMUS_SYNC=1 vblank_mode=0 primusrun'
+alias primusrun-opt='PRIMUS_SYNC=1 vblank_mode=0 primusrun'
 
 
 ###########################
@@ -138,16 +135,16 @@ alias primusrun_opt='PRIMUS_SYNC=1 vblank_mode=0 primusrun'
 ###########################
 
 # run service manually
-alias borg_run_backup='sudo systemctl start borg-backup.service'
+alias borg-run-backup='sudo systemctl start borg-backup.service'
 
 # service status
-alias borg_status_backup='sudo systemctl status borg-backup.service'
+alias borg-status-backup='sudo systemctl status borg-backup.service'
 
 # watch service status live
-alias borg_watch_live='watch -n 1 sudo systemctl status borg-backup.service'
+alias borg-watch-live='watch -n 1 sudo systemctl status borg-backup.service'
 
 # info about repo
-alias borg_info_repo='borg info user@server:<repo-pfad>'
+alias borg-info-repo='borg info borg@192.168.10.250:/betty/vault/backups/niko-laptop'
 
 # list backups
-alias borg_list_backups='borg list user@server:<repo-pfad>'
+alias borg-list-backups='borg list borg@192.168.10.250:/betty/vault/backups/niko-laptop'
