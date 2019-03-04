@@ -172,7 +172,7 @@ function borg-extract-backup() {
 #
 #####################################################
 
-function create-empty-project() {
+function create-project() {
     # Check parameter
     if [ ! -n "$1" ] || [ ! -n "$2" ]; then
         echo "Error: Missing parameter"
