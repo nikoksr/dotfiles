@@ -187,10 +187,12 @@ function create-empty-project() {
     fi
 
     # Create main project folder and cd into it
+    echo "> Creating project folder..."
     mkdir -p "$1"
     cd "$1"
 
     # Create subfolders
+    echo "> Creating subfolders..."
     mkdir -p build
     mkdir -p build/debug
     mkdir -p build/release
@@ -201,8 +203,17 @@ function create-empty-project() {
     mkdir -p test
 
     # Create files
+    echo "> Creating ReadMe and gitignore..."
     touch README.md
     touch .gitignore
+    
+    # Add build-folders and vscode folder to ignore
+    echo build*/ >> .gitignore
+    echo .vscode/ >> .gitignore
+
+    # Copy vscode blueprint folder for build and debug support
+    echo "> Copying blueprints..."
+    cp -r ~/dev/.blueprints/vscode .vscode
 
     # Create language specific blueprint files
     if [ "$2" = "cpp" ]; then
@@ -213,15 +224,17 @@ function create-empty-project() {
         cp ~/dev/.blueprints/CMakeLists-c.txt CMakeLists.txt
     fi
 
-    # Add build-dirs to ignore
-    echo build*/ >> .gitignore
+    # Replace project-name in CMakesLists with the actual project name
+    echo "> Applying project-name in CMakeLists..."
+    sed -i -e "s/PROJECT-NAME/$1/g" CMakeLists.txt 
 
     # Git init, add and commit project
+    echo "> Initializing git-repo..."
     git init .
     git add .
     git commit -m "Create project $1"
 
     # Change back to origin folder and send success message
     cd ..
-    echo "\nCreated project $1..."
+    echo "\n> Done..."
 }
