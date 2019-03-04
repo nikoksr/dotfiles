@@ -114,6 +114,7 @@ cp-dotfiles() {
 
   echo "Copying folders..."
   rsync -auq ~/.vim/ftplugin ~/dev/github/dotfiles/vim/
+  rsync -auq ~/dev/.blueprints/ ~/dev/github/dotfiles/blueprints/
 
   echo "Done..."
 }
