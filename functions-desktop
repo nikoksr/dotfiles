@@ -102,7 +102,7 @@ cp-dotfiles() {
   rsync -uq ~/.zprofile ~/dev/github/dotfiles/zprofile
   rsync -uq ~/.vimrc.heavy ~/dev/github/dotfiles/vim/vimrc.heavy
   rsync -uq ~/.vimrc.light ~/dev/github/dotfiles/vim/vimrc.light
-  rsync -uq ~/.spacemacs ~/dev/github/dotfiles/spacemacs
+  rsync -uq ~/.emacs.d/init.el ~/dev/github/dotfiles/emacs.d/init.el
   rsync -uq ~/.gitconfig ~/dev/github/dotfiles/gitconfig
   rsync -uq ~/.ycm_extra_conf.py ~/dev/github/dotfiles/vim/ycm_extra_conf.py
   rsync -uq ~/.config/termite/config ~/dev/github/dotfiles/termite_config
