@@ -102,7 +102,7 @@ cp-dotfiles() {
   rsync -uq ~/.zprofile ~/dev/github/dotfiles/zprofile
   rsync -uq ~/.vimrc.heavy ~/dev/github/dotfiles/vim/vimrc.heavy
   rsync -uq ~/.vimrc.light ~/dev/github/dotfiles/vim/vimrc.light
-  rsync -uq ~/.spacemacs ~/dev/github/dotfiles/spacemacs
+  rsync -uq ~/.emacs.d/init.el ~/dev/github/dotfiles/emacs.d/init.el
   rsync -uq ~/.gitconfig ~/dev/github/dotfiles/gitconfig
   rsync -uq ~/.ycm_extra_conf.py ~/dev/github/dotfiles/vim/ycm_extra_conf.py
   rsync -uq ~/.config/termite/config ~/dev/github/dotfiles/termite_config
@@ -216,14 +216,17 @@ function create-project() {
     echo "> Copying blueprints..."
     cp -r ~/dev/.blueprints/vscode .vscode
 
-    # Create language specific blueprint files
+    # Set lang variable
+    lang=""
     if [ "$2" = "cpp" ]; then
-        cp ~/dev/.blueprints/blueprint.cpp src/"$1".cpp
-        cp ~/dev/.blueprints/CMakeLists-cpp.txt CMakeLists.txt
+        lang="cpp"
     elif [ "$2" = "c" ]; then
-        cp ~/dev/.blueprints/blueprint.c src/"$1".c
-        cp ~/dev/.blueprints/CMakeLists-c.txt CMakeLists.txt
+        lang="c"
     fi
+
+    # Create language specific blueprint files
+    cp ~/dev/.blueprints/blueprint."$lang" src/"$1"."$lang"
+    cp ~/dev/.blueprints/CMakeLists-"$lang".txt CMakeLists.txt
 
     # Replace project-name in CMakesLists with the actual project name
     echo "> Applying project-name in CMakeLists..."
@@ -235,7 +238,22 @@ function create-project() {
     git add .
     git commit -m "Create project $1"
 
-    # Change back to origin folder and send success message
+    # Send success message
+    echo "> Done..."
+
+    # Ask if project-folder should be opened in vscode
+    while true; do
+        echo -n "> Open project in vscode? [Y/n]"
+        read yn
+
+        if [ ! -n "$yn" ] || [ "$yn" = "Y" ] || [ "$yn" = "y" ]; then
+            code -n . -g src/"$1"."$lang":1
+        elif [ "$yn" != "N" ] && [ "$yn" != "n" ]; then
+            continue
+        fi
+        break
+    done
+
+    # Cd back to origin
     cd ..
-    echo "\n> Done..."
 }
