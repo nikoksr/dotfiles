@@ -210,7 +210,6 @@ function create-project() {
     
     # Add build-folders and vscode folder to ignore
     echo build*/ >> .gitignore
-    echo .vscode/ >> .gitignore
 
     # Copy vscode template folder for build and debug support
     echo "> Copying templates..."
