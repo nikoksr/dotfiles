@@ -37,17 +37,17 @@ alias updfw='fwupdmgr get-devices; fwupdmgr refresh; fwupdmgr get-updates; fwupd
 ##############################
 
 
-# Create .c blueprint file
-alias blueprint-c='cp ~/dev/.blueprints/blueprint.c blueprint.c'
+# Create .c template file
+alias template-c='cp ~/dev/.templates/template.c template.c'
 
-# Create .cpp blueprint file
-alias blueprint-cpp='cp ~/dev/.blueprints/blueprint.cpp blueprint.cpp'
+# Create .cpp template file
+alias template-cpp='cp ~/dev/.templates/template.cpp template.cpp'
 
-# Create CMakeLists.txt blueprint file for C
-alias blueprint-cmake-c='cp ~/dev/.blueprints/CMakeLists-c.txt CMakeLists.txt'
+# Create CMakeLists.txt template file for C
+alias template-cmake-c='cp ~/dev/.templates/CMakeLists-c.txt CMakeLists.txt'
 
-# Create CMakeLists.txt blueprint file for CPP
-alias blueprint-cmake-cpp='cp ~/dev/.blueprints/CMakeLists-cpp.txt CMakeLists.txt'
+# Create CMakeLists.txt template file for CPP
+alias template-cmake-cpp='cp ~/dev/.templates/CMakeLists-cpp.txt CMakeLists.txt'
 
 # CMake Debug
 alias cmake-debug='cmake -DCMAKE_BUILD_TYPE=Debug '
