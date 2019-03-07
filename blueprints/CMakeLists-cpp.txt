@@ -22,3 +22,6 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
 # Add executable
 add_executable(PROJECT-NAME ${source_files})
+
+# Link libraries
+target_link_libraries(${PROJECT_NAME})

@@ -22,3 +22,6 @@ file(GLOB SOURCES "src/*.c")
 
 # Add executable
 add_executable(PROJECT-NAME ${SOURCES})
+
+# Link libraries
+target_link_libraries(${PROJECT_NAME})
