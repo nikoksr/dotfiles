@@ -224,7 +224,7 @@ function create-project() {
     fi
 
     # Create language specific template files
-    cp ~/dev/.templates/template."$lang" src/"$1"."$lang"
+    cp ~/dev/.templates/template."$lang" src/main."$lang"
     cp ~/dev/.templates/CMakeLists-"$lang".txt CMakeLists.txt
 
     # Replace project-name in CMakesLists with the actual project name
