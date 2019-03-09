@@ -28,8 +28,8 @@
 
 # Alias
 [alias]
-    pu = push
-    puom = push -u origin master
+    ps = push
+    psom = push origin master
     pl = pull
     plr = pull --rebase
     st = status
