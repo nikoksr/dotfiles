@@ -246,7 +246,7 @@ function create-project() {
         read yn
 
         if [ ! -n "$yn" ] || [ "$yn" = "Y" ] || [ "$yn" = "y" ]; then
-            code -n . -g src/"$1"."$lang":1
+            code -n . -g src/main."$lang":1
         elif [ "$yn" != "N" ] && [ "$yn" != "n" ]; then
             continue
         fi
