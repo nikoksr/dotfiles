@@ -5,13 +5,13 @@
       "includePath": [
         "/usr/include",
         "/usr/local/include",
-        "${workspaceFolder}/include"
+        "${workspaceFolder}/lib"
       ],
       "defines": [],
-      "compilerPath": "/usr/bin/gdb",
+      "compilerPath": "/usr/bin/gcc",
       "cStandard": "c11",
       "cppStandard": "c++14",
-      "intelliSenseMode": "clang-x64"
+      "intelliSenseMode": "gcc-x64"
     }
   ],
   "version": 4
