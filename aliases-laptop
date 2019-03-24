@@ -34,16 +34,37 @@ alias updfw='fwupdmgr get-devices; fwupdmgr refresh; fwupdmgr get-updates; fwupd
 ##############################
 
 
-# create .c blueprint file
-alias blueprint='cp ~/dev/.blueprint.c ./blueprint.c'
+# Create .c template file
+alias template-c='cp ~/dev/.templates/template.c template.c'
+
+# Create .cpp template file
+alias template-cpp='cp ~/dev/.templates/template.cpp template.cpp'
+
+# Create CMakeLists.txt template file for C
+alias template-cmake-c='cp ~/dev/.templates/CMakeLists-c.txt CMakeLists.txt'
+
+# Create CMakeLists.txt template file for CPP
+alias template-cmake-cpp='cp ~/dev/.templates/CMakeLists-cpp.txt CMakeLists.txt'
+
+# CMake Debug
+alias cmake-debug='cmake -DCMAKE_BUILD_TYPE=Debug '
+
+# CMake Release
+alias cmake-release='cmake -DCMAKE_BUILD_TYPE=Release '
+
+# Make multicore
+alias make='make -j6'
+
+# Cppcheck all warnings and suppress include warnings
+alias cppcheck='cppcheck --enable=all --suppress=missingIncludeSystem'
 
 # gcc flags
-alias gcc='gcc -std=c11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -fcf-protection -O2 -pipe -Wall -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
+# alias gcc='gcc -std=c11 -march=native -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -grecord-gcc-switches -fcf-protection -pipe -Wall -Werror -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
 
 # g++ flags
-alias g++='g++ -std=c++11 -march=native -D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -fcf-protection -O2 -pipe -Wall -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
+# alias g++='g++ -std=c++14 -march=native -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -grecord-gcc-switches -fcf-protection -pipe -Wall -Werror -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
 
-# install and upgrade pip package as user
+# Install and upgrade pip package as user
 alias piuu='pip install --user --upgrade '
 
 

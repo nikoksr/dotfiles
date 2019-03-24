@@ -103,7 +103,7 @@ cp-dotfiles() {
   rsync -auq ~/.config/i3 ~/dev/github/dotfiles/
   rsync -auq ~/.config/rofi ~/dev/github/dotfiles/
   rsync -auq ~/.vim/ftplugin ~/dev/github/dotfiles/vim/
-  rsync -auq ~/dev/.blueprints/ ~/dev/github/dotfiles/blueprints
+  rsync -auq ~/dev/.templates/ ~/dev/github/dotfiles/templates/
 
   echo "Done..."
 }
@@ -199,11 +199,10 @@ function create-project() {
     
     # Add build-folders and vscode folder to ignore
     echo build*/ >> .gitignore
-    echo .vscode/ >> .gitignore
 
-    # Copy vscode blueprint folder for build and debug support
-    echo "> Copying blueprints..."
-    cp -r ~/dev/.blueprints/vscode .vscode
+    # Copy vscode template folder for build and debug support
+    echo "> Copying templates..."
+    cp -r ~/dev/.templates/vscode .vscode
 
     # Set lang variable
     lang=""
@@ -213,9 +212,9 @@ function create-project() {
         lang="c"
     fi
 
-    # Create language specific blueprint files
-    cp ~/dev/.blueprints/blueprint."$lang" src/"$1"."$lang"
-    cp ~/dev/.blueprints/CMakeLists-"$lang".txt CMakeLists.txt
+    # Create language specific template files
+    cp ~/dev/.templates/template."$lang" src/main."$lang"
+    cp ~/dev/.templates/CMakeLists-"$lang".txt CMakeLists.txt
 
     # Replace project-name in CMakesLists with the actual project name
     echo "> Applying project-name in CMakeLists..."
@@ -236,7 +235,7 @@ function create-project() {
         read yn
 
         if [ ! -n "$yn" ] || [ "$yn" = "Y" ] || [ "$yn" = "y" ]; then
-            code -n . -g src/"$1"."$lang":1
+            code -n . -g src/main."$lang":1
         elif [ "$yn" != "N" ] && [ "$yn" != "n" ]; then
             continue
         fi
