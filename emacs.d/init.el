@@ -1,5 +1,4 @@
 (setq user-full-name "Niko Köser")
-
 (setq user-mail-address "koeserniko@gmail.com")
 
 (setq inhibit-splash-screen t
@@ -57,7 +56,7 @@
 
 (setq echo-keystrokes 0.1
       use-dialog-box nil
-      visible-bell t)
+      visible-bell nil)
 
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
