@@ -25,9 +25,6 @@ exec_always --no-startup-id xset r rate 200 25
 # Unused mouse disappears
 exec_always --no-startup-id unclutter
 
-# SSH-Agent
-exec --no-startup-id "ssh-agent;eval $(ssh-agent)" 
-
 # Autostarting screen-locker on suspend
 exec_always --no-startup-id xss-lock -- betterlockscreen -l blur
 
@@ -243,8 +240,8 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+d exec --no-startup-id "rofi -config ~/.config/rofi/config -show drun"
 
 # Terminal
-# bindsym $mod+Return exec termite
-bindsym $mod+Return exec st
+bindsym $mod+Return exec termite
+# bindsym $mod+Return exec st
 
 # Lockscreen
 bindsym $mod+shift+x exec --no-startup-id betterlockscreen -l blur
