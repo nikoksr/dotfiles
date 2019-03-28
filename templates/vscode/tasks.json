@@ -13,7 +13,7 @@
       "args": ["-DCMAKE_BUILD_TYPE=Debug", "../.."]
     },
     {
-      "label": "make-debug",
+      "label": "build-debug",
       "type": "shell",
       "options": {
         "cwd": "${workspaceFolder}/build/debug"
@@ -32,7 +32,7 @@
       "args": ["-DCMAKE_BUILD_TYPE=Release", "../.."]
     },
     {
-      "label": "make-release",
+      "label": "build-release",
       "type": "shell",
       "options": {
         "cwd": "${workspaceFolder}/build/release"
