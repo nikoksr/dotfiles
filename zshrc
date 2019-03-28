@@ -44,9 +44,6 @@ zplugin light zsh-users/zsh-autosuggestions
 zplugin ice wait'0' lucid
 zplugin light zdharma/history-search-multi-word
 
-zplugin ice wait'0' lucid
-zplugin light supercrabtree/k
-
 
 ##############################
 #
