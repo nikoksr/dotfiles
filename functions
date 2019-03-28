@@ -11,19 +11,29 @@
 # Multithreaded compression via tar and pigz
 # @param $1 - file or directory to compress
 function compress() {
-    if [ -n "$1" ]
-    then
-        tar cf - "$1" | pigz --best > "$1.tar.gz"
+    # Check parameter
+    if [ ! -n "$1" ]; then
+        echo "Error: You have to specify a file or folder to compress"
+        echo "Syntax: compress <file>"
+        return 1
     fi
+
+    # Execute compression
+    tar cf - "$1" | pigz --best > "$1".tar.gz
 }
 
 # Decompression via tar and pigz
 # @param $1 - compressed input
 function decompress() {
-    if [ -n "$1" ]
-    then
-        pigz -dc "$1" | tar xf -
+    # Check parameter
+    if [ ! -n "$1" ]; then
+        echo "Error: You have to specify a file or folder to compress"
+        echo "Syntax: decompress <file>"
+        return 1
     fi
+
+    # Execute decompression
+    pigz -dc "$1" | tar xf -
 }
 
 
@@ -34,13 +44,19 @@ function decompress() {
 ##############################
 
 
-# Downloading via Aria2c
+# Downloading a file via Aria2c
 # @param $1 - destination
 # @param $2 - url to download
 function dwnld-file() {
-    if [ -n "$1" ] && [ -n "$2" ]; then
-        aria2c --file-allocation=none -c -x 10 -s 10 -d $1 $2
+    # Check parameter
+    if [ ! -n "$1" ] || [ ! -n "$2" ]; then
+        echo "Error: Missing parameter"
+        echo "Syntax: dwnld-file <url> <destination>"
+        return 1
     fi
+
+    # Execute download via aria2
+    aria2c --file-allocation=none -c -x 10 -s 10 -d "$1" "$2"
 }
 
 
@@ -84,25 +100,17 @@ cp-dotfiles() {
   echo "Copying general files..."
   rsync -uq ~/.zshrc ~/dev/github/dotfiles/zshrc
   rsync -uq ~/.zprofile ~/dev/github/dotfiles/zprofile
-  rsync -uq ~/.vimrc.light ~/dev/github/dotfiles/vim/vimrc.light
   rsync -uq ~/.vimrc.heavy ~/dev/github/dotfiles/vim/vimrc.heavy
-  rsync -uq ~/.vimrc ~/dev/github/dotfiles/vim/vimrc.current
+  rsync -uq ~/.vimrc.light ~/dev/github/dotfiles/vim/vimrc.light
   rsync -uq ~/.emacs.d/init.el ~/dev/github/dotfiles/emacs.d/init.el
   rsync -uq ~/.gitconfig ~/dev/github/dotfiles/gitconfig
   rsync -uq ~/.ycm_extra_conf.py ~/dev/github/dotfiles/vim/ycm_extra_conf.py
-  rsync -uq ~/.config/compton.conf ~/dev/github/dotfiles/compton.conf
-  rsync -uq ~/.config/dunst/dunstrc ~/dev/github/dotfiles/dunstrc
   rsync -uq ~/.config/termite/config ~/dev/github/dotfiles/termite_config
-
-  echo "Copying system specific files..."
-  rsync -uq ~/.Xresources ~/dev/github/dotfiles/Xresources-laptop
-  rsync -uq ~/.aliases ~/dev/github/dotfiles/aliases-laptop
-  rsync -uq ~/.functions ~/dev/github/dotfiles/functions-laptop
+  rsync -uq ~/.Xresources ~/dev/github/dotfiles/Xresources
+  rsync -uq ~/.aliases ~/dev/github/dotfiles/aliases
+  rsync -uq ~/.functions ~/dev/github/dotfiles/functions
 
   echo "Copying folders..."
-  rsync -auq ~/.config/polybar ~/dev/github/dotfiles/
-  rsync -auq ~/.config/i3 ~/dev/github/dotfiles/
-  rsync -auq ~/.config/rofi ~/dev/github/dotfiles/
   rsync -auq ~/.vim/ftplugin ~/dev/github/dotfiles/vim/
   rsync -auq ~/dev/.templates/ ~/dev/github/dotfiles/templates/
 
@@ -159,22 +167,43 @@ function borg-extract-backup() {
 #
 # Create an empty folder structure for dev projects
 #
-# @param $1 path and name
+# @param $1 project-path/name
+# @param $2 language
 #
 #####################################################
 
+
 function create-project() {
-    # Check parameter
+    # Check parameter count
     if [ ! -n "$1" ] || [ ! -n "$2" ]; then
-        echo "Error: Missing parameter"
-        echo "Syntax: create-empty-project <projectname> <language>"
+        echo "> Error: Missing parameter."
+        echo "> Syntax: create-project <projectname> <language>"
         return 1
     fi
 
-    # Check if directory exists
+    # Check if directory already exists
     if [ -d "$1" ]; then
-        echo "Warning: Directory already exists"
+        echo "> Error: Directory already exists."
         return 2
+    fi
+
+    # Check if language is valid 
+    langs=("c", "cpp")
+    lang=""
+    lang_found=0
+
+    for l in "${langs[@]}"; do
+        if [ "$l" = "$2" ] ; then
+            lang_found=1
+            lang="$2"
+            break
+        fi
+    done
+
+    if [ $lang_found -eq 0 ]; then
+        echo "> Error: You have to specify a valid language."
+        echo "         Currently supported languages: ${langs[*]}"
+        return 3
     fi
 
     # Create main project folder and cd into it
@@ -193,25 +222,21 @@ function create-project() {
     mkdir -p src
     mkdir -p test
 
-    # Create files
+    # Create Readme and .gitignore 
     echo "> Creating ReadMe and gitignore..."
+
+    # ReadMe
     touch README.md
+    echo "# $1" >> README.md
+        
+    # .gitignore
     touch .gitignore
-    
-    # Add build-folders and vscode folder to ignore
-    echo build*/ >> .gitignore
+    echo "build/" >> .gitignore
+    echo ".vscode/ipch/" >> .gitignore
 
     # Copy vscode template folder for build and debug support
     echo "> Copying templates..."
     cp -r ~/dev/.templates/vscode .vscode
-
-    # Set lang variable
-    lang=""
-    if [ "$2" = "cpp" ]; then
-        lang="cpp"
-    elif [ "$2" = "c" ]; then
-        lang="c"
-    fi
 
     # Create language specific template files
     cp ~/dev/.templates/template."$lang" src/main."$lang"
@@ -223,18 +248,71 @@ function create-project() {
 
     # Git init, add and commit project
     echo "> Initializing git-repo..."
-    git init .
-    git add .
-    git commit -m "Create project $1"
+    git init . >/dev/null
+    added_remote=0
+    remote_name=""
+
+    # Ask if user wants to add a git-remote
+    while true; do
+        echo -n "> Add git-remote? [y/N] "
+        read yn
+
+        # Evaluate input
+        if [ ! -n "$yn" ] || [ "$yn" = "N" ] || [ "$yn" = "n" ]; then
+            break 
+        elif [ "$yn" = "Y" ] || [ "$yn" = "y" ]; then
+            
+            # Read and validate remote-name
+            echo -n "> Remote-name: "
+            read remote_name 
+
+            if [ -z "$remote_name" -o "$remote_name" = " " ]; then
+                echo "> Remote-name can't be empty..."
+                return 4
+            fi
+
+            # Read and validate remote-url
+            echo -n "> Remote-URL: "
+            read remote_url
+
+            if [ -z "$remote_url" -o "$remote_url" = " " ]; then
+                echo "> Remote-URL can't be empty..."
+                return 5 
+            fi
+
+            # Append .git if missing
+            if [[ ! $remote_url =~ ^.*\.git$ ]]; then
+                remote_url="$remote_url.git"
+            fi 
+
+            # Add remote
+            git remote add "$remote_name" "$remote_url" >/dev/null
+            added_remote=1
+        else
+            echo "> Invalid input..."
+            continue
+        fi
+        break
+    done
+
+    # Git add and commit
+    git add . >/dev/null
+    git commit -m "Create project $1" >/dev/null
+
+    # Push if remote was added
+    if [ $added_remote -eq 1 ]; then
+        git push --quiet -u "$remote_name" master >/dev/null
+    fi
 
     # Send success message
     echo "> Done..."
 
     # Ask if project-folder should be opened in vscode
     while true; do
-        echo -n "> Open project in vscode? [Y/n]"
+        echo -n "> Open project in vscode? [Y/n] "
         read yn
 
+        # Evaluate input
         if [ ! -n "$yn" ] || [ "$yn" = "Y" ] || [ "$yn" = "y" ]; then
             code -n . -g src/main."$lang":1
         elif [ "$yn" != "N" ] && [ "$yn" != "n" ]; then
@@ -242,7 +320,4 @@ function create-project() {
         fi
         break
     done
-
-    # Cd back to origin
-    cd ..
 }
