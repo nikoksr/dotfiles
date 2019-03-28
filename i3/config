@@ -1,6 +1,6 @@
 ##############################
 #
-# Mod and Sup Keys 
+# Mod and Sup Keys
 #
 ##############################
 
@@ -43,7 +43,7 @@ exec --no-startup-id bluetooth off
 
 ##############################
 #
-# Design 
+# Design
 #
 ##############################
 
@@ -60,7 +60,7 @@ exec_always --no-startup-id "killall -q compton;compton -b --dbus"
 # Polybar
 exec_always --no-startup-id /home/niko/.config/polybar/polybar.sh
 
-# Gap sizes 
+# Gap sizes
 # smart_gaps on
 gaps inner 5
 gaps outer 1
@@ -84,7 +84,7 @@ client.background       $bg
 
 ##############################
 #
-# Workspaces 
+# Workspaces
 #
 ##############################
 
@@ -104,7 +104,7 @@ set $workspace10 "10"
 
 ##############################
 #
-# Keybindings 
+# Keybindings
 #
 ##############################
 
@@ -213,7 +213,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 
 # Mute Sound
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle 
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # ===== Screen brightness ====
 
@@ -226,7 +226,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 # ===== Touchpad =============
 
 # Toggle Touchpad
-bindsym XF86TouchpadToggle exec /home/niko/.scripts/toggletouchpad.sh 
+bindsym XF86TouchpadToggle exec /home/niko/.scripts/toggletouchpad.sh
 
 # Media Player Controls
 bindsym XF86AudioPlay exec playerctl play
@@ -239,18 +239,14 @@ bindsym XF86AudioPrev exec playerctl previous
 # Launcher
 bindsym $mod+d exec --no-startup-id "rofi -config ~/.config/rofi/config -show drun"
 
+# Network
+bindsym $mod+n exec --no-startup-id "networkmanager_dmenu"
+
 # Terminal
 bindsym $mod+Return exec termite
-# bindsym $mod+Return exec st
-
-# Lockscreen
-bindsym $mod+shift+x exec --no-startup-id betterlockscreen -l blur
 
 # Screenshot
 bindsym Print exec "scrot -q 100 '%d-%m-%Y@%T.png' -e 'mv $f ~/pictures/screenshots'"
-#
-# Filebrowser
-bindsym $sup+f exec pcmanfm
 
 # Browser
 bindsym $sup+w exec firefox
@@ -261,25 +257,17 @@ bindsym $sup+e exec emacs
 # Remmina
 bindsym $sup+r exec remmina
 
-# VisualStudio Code
+# VS-Code
 bindsym $sup+c exec code
-
-# Gitkraken
-bindsym $sup+k exec gitkraken
-
-# QtCreator
-bindsym $sup+q exec qtcreator
-
-# PyCharm
-bindsym $sup+p exec pycharm
 
 # Dbeaver
 bindsym $sup+d exec dbeaver
 
-# Idea
-bindsym $sup+i exec idea
+# Lockscreen
+bindsym $mod+shift+x exec --no-startup-id betterlockscreen -l blur
 
 # Pywal - Generate new theme
 bindsym $sup+t exec "wal -i /home/niko/pictures/wallpapers/vibrant"
 
-
+# Apply pywal to lockscreen
+bindsym $sup+l exec termite --exec=" betterlockscreen -u "$(< "${HOME}/.cache/wal/wal")" -r 1920x1080 -b 1.0"
