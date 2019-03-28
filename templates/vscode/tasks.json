@@ -9,8 +9,35 @@
       "options": {
         "cwd": "${workspaceFolder}/build/debug"
       },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": false
+      },
       "command": "cmake",
-      "args": ["-DCMAKE_BUILD_TYPE=Debug", "../.."]
+      "args": ["-DCMAKE_BUILD_TYPE=Debug", "../.."],
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "make-debug",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/build/debug"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": false
+      },
+      "command": "make",
+      "args": ["-j6"],
+      "dependsOn": ["cmake-debug"]
     },
     {
       "label": "build-debug",
@@ -18,9 +45,70 @@
       "options": {
         "cwd": "${workspaceFolder}/build/debug"
       },
-      "command": "make",
-      "dependsOn": ["cmake-debug"],
-      "problemMatcher": []
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": false
+      },
+      "dependsOn": ["make-debug"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "command": "echo",
+      "args": ["'Building debug...'"],
+      "problemMatcher": "$gcc",
+      "isBackground": true
+    },
+    {
+      "label": "valgrind-debug-bin",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/build/debug/bin"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "never",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": false
+      },
+      "command": "valgrind",
+      "args": [
+        "--leak-check=full",
+        "./${workspaceFolderBasename}",
+        "e10adc3949ba59abbe56e057f20f883e",
+        "${workspaceFolder}/passwd.txt"
+      ],
+      "dependsOn": ["cppcheck"]
+    },
+    {
+      "label": "check-debug",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/build/debug"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "never",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "command": "echo",
+      "args": ["'Checking debug...'"],
+      "dependsOn": ["valgrind-debug-bin"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "isBackground": true
     },
     {
       "label": "cmake-release",
@@ -28,8 +116,35 @@
       "options": {
         "cwd": "${workspaceFolder}/build/release"
       },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": false
+      },
       "command": "cmake",
-      "args": ["-DCMAKE_BUILD_TYPE=Release", "../.."]
+      "args": ["-DCMAKE_BUILD_TYPE=Release", "../.."],
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "make-release",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/build/release"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": false
+      },
+      "command": "make",
+      "args": ["-j6"],
+      "dependsOn": ["cmake-release"]
     },
     {
       "label": "build-release",
@@ -37,9 +152,45 @@
       "options": {
         "cwd": "${workspaceFolder}/build/release"
       },
-      "command": "make",
-      "dependsOn": ["cmake-release"],
-      "problemMatcher": []
+      "presentation": {
+        "echo": true,
+        "reveal": "never",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "dependsOn": ["make-release"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "command": "echo",
+      "args": ["'Building release...'"],
+      "problemMatcher": "$gcc",
+      "isBackground": true
+    },
+    {
+      "label": "cppcheck",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/src"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": false
+      },
+      "command": "cppcheck",
+      "args": [
+        "--enable=all",
+        "--suppress=missingIncludeSystem",
+        "*.hpp",
+        "*.cpp"
+      ]
     }
   ]
 }
