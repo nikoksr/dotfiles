@@ -61,19 +61,13 @@ alias make='make -j6'
 # Cppcheck all warnings and suppress include warnings
 alias cppcheck='cppcheck --enable=all --suppress=missingIncludeSystem'
 
-# gcc flags
-alias gcc='gcc -std=c11 -march=native -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -grecord-gcc-switches -fcf-protection -pipe -Wall -Werror -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
-
-# g++ flags
-alias g++='g++ -std=c++14 -march=native -fasynchronous-unwind-tables -fexceptions -fstack-clash-protection -fstack-protector-strong -grecord-gcc-switches -fcf-protection -pipe -Wall -Werror -Werror=format-security -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now -Wl,-z,relro'
-
 # Install and upgrade pip package as user
 alias piuu='pip install --user --upgrade '
 
 
 ##############################
 #
-# COLORS                     
+# SIMPLE
 #
 ##############################
 
@@ -85,10 +79,7 @@ alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 
 # ls color
-alias ls='ls -h --color=auto'
-
-# k
-alias k='k -h'
+alias ls='ls -lh --color=auto'
 
 
 ##############################
