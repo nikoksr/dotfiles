@@ -151,7 +151,10 @@ alias mount-betty-vm='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o 
 alias borg-run-backup='sudo systemctl start borg-backup.service'
 
 # service status
-alias borg-status-backup='watch -n 1 sudo systemctl status borg-backup.service'
+alias borg-status-backup='systemctl status borg-backup.service'
+
+# watch service status live
+alias borg-watch-live='watch -n 1 systemctl status borg-backup.service'
 
 # info about repo
 alias borg-info-repo='borg info borg@192.168.10.250:/betty/vault/backups/niko-pc'
