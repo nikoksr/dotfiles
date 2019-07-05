@@ -24,6 +24,9 @@ if [[ $TERM == xterm-termite ]]; then
     __vte_osc7
 fi
 
+# Import colorscheme from 'wal' asynchronously
+(cat ~/.cache/wal/sequences &)
+
 
 ##############################
 #
