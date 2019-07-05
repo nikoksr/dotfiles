@@ -157,9 +157,9 @@ alias borg-status-backup='systemctl status borg-backup.service'
 alias borg-watch-live='watch -n 1 systemctl status borg-backup.service'
 
 # info about repo
-alias borg-info-repo='borg info borg@192.168.10.250:/betty/vault/backups/niko-pc'
+alias borg-info-repo='borg info borg@192.168.10.250:/betty/vault/backups/niko-laptop'
 
 # list backups
-alias borg-list-backups='borg list borg@192.168.10.250:/betty/vault/backups/niko-pc'
+alias borg-list-backups='borg list borg@192.168.10.250:/betty/vault/backups/niko-laptop'
 
 
