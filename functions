@@ -109,16 +109,10 @@ cp-dotfiles() {
   rsync -uq ~/.Xresources ~/dev/github/dotfiles/Xresources
   rsync -uq ~/.aliases ~/dev/github/dotfiles/aliases
   rsync -uq ~/.functions ~/dev/github/dotfiles/functions
-  rsync -uq ~/.config/compton.conf ~/dev/github/dotfiles/compton.conf
-  rsync -uq ~/.config/dunst/dunstrc ~/dev/github/dotfiles/dunstrc
 
   echo "Copying folders..."
   rsync -auq ~/.vim/ftplugin ~/dev/github/dotfiles/vim/
   rsync -auq ~/dev/.templates/ ~/dev/github/dotfiles/templates/
-  rsync -auq ~/.config/i3/ ~/dev/github/dotfiles/i3/
-  rsync -auq ~/.config/polybar/ ~/dev/github/dotfiles/polybar/
-  rsync -auq ~/.config/rofi/ ~/dev/github/dotfiles/rofi/
-
 
   echo "Done..."
 }
@@ -150,8 +144,8 @@ function create-project() {
         return 2
     fi
 
-    # Check if language is valid 
-    langs=("c" "cpp" "c++" "cc" "php" "js" "javascript" "ts" "typescript" "html" "css" "web")
+    # Check if language is valid
+    langs=("c" "cpp" "c++" "cc" "python" "py" "php" "js" "javascript" "ts" "typescript" "html" "css" "web")
     lang=""
     lang_found=0
 
@@ -174,22 +168,22 @@ function create-project() {
     mkdir -p "$1"
     cd "$1"
 
-    # Create Readme and .gitignore 
+    # Create Readme and .gitignore
     echo "> Creating ReadMe and gitignore..."
 
     # ReadMe
     touch README.md
     echo "# $1" >> README.md
-        
+
     # .gitignore
     touch .gitignore
-    
+
     # Create subfolders
     echo "> Creating subfolders..."
 
     # C and CPP specific
     if [ "$lang" = "c" ] || [ "$lang" = "cpp" ] || [ "$lang" = "c++" ] || [ "$lang" = "cc" ]; then
-        
+
         mkdir -p build/
         mkdir -p build/debug/
         mkdir -p build/release/
@@ -202,32 +196,32 @@ function create-project() {
         # Copy vscode template folder for build and debug support
         echo "> Copying templates..."
         cp -r ~/dev/.templates/vscode .vscode
-    
+
         # Create language specific template files
         cp ~/dev/.templates/template."$lang" src/main."$lang"
         cp ~/dev/.templates/CMakeLists-"$lang".txt CMakeLists.txt
-    
+
         # Replace project-name in CMakesLists with the actual project name
         echo "> Applying project-name in CMakeLists..."
-        sed -i -e "s/PROJECT-NAME/$1/g" CMakeLists.txt 
+        sed -i -e "s/PROJECT-NAME/$1/g" CMakeLists.txt
 
         echo "build/" >> .gitignore
         echo ".vscode/ipch/" >> .gitignore
 
     # Web App
-    elif [ "$lang" = "php" ] || [ "$lang" = "js" ] || [ "$lang" = "javascript" ] || 
-            [ "$lang" = "ts" ] || [ "$lang" = "typescript" ] || 
+    elif [ "$lang" = "php" ] || [ "$lang" = "js" ] || [ "$lang" = "javascript" ] ||
+            [ "$lang" = "ts" ] || [ "$lang" = "typescript" ] ||
             [ "$lang" = "html" ] || [ "$lang" = "css" ] || [ "$lang" = "web" ]; then
-        mkdir -p public/css/
-        mkdir -p public/img/content/
-        mkdir -p public/img/layout/
-        mkdir -p public/js/
+        mkdir -p public_html/css/
+        mkdir -p public_html/img/content/
+        mkdir -p public_html/img/layout/
+        mkdir -p public_html/js/
         mkdir -p resources/library/
         mkdir -p resources/templates/
 
         # Copy config.php template
         echo "> Copying templates..."
-        cp -r ~/dev/.templates/index.php public/
+        cp -r ~/dev/.templates/index.php public_html/
         cp -r ~/dev/.templates/config.php resources/
     fi
 
@@ -244,12 +238,12 @@ function create-project() {
 
         # Evaluate input
         if [ ! -n "$yn" ] || [ "$yn" = "N" ] || [ "$yn" = "n" ]; then
-            break 
+            break
         elif [ "$yn" = "Y" ] || [ "$yn" = "y" ]; then
-            
+
             # Read and validate remote-name
             echo -n "> Remote-name: "
-            read remote_name 
+            read remote_name
 
             if [ -z "$remote_name" -o "$remote_name" = " " ]; then
                 echo "> Remote-name can't be empty..."
@@ -262,13 +256,13 @@ function create-project() {
 
             if [ -z "$remote_url" -o "$remote_url" = " " ]; then
                 echo "> Remote-URL can't be empty..."
-                return 5 
+                return 5
             fi
 
             # Append .git if missing
             if [[ ! $remote_url =~ ^.*\.git$ ]]; then
                 remote_url="$remote_url.git"
-            fi 
+            fi
 
             # Add remote
             git remote add "$remote_name" "$remote_url" >/dev/null
@@ -328,9 +322,9 @@ function borg-mount-backup() {
         echo "Syntax: borg-mount-backup <repo-name> <mount-path>"
         return 1
     fi
-    
+
     # Execute borg mount
-    borg mount borg@192.168.10.250:/betty/vault/backups/niko-laptop::"$1" "$2"    
+    borg mount borg@192.168.10.250:/betty/vault/backups/$HOST::"$1" "$2"
 }
 
 
@@ -347,8 +341,8 @@ function borg-extract-backup() {
 
     # Execute borg extract
     if [ -n "$1" ] && [ -n "$2" ]; then
-        borg extract borg@192.168.10.250:/betty/vault/backups/niko-laptop::"$1" "$2"
+        borg extract borg@192.168.10.250:/betty/vault/backups/$HOST::"$1" "$2"
     else
-        borg extract borg@192.168.10.250:/betty/vault/backups/niko-laptop::"$1"
+        borg extract borg@192.168.10.250:/betty/vault/backups/$HOST::"$1"
     fi
 }
