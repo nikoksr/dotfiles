@@ -109,10 +109,16 @@ cp-dotfiles() {
   rsync -uq ~/.Xresources ~/dev/github/dotfiles/Xresources
   rsync -uq ~/.aliases ~/dev/github/dotfiles/aliases
   rsync -uq ~/.functions ~/dev/github/dotfiles/functions
+  rsync -uq ~/.config/compton.conf ~/dev/github/dotfiles/compton.conf
+  rsync -uq ~/.config/dunst/dunstrc ~/dev/github/dotfiles/dunstrc
 
   echo "Copying folders..."
   rsync -auq ~/.vim/ftplugin ~/dev/github/dotfiles/vim/
   rsync -auq ~/dev/.templates/ ~/dev/github/dotfiles/templates/
+  rsync -auq ~/.config/i3/ ~/dev/github/dotfiles/i3/
+  rsync -auq ~/.config/polybar/ ~/dev/github/dotfiles/polybar/
+  rsync -auq ~/.config/rofi/ ~/dev/github/dotfiles/rofi/
+
 
   echo "Done..."
 }
