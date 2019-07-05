@@ -29,7 +29,8 @@
 # Alias
 [alias]
     ps = push
-    psom = push origin master
+    psom = push -u origin master
+    psod = push -u origin develop
     pl = pull
     plr = pull --rebase
     st = status
