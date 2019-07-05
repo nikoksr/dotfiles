@@ -324,7 +324,7 @@ function borg-mount-backup() {
     fi
     
     # Execute borg mount
-    borg mount borg@192.168.10.250:/betty/vault/backups/niko-pc::"$1" "$2"    
+    borg mount borg@192.168.10.250:/betty/vault/backups/niko-laptop::"$1" "$2"    
 }
 
 
@@ -341,8 +341,8 @@ function borg-extract-backup() {
 
     # Execute borg extract
     if [ -n "$1" ] && [ -n "$2" ]; then
-        borg extract borg@192.168.10.250:/betty/vault/backups/niko-pc::"$1" "$2"
+        borg extract borg@192.168.10.250:/betty/vault/backups/niko-laptop::"$1" "$2"
     else
-        borg extract borg@192.168.10.250:/betty/vault/backups/niko-pc::"$1"
+        borg extract borg@192.168.10.250:/betty/vault/backups/niko-laptop::"$1"
     fi
 }
