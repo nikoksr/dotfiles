@@ -29,7 +29,7 @@ exec_always --no-startup-id unclutter
 exec_always --no-startup-id xss-lock -- betterlockscreen -l blur
 
 # Auto-mounting USB
-exec_always --no-startup-id udiskie &
+exec_always --no-startup-id "udiskie --automount --notify --udisks-auto"
 
 # Notifications
 exec_always --no-startup-id "killall dunst;dunst"
@@ -52,7 +52,10 @@ exec --no-startup-id bluetooth off
 font pango: SauceCodePro Nerd Font Medium 13
 
 # Pywal - Global color design and background
-exec --no-startup-id wal -R
+exec_always --no-startup-id (wal -r &)
+
+# Add this to your .xinitrc or whatever file starts programs on startup.
+exec_always --no-startup-id wal -i "$(< "${HOME}/.cache/wal/wal")"
 
 # Compton - Compositor
 exec_always --no-startup-id "killall -q compton;compton -b --dbus"
@@ -267,7 +270,7 @@ bindsym $sup+d exec dbeaver
 bindsym $mod+shift+x exec --no-startup-id betterlockscreen -l blur
 
 # Pywal - Generate new theme
-bindsym $sup+t exec "wal -i /home/niko/pictures/wallpapers/vibrant"
+bindsym $sup+t exec "wal -t -i /home/niko/pictures/wallpapers/vibrant"
 
 # Apply pywal to lockscreen
 bindsym $sup+l exec termite --exec=" betterlockscreen -u "$(< "${HOME}/.cache/wal/wal")" -r 1920x1080 -b 1.0"
