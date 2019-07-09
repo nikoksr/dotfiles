@@ -223,6 +223,14 @@ function create-project() {
         echo "> Copying templates..."
         cp -r ~/dev/.templates/index.php public_html/
         cp -r ~/dev/.templates/config.php resources/
+    # Python
+    elif [ "$lang" = "python" ] || [ "$lang" = "py" ]; then
+        mkdir -p docs/
+        mkdir -p tests/
+        mkdir -p "$1/"
+        echo "#!/usr/bin/env python\n\n__version__ = '0.1.0'" > "$1/__init__.py"
+        echo "#!/usr/bin/env python" > "$1/__main__.py"
+        echo "#!/usr/bin/env python" > "$1/$1.py"
     fi
 
     # Git init, add and commit project
