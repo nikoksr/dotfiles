@@ -29,8 +29,9 @@
 # Alias
 [alias]
     ps = push
-    psom = push -u origin master
-    psod = push -u origin develop
+    psu = push -u
+    psom = push origin master
+    psod = push origin develop 
     pl = pull
     plr = pull --rebase
     st = status
@@ -38,6 +39,7 @@
     ci = commit
     br = branch
     df = diff
+    mg = merge
     lg = log -p
     rso = remote show origin
     rv = remote -v
