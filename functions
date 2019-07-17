@@ -304,7 +304,8 @@ function create-project() {
 
         # Evaluate input
         if [ ! -n "$yn" ] || [ "$yn" = "Y" ] || [ "$yn" = "y" ]; then
-            code -n . -g src/main."$lang":1
+            # code -n . -g src/main."$lang":1
+            code -n .
         elif [ "$yn" != "N" ] && [ "$yn" != "n" ]; then
             continue
         fi
