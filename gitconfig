@@ -12,6 +12,7 @@
     pager = less -x4
     autocrlf = input
     ignorecase = true
+    fileMode = false
 
 # Credential
 [credential]
@@ -39,7 +40,7 @@
     ci = commit
     br = branch
     df = diff
-    mg = merge
+    mg = merge --no-ff
     lg = log -p
     rso = remote show origin
     rv = remote -v
