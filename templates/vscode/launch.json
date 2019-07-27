@@ -11,7 +11,7 @@
       "program": "${workspaceFolder}/build/debug/bin/${workspaceFolderBasename}",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}/build/debug/bin/",
+      "cwd": "${workspaceFolder}",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
@@ -22,7 +22,7 @@
           "ignoreFailures": true
         }
       ],
-      "preLaunchTask": "build-debug"
+      "preLaunchTask": "make-debug"
     },
     {
       "name": "Run Release",
@@ -31,7 +31,7 @@
       "program": "${workspaceFolder}/build/release/bin/${workspaceFolderBasename}",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}/build/release/bin/",
+      "cwd": "${workspaceFolder}",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
@@ -42,7 +42,7 @@
           "ignoreFailures": true
         }
       ],
-      "preLaunchTask": "build-release"
+      "preLaunchTask": "make-release"
     }
   ]
 }
