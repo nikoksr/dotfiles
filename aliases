@@ -21,7 +21,7 @@ alias updnc='trizen -Syu --noconfirm'
 alias updacnc='trizen -Syu --noconfirm; trizen -Rns $(trizen -Qtdq) --noconfirm; trizen -Sc --noconfirm'
 
 # refresh pacman mirrors 
-alias refresh_mirrors='sudo reflector --country 'Germany' --latest 5 --age 24 --sort rate --save /etc/pacman.d/mirrorlist;sudo rm -f /etc/pacman.d/mirrorlist.pacnew;trizen -Syy'
+alias refresh_mirrors='sudo reflector --country "Germany" --latest 5 --age 24 --sort rate --save /etc/pacman.d/mirrorlist;sudo rm -f /etc/pacman.d/mirrorlist.pacnew;trizen -Syy'
 
 # update zplugin
 alias updzsh='zplg self-update;zplg update --all;zplg compile --all'
@@ -67,19 +67,31 @@ alias piuu='pip install --user --upgrade '
 
 ##############################
 #
-# SIMPLE
+# SYSTEM 
 #
 ##############################
 
 
-# grep color
+# grep
 alias grep='grep --color=auto'
 
-# diff color
+# diff
 alias diff='diff --color=auto'
 
-# ls color
-alias ls='ls -lh --color=auto'
+# cp
+alias cpr='rsync --size-only --inplace --human-readable --progress'
+
+# mv
+alias mvr='rsync --size-only --inplace --human-readable --progress --remove-source-files'
+
+# ls
+alias ls='lsd -lh'
+
+# ls recursive
+alias ls-rec='lsd --tree'
+
+# System Age
+alias sysage='awk -F "[[ ]" '\''NR==1 {print $2;}'\'' /var/log/pacman.log'
 
 
 ##############################
@@ -112,33 +124,6 @@ alias ssh-admin@manjaro-test='ssh -4 admin@192.168.10.53'
 
 # ssh admin@mint-test
 alias ssh-admin@mint-test='ssh -4 admin@192.168.10.54'
-
-
-##############################
-#
-# FZF                     
-#
-##############################
-
-
-alias fzf-pre='fzf --preview "head -100 {}"'
-
-
-##############################
-#
-# MOUNT                     
-#
-##############################
-
-
-# betty share
-alias mount-betty-share='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
-
-# betty niko
-alias mount-betty-niko='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
-
-# betty vm
-alias mount-betty-vm='sudo mount -t cifs //192.168.10.250/share ~/smb_shares -o credentials=/home/niko/.smbcred'
 
 
 ###########################
