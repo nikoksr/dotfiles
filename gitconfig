@@ -12,7 +12,6 @@
     pager = less -x4
     autocrlf = input
     ignorecase = true
-    fileMode = false
 
 # Credential
 [credential]
@@ -30,9 +29,8 @@
 # Alias
 [alias]
     ps = push
-    psu = push -u
-    psom = push origin master
-    psod = push origin develop 
+    psom = push -u origin master
+    psod = push -u origin develop
     pl = pull
     plr = pull --rebase
     st = status
@@ -40,7 +38,6 @@
     ci = commit
     br = branch
     df = diff
-    mg = merge --no-ff
     lg = log -p
     rso = remote show origin
     rv = remote -v
