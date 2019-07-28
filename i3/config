@@ -270,7 +270,7 @@ bindsym $sup+d exec dbeaver
 bindsym $mod+shift+x exec --no-startup-id betterlockscreen -l blur
 
 # Pywal - Generate new theme
-bindsym $sup+t exec "wal -t -i /home/niko/pictures/wallpapers/vibrant"
+bindsym $sup+t exec "wal -t -i /home/niko/pictures/wallpapers"
 
 # Apply pywal to lockscreen
 bindsym $sup+l exec termite --exec=" betterlockscreen -u "$(< "${HOME}/.cache/wal/wal")" -r 1920x1080 -b 1.0"

@@ -97,19 +97,34 @@ fglog() {
 
 
 cp-dotfiles() {
-  echo "Copying general files..."
-  cpr -q ~/.zshrc ~/dev/github/dotfiles/zshrc
-  cpr -q ~/.zprofile ~/dev/github/dotfiles/zprofile
-  cpr -q ~/.gitconfig ~/dev/github/dotfiles/gitconfig
-  cpr -q ~/.ycm_extra_conf.py ~/dev/github/dotfiles/vim/ycm_extra_conf.py
-  cpr -q ~/.config/termite/config ~/dev/github/dotfiles/termite_config
-  cpr -q ~/.Xresources ~/dev/github/dotfiles/Xresources
-  cpr -q ~/.aliases ~/dev/github/dotfiles/aliases
-  cpr -q ~/.functions ~/dev/github/dotfiles/functions
+  local df_path="/home/niko/dev/github/dotfiles/"
+
+  if [ -z "$df_path" ]; then
+      echo "Error: No path was provided."
+      return
+  fi
+
+  echo "Copying files..."
+  cpr -q ~/.aliases "${df_path}aliases"
+  cpr -q ~/.functions "${df_path}functions"
+  cpr -q ~/.gitconfig "${df_path}gitconfig"
+  cpr -q ~/.ycm_extra_conf.py "${df_path}vim/ycm_extra_conf.py"
+  cpr -q ~/.vimrc "${df_path}vim/vimrc"
+  cpr -q ~/.Xresources "${df_path}Xresources"
+  cpr -q ~/.zshrc "${df_path}zshrc"
+  cpr -q ~/.zprofile "${df_path}zprofile"
+  cpr -q ~/.config/compton.conf "${df_path}"
+  cpr -q ~/.config/mpd/mpd.conf "${df_path}mpd.conf"
 
   echo "Copying folders..."
-  cpr -rq ~/.vim/ftplugin ~/dev/github/dotfiles/vim/
-  cpr -rq ~/dev/.templates/ ~/dev/github/dotfiles/templates/
+  cpr -rq ~/.vim/ftplugin "${df_path}vim/"
+  cpr -rq ~/.config/i3 "${df_path}"
+  cpr -rq ~/.config/polybar "${df_path}"
+  cpr -rq ~/.config/rofi "${df_path}"
+  cpr -rq ~/.config/dunst "${df_path}"
+  cpr -rq ~/.config/termite "${df_path}"
+  cpr -rq ~/dev/.templates/ "${df_path}templates"
+  cpr -rq ~/.ncmpcpp/ "${df_path}ncmpcpp"
 
   echo "Done..."
 }
