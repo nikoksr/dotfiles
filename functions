@@ -123,6 +123,7 @@ cp-dotfiles() {
   cpr -rq ~/.config/rofi "${df_path}"
   cpr -rq ~/.config/dunst "${df_path}"
   cpr -rq ~/.config/termite "${df_path}"
+  cpr -rq ~/.config/redshift "${df_path}"
   cpr -rq ~/dev/.templates/ "${df_path}templates"
   cpr -rq ~/.ncmpcpp/ "${df_path}ncmpcpp"
 
