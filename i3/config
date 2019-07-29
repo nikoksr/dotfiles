@@ -72,8 +72,8 @@ gaps outer 1
 default_border pixel 1
 
 # Pywal colors and alternative color in case of loding failure
-set_from_resource $fg i3wm.color7 #f0f0f0
-set_from_resource $bg i3wm.color2 #f0f0f0
+set_from_resource $fg i3wm.color7 #fff
+set_from_resource $bg i3wm.color2 #000
 
 # Window colors
 # class                 border   backgr.   text   indicator   child_border
@@ -82,7 +82,7 @@ client.focused_inactive $bg      $bg       $fg    $bg         $bg
 client.unfocused        $bg      $bg       $fg    $bg         $bg
 client.urgent           $bg      $bg       $fg    $bg         $bg
 client.placeholder      $bg      $bg       $fg    $bg         $bg
-client.background       $bg
+client.background       $bg      $bg       $fg    $bg         $bg
 
 
 ##############################
@@ -270,7 +270,7 @@ bindsym $sup+d exec dbeaver
 bindsym $mod+shift+x exec --no-startup-id betterlockscreen -l blur
 
 # Pywal - Generate new theme
-bindsym $sup+t exec "wal -t -i /home/niko/pictures/wallpapers"
+bindsym $sup+t exec "wal -t -i /home/niko/pictures/wallpapers/Vibrant"
 
 # Apply pywal to lockscreen
 bindsym $sup+l exec termite --exec=" betterlockscreen -u "$(< "${HOME}/.cache/wal/wal")" -r 1920x1080 -b 1.0"
