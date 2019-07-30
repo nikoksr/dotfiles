@@ -17,25 +17,25 @@ set $sup Mod4
 
 
 # Keyboard layout
-exec_always --no-startup-id setxkbmap de
+exec --no-startup-id setxkbmap de
 
 # Keyboard speed
-exec_always --no-startup-id xset r rate 200 25
+exec --no-startup-id xset r rate 200 25
 
 # Unused mouse disappears
-exec_always --no-startup-id unclutter
+exec --no-startup-id unclutter
 
 # Autostarting screen-locker on suspend
-exec_always --no-startup-id xss-lock -- betterlockscreen -l blur
+exec --no-startup-id xss-lock -- betterlockscreen -l blur
 
 # Auto-mounting USB
-exec_always --no-startup-id "udiskie -n -T"
+exec --no-startup-id "udiskie -n -T"
 
 # Notifications
-exec_always --no-startup-id "killall dunst;dunst"
+exec --no-startup-id "dunst"
 
 # Polkit
-exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Set bluetooth off on startup
 exec --no-startup-id bluetooth off
@@ -58,7 +58,8 @@ exec_always --no-startup-id (wal -r &)
 exec_always --no-startup-id wal -i "$(< "${HOME}/.cache/wal/wal")"
 
 # Compton - Compositor
-exec_always --no-startup-id "killall -q compton;compton -b --dbus"
+# exec_always --no-startup-id "killall -q compton;compton -b --dbus"
+exec --no-startup-id "compton -b --dbus"
 
 # Polybar
 exec_always --no-startup-id /home/niko/.config/polybar/polybar.sh
