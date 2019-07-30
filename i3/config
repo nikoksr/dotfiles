@@ -29,7 +29,7 @@ exec_always --no-startup-id unclutter
 exec_always --no-startup-id xss-lock -- betterlockscreen -l blur
 
 # Auto-mounting USB
-exec_always --no-startup-id "udiskie --automount --notify --udisks-auto"
+exec_always --no-startup-id "udiskie -n -T"
 
 # Notifications
 exec_always --no-startup-id "killall dunst;dunst"
