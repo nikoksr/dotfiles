@@ -3,40 +3,38 @@
 
 [global]
     font = "SauceCodePro Nerd Font Medium 13"
-    allow_markup = yes
-    format = "<b>%s</b> %p\n%b"
-    sort = yes
-    indicate_hidden = yes
+    markup = full
+    format = "<b>%a:</b> %s\n%b"
     alignment = left
-    bounce_freq = 0
-    show_age_threshold = 60
-    word_wrap = yes
     ignore_newline = no
-    geometry = "400x5-0+33"
-    shrink = yes 
-    transparency = 0
-    idle_threshold = 120
-    monitor = 0
-    follow = mouse
-    sticky_history = yes
-    line_height = 0
-    separator_height = 2
-    padding = 8
-    horizontal_padding = 8
-    separator_color = "#ffffff"
-    startup_notification = false
-    show_age_threshold = 60
     word_wrap = yes 
 
-    dmenu = /usr/bin/rofi -dmenu -p dunst:
-    browser = firefox
     icon_position = left
-    icon_path = /usr/share/icons/Papirus-Dark/16x16/status/:/usr/share/icons/Papirus-Dark/16x16/devices/
     max_icon_size=32
 
+    line_height = 0
+    separator_height = 0
+    geometry = "400x5-10+35"
+    shrink = yes 
+    padding = 10
+    horizontal_padding = 10
+    transparency = 40
+
+    sort = yes
+    indicate_hidden = yes
+    bounce_freq = 0
+    show_age_threshold = -1
+    idle_threshold = 120
+    monitor = 0
+    sticky_history = yes
+    startup_notification = false
+    
+    dmenu = /usr/bin/rofi -dmenu -p dunst:
+    browser = /usr/bin/firefox -new-tab
+    
 [frame]
-    width = 1
-    color = "#f7f7f7"
+    width = 2
+    color = "#ffffff"
 
 [shortcuts]
     close = ctrl+space
@@ -45,16 +43,17 @@
     context = ctrl+shift+period
 
 [urgency_low]
-    background = "#1f2021"
-foreground = "#f7f7f7"
+    background = "#333333"
+    foreground = "#ffffff"
     timeout = 10
 
 [urgency_normal]
-    background = "#1f2021"
-    foreground = "#f7f7f7"
+    background = "#333333"
+    foreground = "#ffffff"
     timeout = 10
 
 [urgency_critical]
-    background = "#1f2021"
-    foreground = "#ef4f4f"
+    background = "#333333"
+    foreground = "#ffffff"
+    frame_color = "#ff0000"
     timeout = 0
