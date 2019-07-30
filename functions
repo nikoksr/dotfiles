@@ -328,6 +328,46 @@ function create-project() {
 #####################################################
 
 
+### Remote
+
+# Mounten eines Remote-Borg-Backups.
+# @param $1 Name des zu mountenden Remote-Archivs
+# @param $2 Mount Pfad
+function borg-mount-backup() {
+    # Check parameter
+    if [ ! -n "$1" ] || [ ! -n "$2" ]; then
+        echo "Error: Missing parameter"
+        echo "Syntax: borg-mount-backup <repo-name> <mount-path>"
+        return 1
+    fi
+
+    # Execute borg mount
+    borg mount borg@192.168.10.250:/betty/vault/backups/$HOST::"$1" "$2"
+}
+
+
+# Extrahieren eines Remote-Borg-Backups.
+# @param $1 Name des zu mountenden Remote-Archivs
+# Optional: @param $2 Unterordner des Archivs
+function borg-extract-backup() {
+    # Check parameter
+    if [ ! -n "$1" ] && [ ! -n "$2" ]; then
+        echo "Error: Missing parameter"
+        echo "Syntax: borg-extract-backup <repo-name> [Optional: archive-folder]"
+        return 1
+    fi
+
+    # Execute borg extract
+    if [ -n "$1" ] && [ -n "$2" ]; then
+        borg extract borg@192.168.10.250:/betty/vault/backups/$HOST::"$1" "$2"
+    else
+        borg extract borg@192.168.10.250:/betty/vault/backups/$HOST::"$1"
+    fi
+}
+
+
+### USB
+
 # Mounten eines Remote-Borg-Backups.
 # @param $1 Name des zu mountenden Remote-Archivs
 # @param $2 Mount Pfad

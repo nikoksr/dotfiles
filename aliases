@@ -132,6 +132,8 @@ alias ssh-admin@mint-test='ssh -4 admin@192.168.10.54'
 #
 ###########################
 
+### Remote
+
 # run service manually
 alias borg-run-backup='sudo systemctl start borg-backup.service'
 
@@ -146,5 +148,22 @@ alias borg-info-repo='borg info borg@192.168.10.250:/betty/vault/backups/$HOST'
 
 # list backups
 alias borg-list-backups='borg list borg@192.168.10.250:/betty/vault/backups/$HOST'
+
+### USB
+
+# run service manually
+alias borg-run-backup-usb='sudo systemctl start borg-backup-usb.service'
+
+# service status
+alias borg-status-backup-usb='systemctl status borg-backup-usb.service'
+
+# watch service status live
+alias borg-watch-live-usb='watch -n 1 systemctl status borg-backup-usb.service'
+
+# info about repo
+alias borg-info-repo-usb='borg info /home/niko/usbdrives/exHdd-niko/borg/niko-laptop'
+
+# list backups
+alias borg-list-backups-usb='borg list /home/niko/usbdrives/exHdd-niko/borg/niko-laptop'
 
 
