@@ -255,7 +255,7 @@ bindsym $sup+w exec firefox
 bindsym $sup+r exec remmina
 
 # VS-Code
-bindsym $sup+c exec code
+bindsym $sup+c exec "code -n"
 
 # Dbeaver
 bindsym $sup+d exec dbeaver
