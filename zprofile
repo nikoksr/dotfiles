@@ -17,4 +17,10 @@ export LANG=en_US.UTF-8
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+# Import colorscheme from 'wal' asynchronously
+(cat ~/.cache/wal/sequences &)
+
+# Background color with transparency
+source ~/.cache/wal/colors.sh
+export color0_alpha="#22${color0/'#'}"
 
