@@ -51,15 +51,11 @@ exec --no-startup-id bluetooth off
 # Font
 font pango: SauceCodePro Nerd Font Medium 13
 
-# Pywal - Global color design and background
-exec_always --no-startup-id (wal -r &)
-
 # Add this to your .xinitrc or whatever file starts programs on startup.
 exec_always --no-startup-id wal -i "$(< "${HOME}/.cache/wal/wal")"
 
 # Compton - Compositor
-# exec_always --no-startup-id "killall -q compton;compton -b --dbus"
-exec --no-startup-id "compton -b --dbus"
+exec_always --no-startup-id "killall -q compton;compton -b --dbus"
 
 # Polybar
 exec_always --no-startup-id /home/niko/.config/polybar/polybar.sh
@@ -169,10 +165,10 @@ bindsym $mod+a focus parent
 
 # Resize Window
 mode "resize" {
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym j resize grow height 5 px or 5 ppt
+        bindsym k resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
 
         # Escape Resize Mode
         bindsym Return mode "default"
@@ -244,7 +240,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+d exec --no-startup-id "rofi -config ~/.config/rofi/config -show drun"
 
 # Network
-bindsym $mod+n exec --no-startup-id "networkmanager_dmenu"
+bindsym $mod+n exec --no-startup-id "networkmanager_dmenu -sort"
 
 # Terminal
 bindsym $mod+Return exec termite
@@ -254,9 +250,6 @@ bindsym Print exec "scrot -q 100 '%d-%m-%Y@%T.png' -e 'mv $f ~/pictures/screensh
 
 # Browser
 bindsym $sup+w exec firefox
-
-# Emacs
-bindsym $sup+e exec emacs
 
 # Remmina
 bindsym $sup+r exec remmina
