@@ -202,7 +202,7 @@ menu-0-3-exec = betterlockscreen -l blur
 menu-0-3-foreground = ${colors.foreground}
 
 [settings]
-; screenchange-reload = true
+screenchange-reload = true
 pseudo-transparency = false 
 
 [global/wm]
