@@ -58,7 +58,7 @@ exec_always --no-startup-id wal -i "$(< "${HOME}/.cache/wal/wal")"
 exec_always --no-startup-id "killall -q compton;compton -b --dbus"
 
 # Polybar
-exec_always --no-startup-id /home/niko/.config/polybar/polybar.sh
+exec_always --no-startup-id /home/niko/.config/polybar/launch.sh
 
 # Gap sizes
 # smart_gaps on
