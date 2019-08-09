@@ -1,5 +1,4 @@
 [colors]
-# background = ${xrdb:color0_alpha:#000}
 background = $color0_alpha
 background-alt = ${xrdb:color1:#222}
 foreground = ${xrdb:color7:#fff}
