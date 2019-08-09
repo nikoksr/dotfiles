@@ -10,7 +10,7 @@
     pager = less -x4
     autocrlf = input
     ignorecase = true
-        fileMode = false
+    fileMode = false 
 
 [credential]
     helper = cache --timeout 3600
