@@ -211,17 +211,16 @@ function create-project() {
 
         # Copy vscode template folder for build and debug support
         echo "> Copying templates..."
-        cp -r ~/dev/.templates/vscode .vscode
+        cp -r ~/dev/.templates/vscode-cpp .vscode
 
         # Create language specific template files
-        cp ~/dev/.templates/template.cpp src/main.cpp
+        cp ~/dev/.templates/main.cpp src/
         cp ~/dev/.templates/CMakeLists-cpp.txt CMakeLists.txt
 
         # Replace project-name in CMakesLists with the actual project name
         echo "> Applying project-name in CMakeLists..."
         sed -i -e "s/PROJECT-NAME/$1/g" CMakeLists.txt
 
-        echo ".vscode/ipch/" >> .gitignore
         echo "build/" >> .gitignore
 
     # Web App
@@ -237,14 +236,16 @@ function create-project() {
 
         # Copy config.php template
         echo "> Copying templates..."
-        cp -r ~/dev/.templates/index.php public_html/
-        cp -r ~/dev/.templates/config.php resources/
+        cp ~/dev/.templates/index.php public_html/
+        cp ~/dev/.templates/config.php resources/
     # Python
     elif [ "$lang" = "python" ] || [ "$lang" = "py" ]; then
         # Create subfolders
         mkdir -p src/
         mkdir -p doc/
         mkdir -p tests/
+        cp -r ~/dev/.templates/vscode-py .vscode
+
 
         # Create virtualenv
         echo "> Creating virtualenv..."
@@ -254,12 +255,12 @@ function create-project() {
 
         # Python packages
         echo "> Installing python packages..."
-        pip install --quiet pylint pep8 autopep8
+        pip install --upgrade --quiet pylint pep8 autopep8
 
-        # Main file
-        touch "src/${1}.py"
-        touch src/__main__.py
-        touch src/__env__.py
+        # Create files
+        cp ~/dev/.templates/__main__.py src/__main__.py
+        cp ~/dev/.templates/template.py "src/${1}.py"
+        cp ~/dev/.templates/template.py src/__env__.py
     fi
 
     # Git init, add and commit project
