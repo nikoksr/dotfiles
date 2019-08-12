@@ -239,6 +239,27 @@ function create-project() {
         echo "> Copying templates..."
         cp -r ~/dev/.templates/index.php public_html/
         cp -r ~/dev/.templates/config.php resources/
+    # Python
+    elif [ "$lang" = "python" ] || [ "$lang" = "py" ]; then
+        # Create subfolders
+        mkdir -p src/
+        mkdir -p doc/
+        mkdir -p tests/
+
+        # Create virtualenv
+        echo "> Creating virtualenv..."
+        virtualenv --quiet .env
+        echo .env/ >> .gitignore
+        source .env/bin/activate
+
+        # Python packages
+        echo "> Installing python packages..."
+        pip install --quiet pylint pep8 autopep8
+
+        # Main file
+        touch "src/${1}.py"
+        touch src/__main__.py
+        touch src/__env__.py
     fi
 
     # Git init, add and commit project
@@ -402,3 +423,11 @@ function borg-extract-backup() {
         borg extract borg@192.168.10.250:/betty/vault/backups/$HOST::"$1"
     fi
 }
+
+
+#####################################################
+#
+# PYTHON VIRUAL ENV
+#
+#####################################################
+
