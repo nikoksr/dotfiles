@@ -255,12 +255,13 @@ function create-project() {
 
         # Python packages
         echo "> Installing python packages..."
-        pip install --upgrade --quiet pylint pep8 autopep8
+        pip install --upgrade --quiet pylint pep8 autopep8 pytest pytest-xdist
 
         # Create files
         cp ~/dev/.templates/__main__.py src/__main__.py
         cp ~/dev/.templates/template.py "src/${1}.py"
-        cp ~/dev/.templates/template.py src/__env__.py
+        cp ~/dev/.templates/template.py src/__init__.py
+        cp ~/dev/.templates/template.py tests/__init__.py
     fi
 
     # Git init, add and commit project
