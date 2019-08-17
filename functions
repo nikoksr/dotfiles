@@ -241,7 +241,7 @@ function create-project() {
     # Python
     elif [ "$lang" = "python" ] || [ "$lang" = "py" ]; then
         # Create subfolders
-        mkdir -p src/
+        mkdir -p "${1}/"
         mkdir -p doc/
         mkdir -p tests/
         cp -r ~/dev/.templates/vscode-py .vscode
@@ -255,13 +255,13 @@ function create-project() {
 
         # Python packages
         echo "> Installing python packages..."
-        pip install --upgrade --quiet pylint pep8 autopep8 pytest pytest-xdist
+        pip install --quiet pylint pep8 black pytest pytest-xdist
 
         # Create files
-        cp ~/dev/.templates/__main__.py src/__main__.py
-        cp ~/dev/.templates/template.py "src/${1}.py"
-        cp ~/dev/.templates/template.py src/__init__.py
-        cp ~/dev/.templates/template.py tests/__init__.py
+        cp ~/dev/.templates/__main__.py "$1"/__main__.py
+        cp ~/dev/.templates/template.py "${1}/${1}.py"
+        touch "$1"/__init__.py
+        touch tests/__init__.py
     fi
 
     # Git init, add and commit project
