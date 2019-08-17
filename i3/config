@@ -32,7 +32,7 @@ exec --no-startup-id xss-lock -- betterlockscreen -l blur
 exec --no-startup-id "udiskie -n -T"
 
 # Notifications
-exec --no-startup-id "dunst"
+exec_always --no-startup-id "killall dunst;dunst &"
 
 # Polkit
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
