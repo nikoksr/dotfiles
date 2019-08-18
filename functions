@@ -147,15 +147,17 @@ function create-project() {
     # Check parameter count
     if [ ! -n "$1" ] || [ ! -n "$2" ]; then
         echo "> Error: Missing parameter."
-        echo "> Syntax: create-project <projectname> <language>"
+        echo "> Syntax: create-project <language> <projectname>"
         return 1
     fi
 
     # Check if directory already exists
-    if [ -d "$1" ]; then
+    if [ -d "$2" ]; then
         echo "> Error: Directory already exists."
         return 2
     fi
+
+    project="$2"
 
     # Check if language is valid
     langs=("c" "cpp" "c++" "cc" "python" "py" "php" "js" "javascript" "ts" "typescript" "html" "css" "web")
@@ -163,9 +165,9 @@ function create-project() {
     lang_found=0
 
     for l in "${langs[@]}"; do
-        if [ "$l" = "$2" ]; then
+        if [ "$l" = "$1" ]; then
             lang_found=1
-            lang="$2"
+            lang="$1"
             break
         fi
     done
@@ -178,15 +180,15 @@ function create-project() {
 
     # Create main project folder and cd into it
     echo "> Creating project folder..."
-    mkdir -p "$1"
-    cd "$1"
+    mkdir -p "$project"
+    cd "$project"
 
     # Create Readme and .gitignore
     echo "> Creating ReadMe and gitignore..."
 
     # ReadMe
     touch README.md
-    echo "# $1" >> README.md
+    echo "# $project" >> README.md
 
     # .gitignore
     echo .vscode/ > .gitignore
@@ -194,17 +196,20 @@ function create-project() {
     # Create subfolders
     echo "> Creating subfolders..."
 
+    # File to open in editor is language specific
+    file_to_open=""
+
     # C and CPP specific
     if [ "$lang" = "c" ] || [ "$lang" = "cpp" ] || [ "$lang" = "c++" ] || [ "$lang" = "cc" ]; then
 
         # Unify language
-        $lang = "cpp"
+        lang="cpp"
 
         mkdir -p build/
         mkdir -p build/debug/
         mkdir -p build/release/
         mkdir -p doc/
-        mkdir -p include/"$1"/
+        mkdir -p include/"$project"/
         mkdir -p lib/
         mkdir -p src/
         mkdir -p test/
@@ -219,9 +224,11 @@ function create-project() {
 
         # Replace project-name in CMakesLists with the actual project name
         echo "> Applying project-name in CMakeLists..."
-        sed -i -e "s/PROJECT-NAME/$1/g" CMakeLists.txt
+        sed -i -e "s/PROJECT-NAME/$project/g" CMakeLists.txt
 
         echo "build/" >> .gitignore
+
+        file_to_open="src/main.cpp"
 
     # Web App
     elif [ "$lang" = "php" ] || [ "$lang" = "js" ] || [ "$lang" = "javascript" ] ||
@@ -238,14 +245,19 @@ function create-project() {
         echo "> Copying templates..."
         cp ~/dev/.templates/index.php public_html/
         cp ~/dev/.templates/config.php resources/
+
+        file_to_open="public_html/index.php"
+
     # Python
     elif [ "$lang" = "python" ] || [ "$lang" = "py" ]; then
+
+        lang="py"
+
         # Create subfolders
-        mkdir -p "${1}/"
+        mkdir -p "${project}/"
         mkdir -p doc/
         mkdir -p tests/
         cp -r ~/dev/.templates/vscode-py .vscode
-
 
         # Create virtualenv
         echo "> Creating virtualenv..."
@@ -300,7 +312,7 @@ function create-project() {
 
             # Append .git if missing
             if [[ ! $remote_url =~ ^.*\.git$ ]]; then
-                remote_url="$remote_url.git"
+                remote_url="${remote_url}.git"
             fi
 
             # Add remote
@@ -335,7 +347,7 @@ function create-project() {
 
         # Evaluate input
         if [ ! -n "$yn" ] || [ "$yn" = "Y" ] || [ "$yn" = "y" ]; then
-            code -n . -g src/main."$lang":1
+            code -n . -g "$file_to_open":1
         elif [ "$yn" != "N" ] && [ "$yn" != "n" ]; then
             continue
         fi
