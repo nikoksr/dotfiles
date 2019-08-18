@@ -160,7 +160,7 @@ function create-project() {
     project="$2"
 
     # Check if language is valid
-    langs=("c" "cpp" "c++" "cc" "python" "py" "php" "js" "javascript" "ts" "typescript" "html" "css" "web")
+    langs=("c" "cpp" "c++" "cc" "python" "py" "go" "golang" "php" "js" "javascript" "ts" "typescript" "html" "css" "web")
     lang=""
     lang_found=0
 
@@ -270,10 +270,37 @@ function create-project() {
         pip install --quiet pylint pep8 black pytest pytest-xdist
 
         # Create files
-        cp ~/dev/.templates/__main__.py "$1"/__main__.py
-        cp ~/dev/.templates/template.py "${1}/${1}.py"
-        touch "$1"/__init__.py
+        cp ~/dev/.templates/__main__.py "${project}/__main__.py"
+        cp ~/dev/.templates/template.py "${project}/${project}.py"
+        touch "${project}/__init__.py"
         touch tests/__init__.py
+
+        file_to_open="${project}/__main__.py"
+
+    # Go
+    elif [ "$lang" = "golang" ] || [ "$lang" = "go" ]; then
+
+        lang="go"
+
+        # Create subfolders
+        mkdir -p "cmd/${project}/"
+        mkdir -p "internal/app/${project}/"
+        mkdir -p internal/pkg/
+        mkdir -p configs/
+        mkdir -p scripts/
+        mkdir -p build/package/
+        mkdir -p build/ci/
+        mkdir -p test/
+        mkdir -p docs/
+        mkdir -p vendor/
+
+        # cp -r ~/dev/.templates/vscode-py .vscode
+
+        # Create files
+        cp ~/dev/.templates/main.go "cmd/${project}/"
+        touch "internal/app/${project}/${project}.go"
+
+        file_to_open="cmd/${project}/main.go"
     fi
 
     # Git init, add and commit project
