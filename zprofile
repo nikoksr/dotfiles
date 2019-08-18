@@ -8,8 +8,8 @@
 ##############################
 
 
-export GOPATH=$HOME/go
-export PATH="$PATH:$HOME/go/bin:/usr/local/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.config/composer/vendor/bin"
+export GOPATH=$HOME/dev/go
+export PATH="$PATH:$GOPATH/bin:/usr/local/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.config/composer/vendor/bin"
 export BOOST_ROOT="$BOOST_ROOT:/usr/local/boost_1_67_0"
 
 export LANG=en_US.UTF-8
