@@ -12,7 +12,7 @@
 alias upd='trizen -Syu'
 
 # update and clean system
-
+alias updac='trizen -Syu; trizen -Rns $(trizen -Qtdq); trizen -Sc'
 
 # update with noconfirm
 alias updnc='trizen -Syu --noconfirm'
