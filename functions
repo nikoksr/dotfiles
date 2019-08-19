@@ -365,9 +365,6 @@ function create-project() {
         git push --quiet -u "$remote_name" develop >/dev/null
     fi
 
-    # Send success message
-    echo "> Done..."
-
     # Ask if project-folder should be opened in vscode
     while true; do
         echo -n "> Open project in vscode? [Y/n] "
@@ -381,6 +378,9 @@ function create-project() {
         fi
         break
     done
+
+    # Send success message
+    echo "> Done..."
 }
 
 
