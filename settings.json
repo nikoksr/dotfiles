@@ -1,0 +1,67 @@
+{
+  // TELEMETRY
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  // EDITOR
+  "editor.fontFamily": "Fira Code, SauceCodePro Nerd Font",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": true,
+  "editor.snippetSuggestions": "top",
+  "editor.fontLigatures": true,
+  "editor.smoothScrolling": true,
+  "editor.suggestSelection": "first",
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 90,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "editor.cursorBlinking": "smooth",
+  "editor.acceptSuggestionOnEnter": "off",
+  // WORKBENCH
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "Material Theme Ocean High Contrast",
+  "workbench.enableExperiments": false,
+  "workbench.editor.highlightModifiedTabs": true,
+  // WINDOW
+  "window.restoreWindows": "folders",
+  "window.titleBarStyle": "custom",
+  "window.title": "${activeEditorMedium}${separator}${rootName}",
+  // FILES
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 5000,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  // OTHER
+  "explorer.sortOrder": "type",
+  "search.smartCase": true,
+  "terminal.integrated.cursorBlinking": true,
+  "breadcrumbs.enabled": true,
+  // GIT
+  "git.enableSmartCommit": true,
+  // SYNC
+  "sync.gist": "fc6ad86c996db592bedd5f2199ce3f61",
+  // CPP
+  "C_Cpp.clang_format_path": "/usr/bin/clang-format",
+  "C_Cpp.clang_format_sortIncludes": true,
+  "C_Cpp.clang_format_style": "{ BasedOnStyle: Chromium, IndentWidth: 4 }",
+  // PYTHON
+  "python.pythonPath": "${workspaceFolder}/.env/bin/python",
+  "python.linting.pep8Enabled": true,
+  "python.linting.pep8Args": [
+    "--max-line-length=90"
+  ],
+  "python.linting.pylintEnabled": true,
+  "python.autoComplete.addBrackets": true,
+  "python.sortImports.path": "isort",
+  "python.formatting.provider": "black",
+  // GO
+  "go.autocompleteUnimportedPackages": true,
+  // PHP
+  "php-cs-fixer.lastDownload": 1565703810181,
+  "php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
+  "php-cs-fixer.formatHtml": true
+}
