@@ -115,7 +115,7 @@ cp-dotfiles() {
   cpr -q ~/.zprofile "${df_path}zprofile"
   cpr -q ~/.config/compton.conf "${df_path}"
   cpr -q ~/.config/mpd/mpd.conf "${df_path}mpd.conf"
-  cpr -q ~/.config/Code\ -\ OSS/User/settings.json "${df_path}"
+  cpr -q ~/.config/Code\ -\ OSS/User/settings.json "${df_path}/vscode/"
 
   echo "Copying folders..."
   cpr -rq ~/.vim/ftplugin "${df_path}vim/"
