@@ -24,6 +24,8 @@
     pager = true
 
 [alias]
+    a = add
+    ap = add --patch
     ps = push
     psu = push -u
     psom = push origin master
