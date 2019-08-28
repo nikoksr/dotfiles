@@ -189,3 +189,14 @@ alias borg-info-repo-usb='borg info /home/niko/usbdrives/exHdd-niko/borg/niko-la
 alias borg-list-backups-usb='borg list /home/niko/usbdrives/exHdd-niko/borg/niko-laptop'
 
 
+###########################
+#
+# MEDIA
+#
+###########################
+
+
+alias mpd_start='systemctl --user start mpd.service'
+alias mpd_stop='systemctl --user stop mpd.service'
+
+
