@@ -213,11 +213,3 @@ function borg-extract-backup() {
         borg extract borg@192.168.10.250:/betty/vault/backups/$HOST::"$1"
     fi
 }
-
-
-#####################################################
-#
-# PYTHON VIRUAL ENV
-#
-#####################################################
-
