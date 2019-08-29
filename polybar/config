@@ -1,11 +1,9 @@
 [colors]
 background = $color0_alpha
-background-alt = ${xrdb:color1:#222}
+background-alt = ${xrdb:color3:#222}
 foreground = ${xrdb:color7:#fff}
-foreground-alt = ${xrdb:color12:#ddd}
-primary = ${xrdb:color5:#555}
-secondary = ${xrdb:color6:#888}
-alert = ${xrdb:color3:#f00}
+foreground-alt = ${xrdb:color2:#ddd}
+alert = #f00
 
 [bar/top]
 monitor = ${env:MONITOR:}
