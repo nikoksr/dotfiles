@@ -240,7 +240,7 @@ bindsym $mod+d exec --no-startup-id "rofi -config ~/.config/rofi/config -show dr
 bindsym $mod+n exec --no-startup-id "networkmanager_dmenu -sort"
 
 # Terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec alacritty
 
 # Screenshot
 bindsym Print exec "scrot -q 100 '%d-%m-%Y@%T.png' -e 'mv $f ~/pictures/screenshots'"
@@ -264,4 +264,4 @@ bindsym $mod+shift+x exec --no-startup-id betterlockscreen -l blur
 bindsym $sup+t exec "wal -t -i /home/niko/pictures/wallpapers/Vibrant"
 
 # Apply pywal to lockscreen
-bindsym $sup+l exec termite --exec=" betterlockscreen -u "$(< "${HOME}/.cache/wal/wal")" -r 1920x1080 -b 1.0"
+bindsym $sup+l exec alacritty -e betterlockscreen -u "$(< "${HOME}/.cache/wal/wal")" -r 1920x1080 -b 1.0
