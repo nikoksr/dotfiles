@@ -225,9 +225,6 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 
 # ===== Touchpad =============
 
-# Toggle Touchpad
-bindsym XF86TouchpadToggle exec /home/niko/.scripts/toggletouchpad.sh
-
 # Media Player Controls
 bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
