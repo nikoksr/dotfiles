@@ -17,28 +17,28 @@ set $sup Mod4
 
 
 # Keyboard layout
-exec --no-startup-id setxkbmap de
+exec_always --no-startup-id setxkbmap de
 
 # Keyboard speed
-exec --no-startup-id xset r rate 200 25
+exec_always --no-startup-id xset r rate 200 25
 
 # Unused mouse disappears
 exec --no-startup-id unclutter
 
 # Autostarting screen-locker on suspend
-exec --no-startup-id xss-lock -- betterlockscreen -l blur
+exec_always --no-startup-id xss-lock -- betterlockscreen -l blur
 
 # Auto-mounting USB
-exec --no-startup-id "udiskie -n -T"
+exec_always --no-startup-id "udiskie -n -T"
 
 # Notifications
 exec_always --no-startup-id "killall dunst;dunst &"
 
 # Polkit
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec_always --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # Set bluetooth off on startup
-exec --no-startup-id bluetooth off
+exec_always --no-startup-id bluetooth off
 
 
 ##############################
