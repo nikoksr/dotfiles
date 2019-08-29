@@ -103,6 +103,9 @@ alias ls-rec='lsd --tree'
 # System Age
 alias sysage='awk -F "[[ ]" '\''NR==1 {print $2;}'\'' /var/log/pacman.log'
 
+# Find alternative
+alias fd='fd -j 6 -c auto -E betty -E usbdevices'
+
 
 ##############################
 #
