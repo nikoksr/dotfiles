@@ -18,7 +18,7 @@
     shrink = yes 
     padding = 10
     horizontal_padding = 10
-    transparency = 40
+    transparency = 10
 
     sort = yes
     indicate_hidden = yes
