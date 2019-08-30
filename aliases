@@ -109,18 +109,6 @@ alias fd='fd -j 6 -c auto -E betty -E usbdevices'
 
 ##############################
 #
-# FAVORITE FOLDERS
-#
-##############################
-
-
-alias gogh='cd ~/dev/go/src/github.com/nikoksr/'
-alias dev='cd ~/dev/'
-alias dotf='cd ~/dev/github/dotfiles/'
-
-
-##############################
-#
 # REMOTE                     
 #
 ##############################
