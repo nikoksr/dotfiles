@@ -1,0 +1,215 @@
+# ~/.functions
+
+
+##############################
+#
+# COMPRESSION
+#
+##############################
+
+
+# Multithreaded compression via tar and pigz
+# @param $1 - file or directory to compress
+function compress() {
+    # Check parameter
+    if [ ! -n "$1" ]; then
+        echo "Error: You have to specify a file or folder to compress"
+        echo "Syntax: compress <file>"
+        return 1
+    fi
+
+    # Execute compression
+    tar cf - "$1" | pigz --best > "$1".tar.gz
+}
+
+# Decompression via tar and pigz
+# @param $1 - compressed input
+function decompress() {
+    # Check parameter
+    if [ ! -n "$1" ]; then
+        echo "Error: You have to specify a file or folder to compress"
+        echo "Syntax: decompress <file>"
+        return 1
+    fi
+
+    # Execute decompression
+    pigz -dc "$1" | tar xf -
+}
+
+
+##############################
+#
+# DOWNLOAD
+#
+##############################
+
+
+# Downloading a file via Aria2c
+# @param $1 - destination
+# @param $2 - url to download
+function dwnld-file() {
+    # Check parameter
+    if [ ! -n "$1" ] || [ ! -n "$2" ]; then
+        echo "Error: Missing parameter"
+        echo "Syntax: dwnld-file <url> <destination>"
+        return 1
+    fi
+
+    # Execute download via aria2
+    aria2c --file-allocation=none -c -x 10 -s 10 -d "$1" "$2"
+}
+
+
+##############################
+#
+# FZF
+#
+##############################
+
+
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+f() {
+  local files
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0 --preview '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (highlight -O ansi -l {} || cat {}) 2> /dev/null | head -500' --color dark))
+  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
+
+# fglog - git commit browser
+fglog() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --header "Press CTRL-S to toggle sort" \
+      --preview "echo {} | grep -o '[a-f0-9]\{7\}' | head -1 |
+                 xargs -I % sh -c 'git show --color=always % | head -$LINES'" \
+      --bind "enter:execute:echo {} | grep -o '[a-f0-9]\{7\}' | head -1 |
+              xargs -I % sh -c 'vim fugitive://\$(git rev-parse --show-toplevel)/.git//% < /dev/tty'"
+}
+
+
+##############################
+#
+# DOTFILES
+#
+##############################
+
+
+cp-dotfiles() {
+  local df_path="/home/niko/dev/github/dotfiles/"
+
+  if [ -z "$df_path" ]; then
+      echo "Error: No path was provided."
+      return
+  fi
+
+  echo "Copying files..."
+  cpr -q ~/.aliases "${df_path}aliases"
+  cpr -q ~/.functions "${df_path}functions"
+  cpr -q ~/.gitconfig "${df_path}gitconfig"
+  cpr -q ~/.ycm_extra_conf.py "${df_path}vim/ycm_extra_conf.py"
+  cpr -q ~/.vimrc "${df_path}vim/vimrc"
+  cpr -q ~/.Xresources "${df_path}Xresources"
+  cpr -q ~/.zshrc "${df_path}zshrc"
+  cpr -q ~/.zprofile "${df_path}zprofile"
+  cpr -q ~/.config/compton.conf "${df_path}"
+  cpr -q ~/.config/mpd/mpd.conf "${df_path}mpd.conf"
+  cpr -q ~/.config/Code\ -\ OSS/User/settings.json "${df_path}/vscode/"
+
+  echo "Copying folders..."
+  cpr -rq ~/.vim/ftplugin "${df_path}vim/"
+  cpr -rq ~/.config/i3 "${df_path}"
+  cpr -rq ~/.config/polybar "${df_path}"
+  cpr -rq ~/.config/rofi "${df_path}"
+  cpr -rq ~/.config/dunst "${df_path}"
+  cpr -rq ~/.config/termite "${df_path}"
+  cpr -rq ~/.config/redshift "${df_path}"
+  cpr -rq ~/dev/.templates/ "${df_path}templates"
+  cpr -rq ~/.ncmpcpp/ "${df_path}ncmpcpp"
+
+  echo "Done..."
+}
+
+
+#####################################################
+#
+# BORG BACKUP
+#
+#####################################################
+
+
+### Remote
+
+# Mounten eines Remote-Borg-Backups.
+# @param $1 Name des zu mountenden Remote-Archivs
+# @param $2 Mount Pfad
+function borg-mount-backup() {
+    # Check parameter
+    if [ ! -n "$1" ] || [ ! -n "$2" ]; then
+        echo "Error: Missing parameter"
+        echo "Syntax: borg-mount-backup <repo-name> <mount-path>"
+        return 1
+    fi
+
+    # Execute borg mount
+    borg mount borg@192.168.10.250:/betty/vault/backups/$HOST::"$1" "$2"
+}
+
+
+# Extrahieren eines Remote-Borg-Backups.
+# @param $1 Name des zu mountenden Remote-Archivs
+# Optional: @param $2 Unterordner des Archivs
+function borg-extract-backup() {
+    # Check parameter
+    if [ ! -n "$1" ] && [ ! -n "$2" ]; then
+        echo "Error: Missing parameter"
+        echo "Syntax: borg-extract-backup <repo-name> [Optional: archive-folder]"
+        return 1
+    fi
+
+    # Execute borg extract
+    if [ -n "$1" ] && [ -n "$2" ]; then
+        borg extract borg@192.168.10.250:/betty/vault/backups/$HOST::"$1" "$2"
+    else
+        borg extract borg@192.168.10.250:/betty/vault/backups/$HOST::"$1"
+    fi
+}
+
+
+### USB
+
+# Mounten eines Remote-Borg-Backups.
+# @param $1 Name des zu mountenden Remote-Archivs
+# @param $2 Mount Pfad
+function borg-mount-backup() {
+    # Check parameter
+    if [ ! -n "$1" ] || [ ! -n "$2" ]; then
+        echo "Error: Missing parameter"
+        echo "Syntax: borg-mount-backup <repo-name> <mount-path>"
+        return 1
+    fi
+
+    # Execute borg mount
+    borg mount borg@192.168.10.250:/betty/vault/backups/$HOST::"$1" "$2"
+}
+
+
+# Extrahieren eines Remote-Borg-Backups.
+# @param $1 Name des zu mountenden Remote-Archivs
+# Optional: @param $2 Unterordner des Archivs
+function borg-extract-backup() {
+    # Check parameter
+    if [ ! -n "$1" ] && [ ! -n "$2" ]; then
+        echo "Error: Missing parameter"
+        echo "Syntax: borg-extract-backup <repo-name> [Optional: archive-folder]"
+        return 1
+    fi
+
+    # Execute borg extract
+    if [ -n "$1" ] && [ -n "$2" ]; then
+        borg extract borg@192.168.10.250:/betty/vault/backups/$HOST::"$1" "$2"
+    else
+        borg extract borg@192.168.10.250:/betty/vault/backups/$HOST::"$1"
+    fi
+}

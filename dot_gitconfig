@@ -1,0 +1,59 @@
+# ~/.gitconfig
+
+[user]
+    name = Niko Köser
+    email = koeserniko@gmail.com
+
+[core]
+    editor = vim
+    symlinks = false
+    pager = less -x4
+    autocrlf = input
+    ignorecase = true
+    fileMode = false 
+
+[credential]
+    helper = cache --timeout 3600
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = true
+    pager = true
+
+[alias]
+    a = add
+    ap = add --patch
+    ps = push
+    psu = push -u
+    psom = push origin master
+    psod = push origin develop
+    pl = pull
+    plr = pull --rebase
+    st = status
+    co = checkout
+    ci = commit
+    br = branch
+    df = diff
+    mg = merge --no-ff
+    lg = log -p
+    rso = remote show origin
+    rv = remote -v
+    me = config user.name
+    unstage = reset HEAD
+    undo = reset --soft HEAD~1
+    undo-hard = git reset --hard HEAD~1
+
+[url "https://github.com/"]
+    insteadOf = gh:
+
+[url "https://gist.github.com/"]
+    insteadOf = gist:
+
+[url "https://bitbucket.org/"]
+    insteadOf = bb:
+
+[url "http://192.168.10.250/"]
+    insteadOf = betty:

@@ -1,0 +1,59 @@
+# ~/.config/dunst/dunstrc
+
+
+[global]
+    font = "SauceCodePro Nerd Font Medium 13"
+    markup = full
+    format = "<b>%a:</b> %s\n%b"
+    alignment = left
+    ignore_newline = no
+    word_wrap = yes 
+
+    icon_position = right
+    max_icon_size=64
+
+    line_height = 0
+    separator_height = 0
+    geometry = "400x5-10+35"
+    shrink = yes 
+    padding = 10
+    horizontal_padding = 10
+    transparency = 10
+
+    sort = yes
+    indicate_hidden = yes
+    bounce_freq = 0
+    show_age_threshold = -1
+    idle_threshold = 120
+    monitor = 0
+    sticky_history = yes
+    startup_notification = false
+    
+    dmenu = /usr/bin/rofi -dmenu -p dunst:
+    browser = /usr/bin/firefox -new-tab
+    
+[frame]
+    width = 2
+    color = "#ffffff"
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+shift+h
+    context = ctrl+shift+period
+
+[urgency_low]
+    background = "#333333"
+    foreground = "#ffffff"
+    timeout = 10
+
+[urgency_normal]
+    background = "#333333"
+    foreground = "#ffffff"
+    timeout = 10
+
+[urgency_critical]
+    background = "#333333"
+    foreground = "#ffffff"
+    frame_color = "#ff0000"
+    timeout = 0

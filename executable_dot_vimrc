@@ -1,0 +1,215 @@
+" ~/.vimrc
+
+
+""""""""""""""""""""""""""""""
+"
+"  LOAD PLUGINS
+"
+""""""""""""""""""""""""""""""
+
+
+call plug#begin('~/.vim/plugged')
+
+" Theme
+Plug 'whatyouhide/vim-gotham'
+Plug 'dylanaraps/wal.vim'
+
+" Fuzzy file finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" Statusline
+" Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Multi-Cursor
+Plug 'terryma/vim-multiple-cursors'
+
+" Dev-Icons
+Plug 'ryanoasis/vim-devicons'
+
+call plug#end()
+
+
+""""""""""""""""""""""""""""""
+"
+"  SETTINGS
+"
+""""""""""""""""""""""""""""""
+
+
+set nocompatible        " Use Vim settings, rather than Vi settings
+
+" set t_Co=256        " 256 Colors
+
+set termguicolors " Enable true color support.
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+colorscheme wal
+" colorscheme gotham256       " Colorscheme
+" colorscheme atom-dark-256       " Colorscheme
+
+let mapleader=','       " leader is comma
+
+set backspace=indent,eol,start      " Make backspace behave in a sane manner.
+
+syntax on       " Switch syntax highlighting on
+
+" Enable file type detection and do language-dependent indenting.
+filetype plugin on
+filetype indent on
+
+set autoindent      " When no filetype, indent like previous line
+
+set relativenumber      " Show line numbers
+
+set showcmd     " Show command in bottom bar
+
+set cursorline      " Highlight current line
+
+set hidden      " Allow hidden buffers, don't limit to 1 file per window/split
+
+set tabstop=4       " Number of visual spaces per TAB
+
+set softtabstop=4       " Number of spaces in tab when editing
+
+set expandtab       " Tabs are spaces
+
+filetype indent on      " load filetype-specific indent files
+
+set wildmenu        " visual autocomplete for command menu
+
+set lazyredraw      " redraw only when we need to.
+
+set complete-=i     "Limit the files searched for auto-completes.
+
+set showmatch       " highlight matching [{()}]
+
+set incsearch       " search as characters are entered
+
+set hlsearch        " highlight matches
+
+set ignorecase      " Ignore case when searching
+
+"Automatically switch search to case-sensitive when search query contains an uppercase letter
+set smartcase
+
+set foldenable          " enable folding
+
+set foldlevelstart=10   " open most folds by default
+
+set foldnestmax=10      " 10 nested fold max
+
+set foldmethod=indent   " fold based on indent level
+
+" Vim backups
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set writebackup
+
+set ruler       " Display cursor position on last line of the screen or in status line of a window
+
+set laststatus=2 " always display status
+
+" Instead of failing a command because of unsaved changes, instead raise a
+" dialogue asking if you wish to save changed files.
+set confirm
+
+set mouse=a     " Enable use of the mouse for all modes
+
+" Quickly time out on keycodes, but never time out on mappings
+set notimeout ttimeout ttimeoutlen=200
+
+set display+=lastline       " Always try to show a paragraph’s last line
+
+set encoding=utf-8          " Use an encoding that supports unicode
+
+scriptencoding utf-8
+
+set scrolloff=1             " The number of screen lines to keep above and below the cursor
+
+set sidescrolloff=5         " Number of screen columns to keep to the left and right of cursor
+
+set wrap                    " Enable line wrapping
+
+set linebreak               " Avoid wrapping a line in the middle of a word
+
+set noerrorbells            " Disable beep on errors
+
+set title                   " Set the window’s title, reflecting the file currently being edited
+
+set history=1000            " Increase the undo limit
+
+set splitbelow      " vertical split to below
+
+set splitright      " horizontal split to the right
+
+" Directory to store swap files.
+set directory=~/.cache/vim
+
+" Directory to store backup files.
+set backupdir=~/.cache/vim
+
+
+"""""""""""""""""""""""""""""
+"
+"  EDIT PLUGINS
+"
+"""""""""""""""""""""""""""""
+
+
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~50%' }
+
+" Airline and Ale
+let g:airline#extensions#ale#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='onedark'
+
+
+"""""""""""""""""""""""""""""
+"
+"  MAPPINGS
+"
+"""""""""""""""""""""""""""""
+
+
+" Redo
+nnoremap U <C-r>
+
+" fzf
+map ; :Files<CR>
+
+" split navigations
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+
+" move to beginning/end of line
+nnoremap B ^
+nnoremap E $
+
+" $/^ doesn't do anything
+nnoremap $ <nop>
+nnoremap ^ <nop>
+
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+
+" space open/closes folds
+nnoremap <space> za
