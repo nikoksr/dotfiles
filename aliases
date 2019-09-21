@@ -126,21 +126,6 @@ alias ping-betty='ping 192.168.10.250'
 # ssh admin@blackbetty
 alias ssh-admin@betty='ssh -4 admin@192.168.10.250'
 
-# ssh niko@blackbetty
-alias ssh-niko@betty='ssh -4 niko@192.168.10.250'
-
-# ssh borg@blackbetty
-alias ssh-borg@betty='ssh -4 borg@192.168.10.250'
-
-# ssh admin@arch-test
-alias ssh-admin@arch-test='ssh -4 admin@192.168.10.52'
-
-# ssh admin@manjaro-test
-alias ssh-admin@manjaro-test='ssh -4 admin@192.168.10.53'
-
-# ssh admin@mint-test
-alias ssh-admin@mint-test='ssh -4 admin@192.168.10.54'
-
 
 ###########################
 #

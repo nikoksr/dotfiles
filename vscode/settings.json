@@ -61,7 +61,7 @@
   "go.autocompleteUnimportedPackages": true,
   "go.docsTool": "gogetdoc",
   // PHP
-  "php-cs-fixer.lastDownload": 1565703810181,
+  "php-cs-fixer.lastDownload": 1568550166068,
   "php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
   "php-cs-fixer.formatHtml": true,
   "[jsonc]": {
@@ -123,5 +123,8 @@
       "value": "#42b883"
     }
   ],
-  "explorer.confirmDelete": false
+  "explorer.confirmDelete": false,
+  "editor.formatOnSaveTimeout": 5000,
+  "go.formatTool": "goimports",
+  "php-cs-fixer.onsave": true
 }

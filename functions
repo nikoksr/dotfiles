@@ -108,6 +108,7 @@ cp-dotfiles() {
   cpr -q ~/.aliases "${df_path}aliases"
   cpr -q ~/.functions "${df_path}functions"
   cpr -q ~/.gitconfig "${df_path}gitconfig"
+  cpr -q ~/.gitmessage "${df_path}gitmessage"
   cpr -q ~/.ycm_extra_conf.py "${df_path}vim/ycm_extra_conf.py"
   cpr -q ~/.vimrc "${df_path}vim/vimrc"
   cpr -q ~/.Xresources "${df_path}Xresources"

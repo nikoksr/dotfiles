@@ -5,7 +5,7 @@
     email = koeserniko@gmail.com
 
 [core]
-    editor = vim
+    editor = nvim
     symlinks = false
     pager = less -x4
     autocrlf = input
@@ -57,3 +57,5 @@
 
 [url "http://192.168.10.250/"]
     insteadOf = betty:
+[commit]
+	template = /home/niko/.gitmessage
