@@ -3,7 +3,7 @@
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
   // EDITOR
-  "editor.fontFamily": "Fira Code, SauceCodePro Nerd Font",
+  "editor.fontFamily": "Cascadia Code, SauceCodePro Nerd Font",
   "editor.formatOnSave": true,
   "editor.tabSize": 4,
   "editor.insertSpaces": true,
@@ -14,6 +14,7 @@
   "editor.suggestSelection": "first",
   "editor.wordWrap": "on",
   "editor.wordWrapColumn": 90,
+  "editor.formatOnSaveTimeout": 5000,
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
   },
@@ -34,11 +35,9 @@
   "files.autoSaveDelay": 5000,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-  // OTHER
+  // EXPLORER
+  "explorer.confirmDelete": false,
   "explorer.sortOrder": "type",
-  "search.smartCase": true,
-  "terminal.integrated.cursorBlinking": true,
-  "breadcrumbs.enabled": true,
   // GIT
   "git.enableSmartCommit": true,
   // SYNC
@@ -60,71 +59,22 @@
   // GO
   "go.autocompleteUnimportedPackages": true,
   "go.docsTool": "gogetdoc",
+  "go.formatTool": "goimports",
   // PHP
   "php-cs-fixer.lastDownload": 1568550166068,
   "php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
   "php-cs-fixer.formatHtml": true,
+  "php-cs-fixer.onsave": true,
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  // OTHER
+  "search.smartCase": true,
+  "terminal.integrated.cursorBlinking": true,
+  "breadcrumbs.enabled": true,
   "debug.internalConsoleOptions": "openOnSessionStart",
   "sync.forceUpload": true,
-  "peacock.favoriteColors": [
-    {
-      "name": "Angular Red",
-      "value": "#b52e31"
-    },
-    {
-      "name": "Auth0 Orange",
-      "value": "#eb5424"
-    },
-    {
-      "name": "Azure Blue",
-      "value": "#007fff"
-    },
-    {
-      "name": "C# Purple",
-      "value": "#68217A"
-    },
-    {
-      "name": "Gatsby Purple",
-      "value": "#639"
-    },
-    {
-      "name": "Go Cyan",
-      "value": "#5dc9e2"
-    },
-    {
-      "name": "Java Blue-Gray",
-      "value": "#557c9b"
-    },
-    {
-      "name": "JavaScript Yellow",
-      "value": "#f9e64f"
-    },
-    {
-      "name": "Mandalorian Blue",
-      "value": "#1857a4"
-    },
-    {
-      "name": "Node Green",
-      "value": "#215732"
-    },
-    {
-      "name": "React Blue",
-      "value": "#00b3e6"
-    },
-    {
-      "name": "Something Different",
-      "value": "#832561"
-    },
-    {
-      "name": "Vue Green",
-      "value": "#42b883"
-    }
-  ],
-  "explorer.confirmDelete": false,
-  "editor.formatOnSaveTimeout": 5000,
-  "go.formatTool": "goimports",
-  "php-cs-fixer.onsave": true
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  }
 }
