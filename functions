@@ -119,7 +119,6 @@ cp-dotfiles() {
   cpr -q ~/.config/Code\ -\ OSS/User/settings.json "${df_path}/vscode/"
 
   echo "Copying folders..."
-  cpr -rq ~/.vim/ftplugin "${df_path}vim/"
   cpr -rq ~/.config/i3 "${df_path}"
   cpr -rq ~/.config/polybar "${df_path}"
   cpr -rq ~/.config/rofi "${df_path}"
