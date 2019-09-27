@@ -27,3 +27,7 @@ fi
 # Background color with transparency
 source ~/.cache/wal/colors.sh
 export color0_alpha="#22${color0/'#'}"
+
+# Npm user-wide installations
+PATH="$HOME/.node_modules/bin:$PATH"
+export npm_config_prefix=~/.node_modules
