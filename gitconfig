@@ -5,7 +5,7 @@
     email = koeserniko@gmail.com
 
 [core]
-    editor = nvim
+    editor = vim
     symlinks = false
     pager = less -x4
     autocrlf = input
