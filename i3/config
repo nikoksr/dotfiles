@@ -246,7 +246,7 @@ bindsym $mod+Return exec alacritty
 bindsym Print exec "flameshot gui &"
 
 # Browser
-bindsym $sup+w exec firefox
+bindsym $sup+w exec firefox-developer-edition
 
 # Remmina
 bindsym $sup+r exec remmina
