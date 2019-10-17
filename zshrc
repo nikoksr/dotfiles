@@ -114,5 +114,3 @@ zplugin light zsh-users/zsh-history-substring-search
 
 zplugin ice wait'0' atinit"zpcompinit; zpcdreplay" lucid
 zplugin light zdharma/fast-syntax-highlighting
-
-
