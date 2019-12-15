@@ -1,9 +1,11 @@
-# If applied, this commit will...
+# See https://www.conventionalcommits.org/en/v1.0.0/
+# Conventions are following semver. Append ! to the type if the change is a breaking
+#  change (major).
+# Types: fix (patch), feat (minor), build, chore, ci, docs, style, refactor, perf, test
+# <type>[optional scope]: <description>
 
-# Why is this change needed?
-Prior to this change, 
+# [optional body]
 
-# How does it address the issue?
-This change
-
-# Provide links to any relevant tickets, articles or other resources
+# Footers other than BREAKING CHANGE: <description> may be provided and follow a convention 
+#  similar to git trailer format (https://git-scm.com/docs/git-interpret-trailers).
+# [optional footer(s)]
