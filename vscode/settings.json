@@ -2,12 +2,8 @@
   // TELEMETRY
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
-  // EDITOR
-  "editor.fontFamily": "Cascadia Code, SauceCodePro Nerd Font",
   "editor.formatOnSave": true,
-  "editor.tabSize": 4,
   "editor.insertSpaces": true,
-  "editor.detectIndentation": true,
   "editor.snippetSuggestions": "top",
   "editor.fontLigatures": true,
   "editor.smoothScrolling": true,
@@ -23,7 +19,6 @@
   // WORKBENCH
   "workbench.startupEditor": "newUntitledFile",
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.colorTheme": "Material Theme Ocean",
   "workbench.enableExperiments": false,
   "workbench.editor.highlightModifiedTabs": true,
   // WINDOW
@@ -48,23 +43,15 @@
   "C_Cpp.clang_format_style": "{ BasedOnStyle: Chromium, IndentWidth: 4 }",
   // PYTHON
   "python.pythonPath": "${workspaceFolder}/.env/bin/python",
-  "python.linting.pep8Enabled": true,
-  "python.linting.pep8Args": [
-    "--max-line-length=90"
-  ],
   "python.linting.pylintEnabled": true,
   "python.autoComplete.addBrackets": true,
   "python.sortImports.path": "isort",
   "python.formatting.provider": "black",
   // GO
+  "go.gopath": "~/dev/go",
   "go.autocompleteUnimportedPackages": true,
   "go.docsTool": "gogetdoc",
   "go.formatTool": "goimports",
-  // PHP
-  "php-cs-fixer.lastDownload": 1568550166068,
-  "php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
-  "php-cs-fixer.formatHtml": true,
-  "php-cs-fixer.onsave": true,
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -81,5 +68,17 @@
   "python.jediEnabled": false,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "mrmlnc.vscode-remark"
+  },
+  "explorer.confirmDragAndDrop": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "workbench.colorTheme": "Night Owl",
+  "editor.fontFamily": "'CascadiaCode Nerd Font'",
+  "editor.tabCompletion": "on",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "liveServer.settings.donotShowInfoMsg": true
 }
