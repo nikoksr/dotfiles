@@ -66,14 +66,22 @@ function dwnld-file() {
 #
 ##############################
 
-
-# fe [FUZZY PATTERN] - Open the selected file with the default editor
-#   - Bypass fuzzy finder if there's only one match (--select-1)
-#   - Exit if there's no match (--exit-0)
+# Fzf: Preview and open files with xdg-open (CTRL-O) or editor(Enter/CTRL-E).
 f() {
-  local files
-  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0 --preview '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (highlight -O ansi -l {} || cat {}) 2> /dev/null | head -500' --color dark))
-  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+  local out file key
+  IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e --preview 'bat --color=always {}')")
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && xdg-open "$file" 2> /dev/null || ${EDITOR:-vim} "$file"
+  fi
+}
+
+# Fzf: Search file contents
+fc() {
+    if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+    local file
+    file="$(rga --max-count=1 --ignore-case --files-with-matches --no-messages "$@" | fzf-tmux +m --preview="rga --ignore-case --pretty --context 10 '"$@"' {}")" && xdg-open "$file"
 }
 
 # fglog - git commit browser
