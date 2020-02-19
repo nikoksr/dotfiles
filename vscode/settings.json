@@ -83,5 +83,9 @@
   "liveServer.settings.donotShowInfoMsg": true,
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "cSpell.userWords": [
+    "firestore",
+    "proji"
+  ]
 }
