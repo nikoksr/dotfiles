@@ -1,4 +1,4 @@
-" vim-bootstrap 
+" vim-bootstrap
 
 "*****************************************************************************
 "" Vim-PLug core
@@ -66,7 +66,8 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 "" Color
-Plug 'tomasr/molokai'
+"" Plug 'whatyouhide/vim-gotham'
+Plug 'hzchirs/vim-material'
 
 "*****************************************************************************
 "" Custom bundles
@@ -138,7 +139,8 @@ set ruler
 set number
 
 let no_buffers_menu=1
-silent! colorscheme molokai
+set background=dark
+silent! colorscheme vim-material
 
 set mousemodel=popup
 set t_Co=256
@@ -159,7 +161,6 @@ else
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
 
-  
   if $COLORTERM == 'gnome-terminal'
     set term=gnome-256color
   else
@@ -167,7 +168,7 @@ else
       set term=xterm-256color
     endif
   endif
-  
+
 endif
 
 
@@ -203,7 +204,7 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-let g:airline_theme = 'powerlineish'
+let g:airline_theme='material'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
