@@ -85,7 +85,7 @@ full-at = 98
 poll-interval = 1.0
 
 format-charging = <label-charging>
-format-discharging = <ramp-capacity> <label-discharging>
+format-discharging =  <ramp-capacity>  <label-discharging>
 
 label-charging =  %percentage%%
 label-discharging = %percentage%%
