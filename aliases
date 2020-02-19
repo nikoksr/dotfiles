@@ -21,7 +21,7 @@ alias updnc='yay -Syu --noconfirm'
 alias updacnc='yay -Syu --noconfirm; yay -Rns $(yay -Qtdq) --noconfirm'
 
 # refresh pacman mirrors
-alias refresh_mirrors='sudo reflector --country "Germany" --latest 5 --age 24 --sort rate --save /etc/pacman.d/mirrorlist;sudo rm -f /etc/pacman.d/mirrorlist.pacnew;yay -Syy'
+alias refresh_mirrors='sudo reflector --country "Germany" --latest 10 --age 24 --sort rate --save /etc/pacman.d/mirrorlist;sudo rm -f /etc/pacman.d/mirrorlist.pacnew;yay -Syy'
 
 # update zplugin
 alias updzsh='zplg self-update;zplg update --all;zplg compile --all'
