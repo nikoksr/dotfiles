@@ -17,12 +17,8 @@ source $HOME/.zprofile
 source $HOME/.aliases
 source $HOME/.functions
 
+# FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-if [[ $TERM == xterm-termite ]]; then
-    . /etc/profile.d/vte.sh
-    __vte_osc7
-fi
 
 
 ##############################
