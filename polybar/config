@@ -117,7 +117,7 @@ animation-discharging-framerate = 500
 type = internal/network
 interface = wlp2s0
 interval = 3.0
-format-connected = <ramp-signal> <label-connected>
+format-connected = <ramp-signal>  <label-connected>
 format-disconnected = <label-disconnected>
 
 label-connected = %essid%
