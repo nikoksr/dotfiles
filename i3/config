@@ -49,7 +49,7 @@ exec_always --no-startup-id bluetooth off
 
 
 # Font
-font pango: SauceCodePro Nerd Font Medium 13
+font pango: CaskaydiaCove Nerd Font Medium 13
 
 # Add this to your .xinitrc or whatever file starts programs on startup.
 exec_always --no-startup-id wal -i "$(< "${HOME}/.cache/wal/wal")"
@@ -256,9 +256,6 @@ bindsym $sup+c exec "code -n"
 
 # Dbeaver
 bindsym $sup+d exec dbeaver
-
-# Bitwarden
-bindsym $sup+b exec bwmenu
 
 # Lockscreen
 bindsym $mod+shift+x exec --no-startup-id betterlockscreen -l blur
