@@ -75,7 +75,7 @@
   "explorer.confirmDragAndDrop": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "Night Owl",
-  "editor.fontFamily": "'CascadiaCode Nerd Font'",
+  "editor.fontFamily": "CaskaydiaCove Nerd Font",
   "editor.tabCompletion": "on",
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -87,5 +87,6 @@
   "cSpell.userWords": [
     "firestore",
     "proji"
-  ]
+  ],
+  "editor.maxTokenizationLineLength": 20000000
 }
