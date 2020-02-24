@@ -105,7 +105,7 @@ fglog() {
 
 
 cp-dotfiles() {
-  local df_path="/home/niko/dev/github/dotfiles/"
+  local df_path="/home/niko/dev/github/personal/dotfiles/"
 
   if [ -z "$df_path" ]; then
       echo "Error: No path was provided."
