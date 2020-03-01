@@ -9,16 +9,10 @@
 
 
 # update system
-alias upd='yay -Syu'
+alias upd='yay'
 
 # update and clean system
-alias updac='yay -Syu; yay -Rns $(yay -Qtdq)'
-
-# update with noconfirm
-alias updnc='yay -Syu --noconfirm'
-
-# update and clean system with noconfirm
-alias updacnc='yay -Syu --noconfirm; yay -Rns $(yay -Qtdq) --noconfirm'
+alias updac='yay; yay -Rns $(yay -Qtdq)'
 
 # refresh pacman mirrors
 alias refresh_mirrors='sudo reflector --country "Germany" --latest 10 --age 24 --sort rate --save /etc/pacman.d/mirrorlist;sudo rm -f /etc/pacman.d/mirrorlist.pacnew;yay -Syy'
@@ -26,8 +20,14 @@ alias refresh_mirrors='sudo reflector --country "Germany" --latest 10 --age 24 -
 # update zplugin
 alias updzsh='zplg self-update;zplg update --all;zplg compile --all'
 
+# update vim-plug
+alias updvim='vim +PlugUpgrade +qall > /dev/null; vim +PlugUpdate +qall > /dev/null'
+
 # update firmware
 alias updfw='fwupdmgr get-devices; fwupdmgr refresh; fwupdmgr get-updates; fwupdmgr update'
+
+# update all
+alias updall='refresh_mirrors; upd; updzsh; updvim; updfw'
 
 
 ##############################
