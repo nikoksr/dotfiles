@@ -9,7 +9,7 @@
 
 
 export GOPATH=$HOME/dev/go
-export PATH="$PATH:$GOPATH/bin:/usr/local/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.scripts"
+export PATH="$PATH:$GOPATH/bin:/usr/local/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.scripts:/opt/osxcross/bin"
 export BOOST_ROOT="$BOOST_ROOT:/usr/local/boost_1_67_0"
 
 export LANG=en_US.UTF-8
@@ -33,3 +33,5 @@ fi
 # GPG Signing
 export GPG_TTY=$(tty)
 
+# osxcross
+export LD_LIBRARY_PATH="/opt/osxcross/lib"
