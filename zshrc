@@ -1,25 +1,21 @@
-# ~/.zshrc
 
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing DHARMA Initiative Plugin Manager (zdharma/zinit)…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f"
+fi
 
-source $HOME/.zplugin/bin/zplugin.zsh
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
-
-
-##############################
-#
-# ENVIRONMENT             
-#
-##############################
-
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of Zinit installer's chunk
 
 source $HOME/.zprofile
 source $HOME/.aliases
 source $HOME/.functions
-
-# FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 
 ##############################
 #
@@ -28,17 +24,17 @@ source $HOME/.functions
 ##############################
 
 
-zplugin ice wait'0' lucid
-zplugin light thetic/extract
+zinit ice wait'0' lucid
+zinit light thetic/extract
 
-zplugin ice wait'0' blockf lucid
-zplugin light zsh-users/zsh-completions
+zinit ice wait'0' blockf lucid
+zinit light zsh-users/zsh-completions
 
-zplugin ice wait'0' atload"_zsh_autosuggest_start" lucid
-zplugin light zsh-users/zsh-autosuggestions
+zinit ice wait'0' atload"_zsh_autosuggest_start" lucid
+zinit light zsh-users/zsh-autosuggestions
 
-zplugin ice wait'0' lucid
-zplugin light zdharma/history-search-multi-word
+zinit ice wait'0' lucid
+zinit light zdharma/history-search-multi-word
 
 
 ##############################
@@ -48,8 +44,8 @@ zplugin light zdharma/history-search-multi-word
 ##############################
 
 
-zplugin ice pick"async.zsh" src"pure.zsh" lucid
-zplugin light sindresorhus/pure
+zinit ice pick"async.zsh" src"pure.zsh" lucid
+zinit light sindresorhus/pure
 
 
 ##############################
@@ -61,20 +57,20 @@ zplugin light sindresorhus/pure
 
 setopt promptsubst
 
-zplugin ice wait'0' lucid
-zplugin snippet OMZ::lib/history.zsh
+zinit ice wait'0' lucid
+zinit snippet OMZ::lib/history.zsh
 
-zplugin ice wait'0' lucid
-zplugin snippet OMZ::lib/completion.zsh
+zinit ice wait'0' lucid
+zinit snippet OMZ::lib/completion.zsh
 
-zplugin ice wait'0' lucid
-zplugin snippet OMZ::lib/key-bindings.zsh
+zinit ice wait'0' lucid
+zinit snippet OMZ::lib/key-bindings.zsh
 
-zplugin ice wait'0' lucid
-zplugin snippet OMZ::lib/functions.zsh
+zinit ice wait'0' lucid
+zinit snippet OMZ::lib/functions.zsh
 
-zplugin ice wait'0' lucid
-zplugin snippet OMZ::lib/correction.zsh
+zinit ice wait'0' lucid
+zinit snippet OMZ::lib/correction.zsh
 
 
 ##############################
@@ -84,11 +80,11 @@ zplugin snippet OMZ::lib/correction.zsh
 ##############################
 
 
-zplugin ice wait'0' lucid
-zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
+zinit ice wait'0' lucid
+zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
-zplugin ice wait'0' lucid
-zplugin snippet OMZ::plugins/history/history.plugin.zsh
+zinit ice wait'0' lucid
+zinit snippet OMZ::plugins/history/history.plugin.zsh
 
 
 ##############################
@@ -105,8 +101,9 @@ bindkey '^[[B' history-substring-search-down
 zle -N history-substring-search-up
 zle -N history-substring-search-down
 
-zplugin ice wait'0' lucid
-zplugin light zsh-users/zsh-history-substring-search
+zinit ice wait'0' lucid
+zinit light zsh-users/zsh-history-substring-search
 
-zplugin ice wait'0' atinit"zpcompinit; zpcdreplay" lucid
-zplugin light zdharma/fast-syntax-highlighting
+zinit ice wait'0' atinit"zpcompinit; zpcdreplay" lucid
+zinit light zdharma/fast-syntax-highlighting
+
