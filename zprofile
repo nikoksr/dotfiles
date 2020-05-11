@@ -14,8 +14,8 @@ export BOOST_ROOT="$BOOST_ROOT:/usr/local/boost_1_67_0"
 
 export LANG=en_US.UTF-8
 
-export VISUAL=vim
-export EDITOR="$VISUAL"
+export EDITOR='vim'
+export VISUAL='code'
 
 if test “${PS1+set}”; then 
     export CDPATH="$CDPATH:$GOPATH/src"

@@ -77,13 +77,6 @@ f() {
   fi
 }
 
-# Fzf: Search file contents
-fc() {
-    if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
-    local file
-    file="$(rga --max-count=1 --ignore-case --files-with-matches --no-messages "$@" | fzf-tmux +m --preview="rga --ignore-case --pretty --context 10 '"$@"' {}")" && xdg-open "$file" 2> /dev/null
-}
-
 # fglog - git commit browser
 fglog() {
   git log --graph --color=always \
@@ -122,7 +115,7 @@ cp-dotfiles() {
   cpr -q ~/.Xresources "${df_path}Xresources"
   cpr -q ~/.zshrc "${df_path}zshrc"
   cpr -q ~/.zprofile "${df_path}zprofile"
-  cpr -q ~/.config/compton.conf "${df_path}"
+  cpr -q ~/.config/picom.conf "${df_path}"
   cpr -q ~/.config/alacritty/alacritty.yml "${df_path}"
   cpr -q ~/.config/mpd/mpd.conf "${df_path}mpd.conf"
   cpr -q ~/.config/Code\ -\ OSS/User/settings.json "${df_path}/vscode/"
