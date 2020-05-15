@@ -29,7 +29,7 @@ exec --no-startup-id unclutter
 exec_always --no-startup-id xss-lock -- betterlockscreen -l blur
 
 # Auto-mounting USB
-exec_always --no-startup-id "udiskie -n -T"
+exec_always --no-startup-id "udiskie -a -n -T"
 
 # Notifications
 exec_always --no-startup-id "killall dunst;dunst &"
@@ -55,7 +55,7 @@ font pango: CaskaydiaCove Nerd Font Medium 13
 exec_always --no-startup-id wal -i "$(< "${HOME}/.cache/wal/wal")"
 
 # Compton - Compositor
-exec_always --no-startup-id "killall -q compton;compton -b --dbus"
+exec_always --no-startup-id "killall -q picom;picom -b --dbus --experimental-backends"
 
 # Polybar
 exec_always --no-startup-id /home/niko/.config/polybar/launch.sh
@@ -243,7 +243,7 @@ bindsym $mod+n exec --no-startup-id "networkmanager_dmenu -sort"
 bindsym $mod+Return exec alacritty
 
 # Screenshot
-bindsym Print exec "flameshot gui &"
+bindsym Print exec scrot
 
 # Browser
 bindsym $sup+w exec firefox-developer-edition
@@ -256,6 +256,9 @@ bindsym $sup+c exec "code -n"
 
 # Dbeaver
 bindsym $sup+d exec dbeaver
+
+# Virtmanager 
+bindsym $sup+v exec virt-manager 
 
 # Lockscreen
 bindsym $mod+shift+x exec --no-startup-id betterlockscreen -l blur

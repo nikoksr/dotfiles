@@ -10,7 +10,6 @@
   "editor.suggestSelection": "first",
   "editor.wordWrap": "on",
   "editor.wordWrapColumn": 90,
-  "editor.formatOnSaveTimeout": 5000,
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
   },
@@ -18,7 +17,6 @@
   "editor.acceptSuggestionOnEnter": "off",
   // WORKBENCH
   "workbench.startupEditor": "newUntitledFile",
-  "workbench.iconTheme": "material-icon-theme",
   "workbench.enableExperiments": false,
   "workbench.editor.highlightModifiedTabs": true,
   // WINDOW
@@ -67,14 +65,13 @@
   "window.zoomLevel": 0,
   "python.jediEnabled": false,
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[markdown]": {
     "editor.defaultFormatter": "mrmlnc.vscode-remark"
   },
   "explorer.confirmDragAndDrop": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Night Owl",
   "editor.fontFamily": "CaskaydiaCove Nerd Font",
   "editor.tabCompletion": "on",
   "[html]": {
@@ -84,9 +81,7 @@
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.userWords": [
-    "firestore",
-    "proji"
-  ],
-  "editor.maxTokenizationLineLength": 20000000
+  "editor.maxTokenizationLineLength": 20000000,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "Night Owl"
 }

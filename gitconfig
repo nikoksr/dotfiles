@@ -3,6 +3,7 @@
 [user]
     name = Niko Köser
     email = koeserniko@gmail.com
+	signingkey = F3F28C118DAA6375
 
 [core]
     editor = vim
@@ -16,7 +17,6 @@
     helper = cache --timeout 3600
 
 [color]
-    diff = auto
     status = auto
     branch = auto
     interactive = auto
@@ -55,11 +55,9 @@
 [url "https://bitbucket.org/"]
     insteadOf = bb:
 
-[url "http://192.168.10.250/"]
-    insteadOf = betty:
-
 [commit]
 	template = /home/niko/.gitmessage
+	gpgsign = true
 
 [color "diff-highlight"]
 	oldNormal = red bold
@@ -74,3 +72,5 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[push]
+	followTags = true
