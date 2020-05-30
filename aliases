@@ -20,6 +20,9 @@ alias refresh_mirrors='sudo reflector -c "Germany" -l 200 -n 20 -p https --age 1
 # update zplugin
 alias updzsh='zplg self-update;zplg update --all;zplg compile --all'
 
+# update npm
+alias updnpm='ncu -g -u'
+
 # update vim-plug
 alias updvim='vim +PlugUpgrade +qall > /dev/null; vim +PlugUpdate +qall > /dev/null'
 
