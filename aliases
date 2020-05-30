@@ -129,14 +129,7 @@ alias ping-betty='ping 192.168.10.250'
 # ssh admin@blackbetty
 alias ssh-admin@betty='ssh -4 admin@192.168.10.250'
 
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-
+# ssh raspi
 alias ssh-admin@docker-pi='ssh -4 admin@192.168.0.24'
 
 
