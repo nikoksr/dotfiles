@@ -24,13 +24,13 @@ alias updzsh='zplg self-update;zplg update --all;zplg compile --all'
 alias updnpm='ncu -g -u'
 
 # update vim-plug
-alias updvim='vim +PlugUpgrade +qall > /dev/null; vim +PlugUpdate +qall > /dev/null'
+alias updvim='nvim +PlugUpgrade +qall > /dev/null; nvim +PlugUpdate +qall > /dev/null'
 
 # update firmware
 alias updfw='fwupdmgr get-devices; fwupdmgr refresh; fwupdmgr get-updates; fwupdmgr update'
 
 # update all
-alias updall='refresh_mirrors; upd; updzsh; updvim; updfw'
+alias updall='refresh_mirrors; upd; updzsh; updnpm; updvim; updfw'
 
 
 ##############################
@@ -84,6 +84,9 @@ alias docker-container-ip='docker inspect -f "{{range .NetworkSettings.Networks}
 #
 ##############################
 
+
+# nvim to vim
+alias vim='nvim'
 
 # grep
 alias grep='grep --color=auto'
