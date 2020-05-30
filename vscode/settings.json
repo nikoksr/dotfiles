@@ -2,6 +2,7 @@
   // TELEMETRY
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
+  // EDITOR
   "editor.formatOnSave": true,
   "editor.insertSpaces": true,
   "editor.snippetSuggestions": "top",
@@ -11,14 +12,22 @@
   "editor.wordWrap": "on",
   "editor.wordWrapColumn": 90,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": true,
+    "source.fixAll.eslint": true
   },
   "editor.cursorBlinking": "smooth",
   "editor.acceptSuggestionOnEnter": "off",
+  "editor.tabCompletion": "on",
+  "editor.maxTokenizationLineLength": 20000000,
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.fontSize": 12,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   // WORKBENCH
   "workbench.startupEditor": "newUntitledFile",
   "workbench.enableExperiments": false,
   "workbench.editor.highlightModifiedTabs": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "Night Owl",
   // WINDOW
   "window.restoreWindows": "folders",
   "window.titleBarStyle": "custom",
@@ -30,11 +39,13 @@
   "files.trimTrailingWhitespace": true,
   // EXPLORER
   "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
   "explorer.sortOrder": "type",
   // GIT
   "git.enableSmartCommit": true,
   // SYNC
   "sync.gist": "fc6ad86c996db592bedd5f2199ce3f61",
+  "sync.forceUpload": true,
   // CPP
   "C_Cpp.clang_format_path": "/usr/bin/clang-format",
   "C_Cpp.clang_format_sortIncludes": true,
@@ -50,38 +61,57 @@
   "go.autocompleteUnimportedPackages": true,
   "go.docsTool": "gogetdoc",
   "go.formatTool": "goimports",
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "go.useLanguageServer": true,
+  // VIM
+  "vim.easymotion": false,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.statusBarColorControl": false,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<C-n>"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": ["leader", "w"],
+      "commands": ["workbench.action.files.save"]
+    },
+    {
+      "before": ["leader", "o"],
+      "commands": ["workbench.action.files.openFile"]
+    },
+    {
+      "before": ["leader", "n"],
+      "commands": ["workbench.action.files.newUntitledFile"]
+    },
+    {
+      "before": [":"],
+      "commands": ["workbench.action.showCommands"]
+    }
+  ],
+  "vim.leader": "<space>",
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false
   },
   // OTHER
   "search.smartCase": true,
   "terminal.integrated.cursorBlinking": true,
   "breadcrumbs.enabled": true,
   "debug.internalConsoleOptions": "openOnSessionStart",
-  "sync.forceUpload": true,
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
   "window.zoomLevel": 0,
   "python.jediEnabled": false,
-  "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
   "[markdown]": {
     "editor.defaultFormatter": "mrmlnc.vscode-remark"
   },
-  "explorer.confirmDragAndDrop": false,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "editor.fontFamily": "CaskaydiaCove Nerd Font",
-  "editor.tabCompletion": "on",
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "liveServer.settings.donotShowInfoMsg": true,
-  "[javascriptreact]": {
+  "prettier.packageManager": "yarn",
+  "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "editor.maxTokenizationLineLength": 20000000,
-  "workbench.iconTheme": "material-icon-theme",
-  "workbench.colorTheme": "Night Owl"
+  }
 }
