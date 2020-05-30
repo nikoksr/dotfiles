@@ -15,6 +15,7 @@ export LANG=en_US.UTF-8
 
 export EDITOR='vim'
 export VISUAL='code'
+export TERM='xterm-256color'
 
 if test “${PS1+set}”; then 
     export CDPATH="$CDPATH:$GOPATH/src"
