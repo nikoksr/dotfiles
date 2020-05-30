@@ -6,12 +6,12 @@
 	signingkey = F3F28C118DAA6375
 
 [core]
-    editor = vim
+    editor = nvim
     symlinks = false
 	pager = diff-so-fancy | less --tabs=4 -RFX
     autocrlf = input
     ignorecase = true
-    fileMode = false 
+	fileMode = false
 
 [credential]
     helper = cache --timeout 3600
