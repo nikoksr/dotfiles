@@ -113,27 +113,6 @@ alias sysage='awk -F "[[ ]" '\''NR==1 {print $2;}'\'' /var/log/pacman.log'
 alias fd='fd -j 6 -c auto -E betty -E usbdevices'
 
 
-##############################
-#
-# REMOTE
-#
-##############################
-
-
-# wake betty
-alias wake-betty='wol D0:50:99:C3:DF:2F'
-
-# ping betty
-alias ping-betty='ping 192.168.10.250'
-
-# ssh admin@blackbetty
-alias ssh-admin@betty='ssh -4 admin@192.168.10.250'
-
-# ssh raspi
-alias ssh-admin@docker-pi='ssh -4 admin@192.168.0.24'
-
-
-
 ###########################
 #
 # BORG BACKUP

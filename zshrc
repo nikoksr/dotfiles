@@ -22,6 +22,7 @@ zinit light-mode for \
 
 source $HOME/.zprofile
 source $HOME/.aliases
+source $HOME/.remote_aliases
 source $HOME/.functions
 
 ##############################
