@@ -125,7 +125,7 @@ cp-dotfiles() {
   cpr -rq --ignore-errors ~/.config/dunst "${df_path}"
   cpr -rq --ignore-errors ~/.config/redshift "${df_path}"
   cpr -rq --ignore-errors ~/.config/proji "${df_path}"
-  cpr -rq --exclude 'vim_plug' --ignore-errors ~/.config/nvim "${df_path}"
+  cpr -rq --exclude 'vim_plug' --exclude 'undodir' --ignore-errors ~/.config/nvim "${df_path}"
   
   echo "Done..."
 }
