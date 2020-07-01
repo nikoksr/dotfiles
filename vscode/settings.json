@@ -27,7 +27,6 @@
   "workbench.enableExperiments": false,
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.colorTheme": "Night Owl",
   // WINDOW
   "window.restoreWindows": "folders",
   "window.titleBarStyle": "custom",
@@ -60,7 +59,6 @@
   "go.gopath": "~/dev/go",
   "go.autocompleteUnimportedPackages": true,
   "go.docsTool": "gogetdoc",
-  "go.formatTool": "goimports",
   "go.useLanguageServer": true,
   // VIM
   "vim.easymotion": false,
@@ -113,5 +111,13 @@
   "prettier.packageManager": "yarn",
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "workbench.colorTheme": "Night Owl",
+  "todo-tree.tree.showScanModeButton": false,
+  "todo-tree.filtering.excludeGlobs": [
+    "**/node_modules/*"
+  ],
+  "go.formatTool": "gofmt"
 }
