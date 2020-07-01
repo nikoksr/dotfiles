@@ -111,7 +111,6 @@ cp-dotfiles() {
   cpr -q --ignore-errors ~/.gitconfig "${df_path}gitconfig"
   cpr -q --ignore-errors ~/.gitmessage "${df_path}gitmessage"
   cpr -q --ignore-errors ~/.vimrc "${df_path}vim/vimrc"
-  cpr -q --ignore-errors ~/.config/nvim/init.vim "${df_path}nvim/init.vim"
   cpr -q --ignore-errors ~/.Xresources "${df_path}Xresources"
   cpr -q --ignore-errors ~/.zshrc "${df_path}zshrc"
   cpr -q --ignore-errors ~/.zprofile "${df_path}zprofile"
@@ -126,6 +125,7 @@ cp-dotfiles() {
   cpr -rq --ignore-errors ~/.config/dunst "${df_path}"
   cpr -rq --ignore-errors ~/.config/redshift "${df_path}"
   cpr -rq --ignore-errors ~/.config/proji "${df_path}"
+  cpr -rq --exclude 'vim_plug' --ignore-errors ~/.config/nvim "${df_path}"
   
   echo "Done..."
 }
