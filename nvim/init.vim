@@ -1,464 +1,462 @@
-" vim-bootstrap 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Table of contents:
+" => General and UI configs
+" => Colors, Fonts, ...
+" => Text, tab and indent related
+" => Visual mode related
+" => Tabpages, windows and buffers
+" => Status line
+" => Editing mappings
+" => Integrated terminal settings
+" => Spell checking
+" => Software developement related
+" => Helper functions
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"*****************************************************************************
-"" Vim-PLug core
-"*****************************************************************************
-let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General and UI configs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General and obvious
+set number
+set nowrap
+let mapleader = ' '
+let vim_dir = '$HOME/.config/nvim'
 
-let g:vim_bootstrap_langs = ""
-let g:vim_bootstrap_editor = "nvim"				" nvim or vim
+" Scroll page with 1 line space.
+set so=1
 
-if !filereadable(vimplug_exists)
-  if !executable("curl")
-    echoerr "You have to install curl or first install vim-plug yourself!"
-    execute "q!"
-  endif
-  echo "Installing Vim-Plug..."
-  echo ""
-  silent exec "!\curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  let g:not_finish_vimplug = "yes"
+" Number of commands to remember.
+set history=500
 
-  autocmd VimEnter * PlugInstall
-endif
+" Enable filetype plugins.
+filetype plugin on
+filetype indent on
 
-" Required:
-call plug#begin(expand('~/.config/nvim/plugged'))
-
-"*****************************************************************************
-"" Plug install packages
-"*****************************************************************************
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'airblade/vim-gitgutter'
-Plug 'vim-scripts/grep.vim'
-Plug 'vim-scripts/CSApprox'
-Plug 'Raimondi/delimitMate'
-Plug 'majutsushi/tagbar'
-Plug 'w0rp/ale'
-Plug 'Yggdroot/indentLine'
-Plug 'avelino/vim-bootstrap-updater'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
-
-if isdirectory('/usr/local/opt/fzf')
-  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-else
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-  Plug 'junegunn/fzf.vim'
-endif
-let g:make = 'gmake'
-if exists('make')
-        let g:make = 'make'
-endif
-Plug 'Shougo/vimproc.vim', {'do': g:make}
-
-"" Vim-Session
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-
-"" Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
-"" Color
-Plug 'whatyouhide/vim-gotham'
-
-"*****************************************************************************
-"" Custom bundles
-"*****************************************************************************
-
-"*****************************************************************************
-"*****************************************************************************
-
-"" Include user's extra bundle
-if filereadable(expand("~/.config/nvim/local_bundles.vim"))
-  source ~/.config/nvim/local_bundles.vim
-endif
-
-call plug#end()
-
-" Required:
-filetype plugin indent on
-
-
-"*****************************************************************************
-"" Basic Setup
-"*****************************************************************************"
-"" Encoding
-set encoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8
-
-
-"" Fix backspace indent
-set backspace=indent,eol,start
-
-"" Tabs. May be overridden by autocmd rules
-set tabstop=4
-set softtabstop=0
-set shiftwidth=4
-set expandtab
-
-"" Map leader to <space> 
-let mapleader=" "
-
-"" Enable hidden buffers
-set hidden
-
-"" Searching
-set hlsearch
-set incsearch
+" Search related configurations.
 set ignorecase
 set smartcase
-
-set fileformats=unix,dos,mac
-
-if exists('$SHELL')
-    set shell=$SHELL
-else
-    set shell=/bin/sh
+set incsearch
+set hlsearch
+" For some reason this gets messed up in vim.
+if has('nvim')
+    nnoremap <silent> <c-[> <esc>:noh<cr>
 endif
 
-" session management
-let g:session_directory = "~/.config/nvim/session"
-let g:session_autoload = "no"
-let g:session_autosave = "no"
-let g:session_command_aliases = 1
+" Easy copy-paste between different vim sessions
+inoremap <c-c> <nop>
+vnoremap <c-c> <nop>
+vnoremap <c-c>c "+y
+vnoremap <c-c>x "+d
+vnoremap <c-c>v "+p
+nnoremap <c-c>v "+p
+inoremap <c-c>v <esc>"+pa
 
-"*****************************************************************************
-"" Visual Settings
-"*****************************************************************************
-syntax on
+" Quick save
+nnoremap <silent><leader>w :<c-u>update<cr>
+
+" Quick quit
+nnoremap <silent><leader>q :<c-u>quit<cr>
+
+" Remap redo
+nnoremap <s-U> <C-R>
+
+" Show current position in file
 set ruler
-set number
 
-let no_buffers_menu=1
-silent! colorscheme gotham
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
 
-set mousemodel=popup
-set t_Co=256
-set guioptions=egmrti
-set gfn=Monospace\ 10
+" How vim completions work
+set completeopt=longest,menuone,preview
 
-if has("gui_running")
-  if has("gui_mac") || has("gui_macvim")
-    set guifont=Menlo:h12
-    set transparency=7
-  endif
+" Set wildmenu (autocompletions in command line)
+set wildmenu
+set wildmode=longest,full
+" Command prompt completion keystroke
+set wildchar=<tab>
+" How to refer to wildchar inside of mappings
+set wildcharm=<c-z>
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=.git\*,.hg\*,.svn\*
 else
-  let g:CSApprox_loaded = 1
-
-  " IndentLine
-  let g:indentLine_enabled = 1
-  let g:indentLine_concealcursor = 0
-  let g:indentLine_char = '┆'
-  let g:indentLine_faster = 1
-
-  
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 endif
 
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
 
+" Allow left/right to move between lines
+"set whichwrap+=<,>,h,l
 
-"" Disable the blinking cursor.
-set gcr=a:blinkon0
-set scrolloff=3
+" j/k will move virtual lines (lines that wrap)
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
-"" Status bar
+" For regular expressions turn magic on
+set magic
+
+" Show matching brackets when text indicator is over them
+set showmatch
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+
+" wait 500 milliseconds for mappings to complete
+set timeoutlen=500
+
+" Reload vim configs when changing them
+autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+autocmd! bufwritepost $VIMD/plugin/* source %
+
+" Allow mouse control in normal, visual and command modes.
+"set mouse=nvc
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors, Fonts, ...
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable syntax highlighting
+syntax on
+
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Chosen colorscheme
+" colorscheme gruvbox8_hard
+colorscheme night-owl
+" Set background (only needed for vim).
+set background=dark
+
+" @@@@ Add this to the end of $VIMRUNTIME/syntax/syntax.vim
+"let g:gruvbox_italics = 0
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tab settings
+set expandtab
+set smarttab
+" 1 tab = 4 spaces
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+
+set autoindent
+
+" Dont auto comment when going down a line in a comment with enter or O/o.
+"TODO check if this really needs to be in an autocmd
+autocmd FileType * setlocal formatoptions-=r formatoptions-=o
+
+" Remove trailing whitespace on save (But I now have a smart plugin for it).
+"autocmd BufWritePre * %s/\s\+$//e
+
+""""""""""""""""""""""""""""""
+" => Visual mode related
+""""""""""""""""""""""""""""""
+" Visual mode pressing * or # searches for the current selection
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+
+" Stay in visual mode after indenting
+vnoremap > >gv
+vnoremap < <gv
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Tabpages, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Windows
+" Smart way to move between windows
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+
+" Use Q to exit an unchanged window (usefull for helper windows)
+nnoremap <silent> Q :q<cr>
+" Disable command history (I type this way too many times wrong)
+nnoremap q: :q
+
+" Open new split panes on the bottom and on the right
+set splitbelow splitright
+
+""" Buffers
+" A buffer becomes hidden when it is abandoned
+set hidden
+
+" Allow actions like :find and gf to find files in sub-directories of :pwd
+set path=.,**
+
+" Use :f, :sf and :vf as shortcuts for using :find
+cnoreabbre f find
+cnoreabbre sf sfind
+cnoreabbre vf vert sfind
+"TODO add shortcuts (not commands) for :find,:sfind and :vert sfind
+
+" Use existing buffers in the current tab if already open.
+set switchbuf=useopen
+
+" Return to last edit position when opening files (You want this!).
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" Buffer navigation (mostly done with gb. Page up/down is for a lazy mood).
+nnoremap gb :ls<CR>:b<space>
+nnoremap <PageUp> :bnext<cr>
+nnoremap <PageDown> :bprevious<cr>
+nnoremap <leader>bn :bnext<cr>
+nnoremap <leader>bp :bprevious<cr>
+nnoremap <leader>bs :ls<cr>:sb<space>
+nnoremap <leader>bv :ls<cr>:vert sb<space>
+
+" Closing buffers.
+nnoremap <leader>bd :ls<cr>:bdelete<space>
+nnoremap <silent> <leader>bo :w<cr>:tabonly<cr>:%bd<cr><c-o>:bd#<cr>
+
+""" Tabpages
+" Enable switching to last-active tab
+if !exists('g:Lasttab')
+    let g:Lasttab = 1
+    let g:Lasttab_backup = 1
+endif
+autocmd! TabLeave * let g:Lasttab_backup = g:Lasttab | let g:Lasttab = tabpagenr()
+autocmd! TabClosed * let g:Lasttab = g:Lasttab_backup
+
+" Useful mappings for managing tabs
+nnoremap <leader>te :tabedit<space>
+nnoremap <leader>tf :tabfind<space>
+nnoremap <leader>to :tabonly<cr>
+nnoremap <leader>tc :tabclose<cr>
+nnoremap <leader>tm :tabmove<cr>
+nnoremap <leader>th :tab help<space>
+nnoremap <c-pageup> :tabnext<cr>
+nnoremap <c-pagedown> :tabprevious<cr>
+nnoremap <silent> <Leader>tt :execute "tabn " . g:Lasttab<cr>
+
+" Make better labels for tabpages
+" Unset this if you want to use my tabline instead of airline's.
+"set tabline=%!MyTabLine()
+
+" Switch CWD to the directory of the open buffer. Global for all tabpages.
+nnoremap <leader>cd :cd %:p:h<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Status line
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Always show the status line
 set laststatus=2
 
-"" Use modeline overrides
-set modeline
-set modelines=10
+" Format the status line
+"set statusline=\ %F\ \ Line:\ %l\ \ Column:\ %c
 
-set title
-set titleold="Terminal"
-set titlestring=%F
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map 9 ^
 
-set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
+" Move lines of text using ctrl+alt+h/j/k/l.
+nnoremap <m-s-j> mz:m+<cr>`z
+nnoremap <m-s-k> mz:m-2<cr>`z
+vnoremap <m-s-j> :m'>+<cr>`<my`>mzgv`yo`z
+vnoremap <m-s-k> :m'<-2<cr>`>my`<mzgv`yo`z
+nnoremap <m-s-l> >>
+nnoremap <m-s-h> <<
+vnoremap <m-s-l> >gv4l
+vnoremap <m-s-h> <gv4h
 
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
-nnoremap n nzzzv
-nnoremap N Nzzzv
+" Allow paste and undo in insert and visual mode.
+vnoremap <c-u> <esc>u
+inoremap <c-u> <esc>ua
+inoremap <c-v> <c-g>u<esc>pa<c-g>u
 
-if exists("*fugitive#statusline")
-  set statusline+=%{fugitive#statusline()}
+" Make Y yank to end of line (much like C and D).
+nnoremap Y y$
+
+" Auto expand brackets.
+inoremap {<cr> {<cr><c-g>u}<esc>O
+inoremap (<cr> (<cr><c-g>u)<esc>O
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Integrated terminal settings
+" * In these mappings, s stands for shell.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has('nvim')
+    nnoremap <silent> gs <c-w>s:terminal<cr>i
+    nnoremap <leader>ts :tabedit<cr>:terminal<cr>i
+    " Move around the terminal in a way compatible with tmux.
+    tnoremap <c-b>[ <c-\><c-n>
+    tnoremap <c-b><c-[> <c-\><c-n>
+    tnoremap <silent> <c-b>x <c-\><c-n>:bd!<cr>
+
+    autocmd TermOpen * setlocal nonumber
+    autocmd TermOpen * nnoremap <buffer><silent> Q :bd!<cr>
 endif
 
-" vim-airline
-let g:airline_theme = 'powerlineish'
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline_skip_empty_sections = 1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Spell checking
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pressing <leader>ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
 
-"*****************************************************************************
-"" Abbreviations
-"*****************************************************************************
-"" no one is really happy until you have this shortcuts
-cnoreabbrev W! w!
-cnoreabbrev Q! q!
-cnoreabbrev Qall! qall!
-cnoreabbrev Wq wq
-cnoreabbrev Wa wa
-cnoreabbrev wQ wq
-cnoreabbrev WQ wq
-cnoreabbrev W w
-cnoreabbrev Q q
-cnoreabbrev Qall qall
+" Shortcuts using <leader>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
 
-"" NERDTree configuration
-let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-let g:NERDTreeShowBookmarks=1
-let g:nerdtree_tabs_focus_on_files=1
-let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 50
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
-nnoremap <silent> <F2> :NERDTreeFind<CR>
-nnoremap <silent> <F3> :NERDTreeToggle<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Software developement related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Basic debugging with gdb inside of vim.
+command! -nargs=1 GDB packadd termdebug | Termdebug <args>
 
-" grep.vim
-nnoremap <silent> <leader>f :Rgrep<CR>
-let Grep_Default_Options = '-IR'
-let Grep_Skip_Files = '*.log *.db'
-let Grep_Skip_Dirs = '.git node_modules'
+" Shortcuts for using the quickfix list (used by :make and other commands).
+nnoremap <leader>co :copen<cr>
+nnoremap <leader>cc :cclose<cr>
+nnoremap <leader>cn :cnext<cr>
+nnoremap <leader>cp :cprevious<cr>
 
-" terminal emulation
-nnoremap <silent> <leader>sh :terminal<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Tabline format functions.
+function MyTabLine()
+    let s = ''
+    for i in range(tabpagenr('$'))
+        " select the highlighting
+        if i + 1 == tabpagenr()
+            let s .= '%#TabLineSel#'
+        else
+            let s .= '%#TabLine#'
+        endif
+
+        if 0 != i
+            let s .= '╲  '
+        endif
+
+        " set the tab page number (for mouse clicks)
+        let s .= '%' . (i + 1) . 'T'
+        " set page number string
+        let s .= i + 1 . ''
+        " the label is made by MyTabLabel()
+        let s .= '%{MyTabLabel(' . (i + 1) . ')}  '
+    endfor
+
+    " after the last tab fill with TabLineFill and reset tab page nr
+    let s .= '%#TabLineFill#%T'
+
+    " right-align the label to close the current tab page
+    if tabpagenr('$') > 1
+        let s .= '%=%#TabLine#%999Xclose'
+    endif
+
+    return s
+endfunction
+
+function MyTabLabel(n)
+    let buflist = tabpagebuflist(a:n)
+    let winnr = tabpagewinnr(a:n)
+    let is_modified = 0
+    let label = ''
+
+    for buffer in buflist
+        if getbufvar(buffer, "&modified")
+            let is_modified = 1
+            break
+        endif
+    endfor
+
+    if is_modified == 1
+        let label .= '❕'
+    else
+        let label .= ' '
+    endif
+
+    let label .= fnamemodify(bufname(buflist[winnr - 1]), ':t')
+
+    return label
+endfunction
 
 
-"*****************************************************************************
-"" Commands
-"*****************************************************************************
-" remove trailing whitespaces
-command! FixWhitespace :%s/\s\+$//e
+function! CmdLine(str)
+    call feedkeys(":" . a:str)
+endfunction
 
-"*****************************************************************************
-"" Functions
-"*****************************************************************************
-if !exists('*s:setupWrapping')
-  function s:setupWrapping()
-    set wrap
-    set wm=2
-    set textwidth=79
-  endfunction
+function! VisualSelection(direction, extra_filter) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", "\\/.*'$^~[]")
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'gv'
+        call CmdLine("Ack '" . l:pattern . "' " )
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-"*****************************************************************************
-"" Autocmd Rules
-"*****************************************************************************
-"" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
-augroup vimrc-sync-fromstart
-  autocmd!
-  autocmd BufEnter * :syntax sync maxlines=200
-augroup END
+" Only use plugins for neovim, not vim.
+if has('nvim')
+    call plug#begin("~/.config/nvim/vim_plug")
+    " File explorer.
+    Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 
-"" Remember cursor position
-augroup vimrc-remember-cursor-position
-  autocmd!
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-augroup END
+    " LSP.
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-"" txt
-augroup vimrc-wrapping
-  autocmd!
-  autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
-augroup END
+    " TS Syntax
+    Plug 'HerringtonDarkholme/yats.vim'
 
-"" make/cmake
-augroup vimrc-make-cmake
-  autocmd!
-  autocmd FileType make setlocal noexpandtab
-  autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
-augroup END
+    " Format go
+    Plug 'mattn/vim-goimports'
 
-set autoread
+    " Colorschemes.
+    " Plug 'lifepillar/vim-gruvbox8'
+    Plug 'haishanh/night-owl.vim'
 
-"*****************************************************************************
-"" Mappings
-"*****************************************************************************
+    " Statusline/Tabline manager.
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
 
-"" Save
-nnoremap <Leader>w :update<CR>
+    " Command mode readline shortcuts (like c-a and c-e).
+    Plug 'ryvnf/readline.vim'
 
+    " Auto close pairs. This is the best one, but it still doesnt suffice.
+    "Plug 'cohama/lexima.vim'
 
-"" Split
-noremap <Leader>h :<C-u>split<CR>
-noremap <Leader>v :<C-u>vsplit<CR>
+    " Smart way to remove trailing whitespace.
+    Plug 'axelf4/vim-strip-trailing-whitespace'
 
-"" Git
-noremap <Leader>ga :Gwrite<CR>
-noremap <Leader>gc :Gcommit<CR>
-noremap <Leader>gsh :Gpush<CR>
-noremap <Leader>gll :Gpull<CR>
-noremap <Leader>gs :Gstatus<CR>
-noremap <Leader>gb :Gblame<CR>
-noremap <Leader>gd :Gvdiff<CR>
-noremap <Leader>gr :Gremove<CR>
+    " Fuzzy finder
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
 
-" session management
-nnoremap <leader>so :OpenSession<Space>
-nnoremap <leader>ss :SaveSession<Space>
-nnoremap <leader>sd :DeleteSession<CR>
-nnoremap <leader>sc :CloseSession<CR>
+    " Better undos
+    Plug 'mbbill/undotree'
 
-"" Tabs
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-nnoremap <silent> <S-t> :tabnew<CR>
-
-"" Set working directory
-nnoremap <leader>. :lcd %:p:h<CR>
-
-"" Opens an edit command with the path of the currently edited file filled in
-noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
-"" Opens a tab edit command with the path of the currently edited file filled
-noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
-
-"" fzf.vim
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
-
-" The Silver Searcher
-if executable('ag')
-  let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-  set grepprg=ag\ --nogroup\ --nocolor
+    " Better syntax highlighting
+    Plug 'sheerun/vim-polyglot'
+    call plug#end()
 endif
 
-" ripgrep
-if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-  set grepprg=rg\ --vimgrep
-  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-endif
-
-cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>e :FZF -m<CR>
-"Recovery commands from history through FZF
-nmap <leader>y :History:<CR>
-
-" snippets
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-let g:UltiSnipsEditSplit="vertical"
-
-" ale
-let g:ale_linters = {}
-
-" Tagbar
-nmap <silent> <F4> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
-
-" Disable visualbell
-set noerrorbells visualbell t_vb=
-if has('autocmd')
-  autocmd GUIEnter * set visualbell t_vb=
-endif
-
-"" Copy/Paste/Cut
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endif
-
-noremap YY "+y<CR>
-noremap <leader>p "+gP<CR>
-noremap XX "+x<CR>
-
-if has('macunix')
-  " pbcopy for OSX copy/paste
-  vmap <C-x> :!pbcopy<CR>
-  vmap <C-c> :w !pbcopy<CR><CR>
-endif
-
-"" Buffer nav
-noremap <leader>z :bp<CR>
-noremap <leader>q :bp<CR>
-noremap <leader>x :bn<CR>
-noremap <leader>w :bn<CR>
-
-"" Close buffer
-noremap <leader>c :bd<CR>
-
-"" Clean search (highlight)
-nnoremap <silent> <leader><space> :noh<cr>
-
-"" Switching windows
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-noremap <C-h> <C-w>h
-
-"" Vmap for maintain Visual Mode after shifting > and <
-vmap < <gv
-vmap > >gv
-
-"" Move visual block
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
-"" Open current line on GitHub
-nnoremap <Leader>o :.Gbrowse<CR>
-
-"*****************************************************************************
-"" Custom configs
-"*****************************************************************************
-
-
-"*****************************************************************************
-"*****************************************************************************
-
-"" Include user's local vim config
-if filereadable(expand("~/.config/nvim/local_init.vim"))
-  source ~/.config/nvim/local_init.vim
-endif
-
-"*****************************************************************************
-"" Convenience variables
-"*****************************************************************************
-
-" vim-airline
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-if !exists('g:airline_powerline_fonts')
-  let g:airline#extensions#tabline#left_sep = ' '
-  let g:airline#extensions#tabline#left_alt_sep = '|'
-  let g:airline_left_sep          = '▶'
-  let g:airline_left_alt_sep      = '»'
-  let g:airline_right_sep         = '◀'
-  let g:airline_right_alt_sep     = '«'
-  let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
-  let g:airline#extensions#readonly#symbol   = '⊘'
-  let g:airline#extensions#linecolumn#prefix = '¶'
-  let g:airline#extensions#paste#symbol      = 'ρ'
-  let g:airline_symbols.linenr    = '␊'
-  let g:airline_symbols.branch    = '⎇'
-  let g:airline_symbols.paste     = 'ρ'
-  let g:airline_symbols.paste     = 'Þ'
-  let g:airline_symbols.paste     = '∥'
-  let g:airline_symbols.whitespace = 'Ξ'
-else
-  let g:airline#extensions#tabline#left_sep = ''
-  let g:airline#extensions#tabline#left_alt_sep = ''
-
-  " powerline symbols
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  let g:airline_symbols.linenr = ''
-endif

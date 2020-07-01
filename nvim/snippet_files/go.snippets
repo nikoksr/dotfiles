@@ -1,0 +1,81 @@
+# Snippets for Go
+
+# priority -10
+
+# shorthand variable declaration
+snippet : "v := value"
+${1} := ${0}
+endsnippet
+
+# append
+snippet ap "append(slice, value)"
+append(${1:slice}, ${0:value})
+endsnippet
+
+# append assignment
+snippet ap= "a = append(a, value)"
+${1:slice} = append($1, ${0:value})
+endsnippet
+
+snippet ewf "errors.Wrapf"
+errors.Wrapf(${1:err}, "${2:message %v}", ${3:args...})
+endsnippet
+
+# error snippet
+snippet errn "Error return" !b
+if err != nil {
+	return err
+}
+${0}
+endsnippet
+
+# error log snippet
+snippet errl "Error with log.Fataln(err)" !b
+if err != nil {
+	log.Fataln(err)
+}
+${0}
+endsnippet
+
+
+# function
+snippet func "func Function(...) [error] { ... }"
+func ${1:name}(${2:params})${3/(.+)/ /}`!p opening_par(snip, 3)`$3`!p closing_par(snip, 3)` {
+	${0:${VISUAL}}
+}
+endsnippet
+
+# Fmt Printf debug
+snippet ff "fmt.Printf(...)"
+fmt.Printf("$1 = %+v\n", ${1:${VISUAL}})
+endsnippet
+
+# main()
+snippet main "func main() { ... }"
+func main() {
+	${0:${VISUAL}}
+}
+endsnippet
+
+# struct
+snippet st "type T struct { ... }"
+type ${1:Type} struct {
+	${0}
+}
+endsnippet
+
+# switch
+snippet switch "switch x { ... }"
+switch ${1:var} {
+case ${2:value1}:
+	${0}
+}
+endsnippet
+
+# goroutine anonymous function
+snippet gof "go func() { ... }()"
+go func() {
+	${1:${VISUAL}}
+}()
+${0}
+endsnippet
