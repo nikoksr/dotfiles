@@ -115,4 +115,3 @@ zinit light zsh-users/zsh-history-substring-search
 zinit ice wait'0' atinit"zpcompinit; zpcdreplay" lucid
 zinit light zdharma/fast-syntax-highlighting
 
-
