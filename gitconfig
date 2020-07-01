@@ -74,3 +74,6 @@
 	whitespace = red reverse
 [push]
 	followTags = true
+[pull]
+	rebase = false
+	ff = only
