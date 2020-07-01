@@ -102,7 +102,7 @@ alias mvr='rsync --size-only --inplace --human-readable --progress --remove-sour
 
 # ls
 alias ls='lsd -lh --group-dirs=first'
- 
+
 # ls recursive
 alias ls-rec='lsd --tree --group-dirs=first'
 
