@@ -1,14 +1,15 @@
 {
   "suggest.minTriggerInputLength": 2,
-  "suggest.snippetIndicator": "  ",
-  "suggest.maxCompleteItemCount": 8,
+  "suggest.snippetIndicator": "  ",
   "suggest.labelMaxLength": 40,
 
   "snippets.userSnippetsDirectory": "~/.config/nvim/snippet_files",
 
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
 
+  "diagnostic.errorSign": "",
   "diagnostic.warningSign": "",
+  "diagnostic.infoSign": "",
 
   "python.linting.enabled": true,
   "python.jediEnabled": false,
@@ -28,6 +29,13 @@
     "graphql"
   ],
 
+  "eslint.filetypes": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "javascriptreact"
+  ],
+
   "languageserver": {
     "go": {
       "command": "gopls",
@@ -36,11 +44,17 @@
     },
     "ccls": {
       "command": "ccls",
-      "filetypes": ["c", "cpp"],
-      "rootPatterns": [".git/", ".ccls-root", "compile_commands.json"],
+      "filetypes": ["c", "cpp", "objc", "objcpp"],
+      "rootPatterns": [
+        ".ccls",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
       "initializationOptions": {
         "cache": {
-          "directory": ".ccls-cache"
+          "directory": "/tmp/ccls"
         }
       }
     }

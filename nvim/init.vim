@@ -135,6 +135,7 @@ set encoding=utf8
 " Chosen colorscheme
 " colorscheme gruvbox8_hard
 colorscheme night-owl
+
 " Set background (only needed for vim).
 set background=dark
 
@@ -419,9 +420,6 @@ endif
 " Only use plugins for neovim, not vim.
 if has('nvim')
     call plug#begin("~/.config/nvim/vim_plug")
-    " File explorer.
-    Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-
     " LSP.
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -457,6 +455,13 @@ if has('nvim')
 
     " Better syntax highlighting
     Plug 'sheerun/vim-polyglot'
+
+    " Git sidebar indicators
+    Plug 'airblade/vim-gitgutter'
+
+    " Better comments
+    Plug 'preservim/nerdcommenter'
+
     call plug#end()
 endif
 

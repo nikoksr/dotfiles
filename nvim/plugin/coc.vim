@@ -29,11 +29,15 @@ set shortmess+=c
 " Have a signs colum on the left
 set signcolumn=yes
 
+" Enable mouse support
+set mouse=a
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Global extensions.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:coc_global_extensions = [
+  \ 'coc-explorer',
   \ 'coc-snippets',
   \ 'coc-pairs',
   \ 'coc-tsserver',
@@ -56,9 +60,9 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Use <cr> to comfirm completion.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" Use `[g` and `]g` to navigate diagnostics.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" Use `Öd` and `öd` to navigate diagnostics.
+nmap <silent> Öd <Plug>(coc-diagnostic-prev)
+nmap <silent> öd <Plug>(coc-diagnostic-next)
 
 " Keys for gotos.
 " Add any filetype with an lsp to this au.
@@ -80,6 +84,14 @@ nmap <silent> <c-[> <esc>:noh<cr><Plug>(coc-float-hide)
 "TODO it works in a weird way, that until you save all buffer, the new name is
 "not recognized. Do that it will keep analytics before saving.
 nmap <F2> <Plug>(coc-rename)
+
+nmap <expr> <silent> <C-S-l> <SID>select_current_word()
+function! s:select_current_word()
+  if !get(g:, 'coc_cursors_activated', 0)
+    return "\<Plug>(coc-cursors-word)"
+  endif
+  return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
+endfunc
 
 " Format selected region.
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -124,6 +136,23 @@ command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport
 
 " Add status line support for integration with other plugins. checkout `:h coc-status`
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Coc explorer
+nmap <space>e :CocCommand explorer<CR>
+
+" Coc lists
+" Grep
+" grep word under cursor
+command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
+
+function! s:GrepArgs(...)
+  let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
+        \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
+  return join(list, "\n")
+endfunction
+
+" Keymapping for grep word under cursor with interactive mode
+nnoremap <silent> <Leader>cf :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => CocList
