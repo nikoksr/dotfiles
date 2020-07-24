@@ -22,7 +22,7 @@ export TERM='xterm-256color'
 export npm_config_prefix=~/.node_modules
 
 if test “${PS1+set}”; then 
-    export CDPATH="$CDPATH:$GOPATH/src"
+    export CDPATH="$CDPATH:/home/niko/dev/github/personal"
 fi
 
 if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
