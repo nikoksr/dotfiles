@@ -86,6 +86,7 @@ alias docker-container-ip='docker inspect -f "{{range .NetworkSettings.Networks}
 
 
 # nvim to vim
+alias v='nvim'
 alias vim='nvim'
 
 # grep
