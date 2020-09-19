@@ -119,5 +119,6 @@
   "todo-tree.filtering.excludeGlobs": [
     "**/node_modules/*"
   ],
-  "go.formatTool": "gofmt"
+  "go.formatTool": "gofmt",
+  "editor.renameOnType": true
 }
