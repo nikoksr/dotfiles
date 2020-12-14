@@ -1,27 +1,19 @@
 # ~/.aliases
 
-
 ##############################
 #
 # UPDATES
 #
 ##############################
 
-
-# update system
-alias upd='yay'
-
-# update and clean system
-alias updac='yay; yay -Rns $(yay -Qtdq)'
-
 # refresh pacman mirrors
-alias refresh_mirrors='sudo reflector -c "Germany" -l 200 -n 20 -p https --age 12 --sort rate --save /etc/pacman.d/mirrorlist;sudo rm -f /etc/pacman.d/mirrorlist.pacnew'
+alias refresh_mirrors='sudo reflector -p https --ipv4 --latest 5 --sort rate --save /etc/pacman.d/mirrorlist && sudo pacman -Syy'
 
 # update zplugin
-alias updzsh='zplg self-update;zplg update --all;zplg compile --all'
+alias updzsh='zinit self-update;zinit update --all;zinit compile --all;zinit cclear'
 
 # update npm
-alias updnpm='ncu -g -u'
+alias updnpm='npm -g update npm-check-updates;ncu -g -u;npm -g update'
 
 # update vim-plug
 alias updvim='nvim +PlugUpgrade +qall > /dev/null; nvim +PlugUpdate +qall > /dev/null'
@@ -30,27 +22,16 @@ alias updvim='nvim +PlugUpgrade +qall > /dev/null; nvim +PlugUpdate +qall > /dev
 alias updfw='fwupdmgr get-devices; fwupdmgr refresh; fwupdmgr get-updates; fwupdmgr update'
 
 # update all
-alias updall='refresh_mirrors; upd; updzsh; updnpm; updvim; updfw'
+alias updall='yay; updzsh; updnpm; updvim; updfw'
 
+# clean packages
+alias clean-packages='yay -Runs $(yay -Qtdq)'
 
 ##############################
 #
 # DEVELOPMENT
 #
 ##############################
-
-
-# Create .c template file
-alias template-c='cp ~/dev/.templates/template.c template.c'
-
-# Create .cpp template file
-alias template-cpp='cp ~/dev/.templates/template.cpp template.cpp'
-
-# Create CMakeLists.txt template file for C
-alias template-cmake-c='cp ~/dev/.templates/CMakeLists-c.txt CMakeLists.txt'
-
-# Create CMakeLists.txt template file for CPP
-alias template-cmake-cpp='cp ~/dev/.templates/CMakeLists-cpp.txt CMakeLists.txt'
 
 # CMake Debug
 alias cmake-debug='cmake -DCMAKE_BUILD_TYPE=Debug '
@@ -67,23 +48,11 @@ alias cppcheck='cppcheck --enable=all --suppress=missingIncludeSystem'
 # Install and upgrade pip package as user
 alias piuu='pip install --user --upgrade '
 
-
-##############################
-#
-# DOCKER
-#
-##############################
-
-
-alias docker-container-ip='docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}"'
-
-
 ##############################
 #
 # SYSTEM
 #
 ##############################
-
 
 # nvim to vim
 alias v='nvim'
@@ -107,60 +76,6 @@ alias ls='lsd -lh --group-dirs=first'
 # ls recursive
 alias ls-rec='lsd --tree --group-dirs=first'
 
-# System Age
-alias sysage='awk -F "[[ ]" '\''NR==1 {print $2;}'\'' /var/log/pacman.log'
-
 # Find alternative
 alias fd='fd -j 6 -c auto -E betty -E usbdevices'
 
-
-###########################
-#
-# BORG BACKUP
-#
-###########################
-
-### Remote
-
-# run service manually
-alias borg-run-backup='sudo systemctl start borg-backup.service'
-
-# service status
-alias borg-status-backup='systemctl status borg-backup.service'
-
-# watch service status live
-alias borg-watch-live='watch -n 1 systemctl status borg-backup.service'
-
-# info about repo
-alias borg-info-repo='borg info borg@192.168.10.250:/betty/vault/backups/$HOST'
-
-# list backups
-alias borg-list-backups='borg list borg@192.168.10.250:/betty/vault/backups/$HOST'
-
-### USB
-
-# run service manually
-alias borg-run-backup-usb='sudo systemctl start borg-backup-usb.service'
-
-# service status
-alias borg-status-backup-usb='systemctl status borg-backup-usb.service'
-
-# watch service status live
-alias borg-watch-live-usb='watch -n 1 systemctl status borg-backup-usb.service'
-
-# info about repo
-alias borg-info-repo-usb='borg info /home/niko/usbdrives/exHdd-niko/borg/niko-laptop'
-
-# list backups
-alias borg-list-backups-usb='borg list /home/niko/usbdrives/exHdd-niko/borg/niko-laptop'
-
-
-###########################
-#
-# MEDIA
-#
-###########################
-
-
-alias mpd_start='systemctl --user start mpd.service'
-alias mpd_stop='systemctl --user stop mpd.service'

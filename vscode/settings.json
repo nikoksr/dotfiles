@@ -21,7 +21,6 @@
   "editor.maxTokenizationLineLength": 20000000,
   "editor.fontFamily": "JetBrainsMono Nerd Font",
   "editor.fontSize": 12,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   // WORKBENCH
   "workbench.startupEditor": "newUntitledFile",
   "workbench.enableExperiments": false,
@@ -36,8 +35,6 @@
   "files.autoSaveDelay": 5000,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-  // EXPLORER
-  "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "explorer.sortOrder": "type",
   // GIT
@@ -119,6 +116,7 @@
   "todo-tree.filtering.excludeGlobs": [
     "**/node_modules/*"
   ],
-  "go.formatTool": "gofmt",
-  "editor.renameOnType": true
+  "go.formatTool": "gofumports",
+  "editor.renameOnType": true,
+  "files.enableTrash": false
 }

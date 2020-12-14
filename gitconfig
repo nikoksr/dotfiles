@@ -8,7 +8,7 @@
 [core]
     editor = nvim
     symlinks = false
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = less
     autocrlf = input
     ignorecase = true
 	fileMode = false
@@ -59,21 +59,12 @@
 	template = /home/niko/.gitmessage
 	gpgsign = true
 
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+[tag]
+	gpgsign = true
 
-[color "diff"]
-	meta = 11
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
 [push]
 	followTags = true
+
 [pull]
 	rebase = false
 	ff = only

@@ -7,7 +7,6 @@
 #
 ##############################
 
-
 # Multithreaded compression via tar and pigz
 # @param $1 - file or directory to compress
 function compress() {
@@ -36,18 +35,16 @@ function decompress() {
     pigz -dc "$1" | tar xf -
 }
 
-
 ##############################
 #
 # DOWNLOAD
 #
 ##############################
 
-
 # Downloading a file via Aria2c
 # @param $1 - destination
 # @param $2 - url to download
-function dwnld-file() {
+function get-file() {
     # Check parameter
     if [ ! -n "$1" ] || [ ! -n "$2" ]; then
         echo "Error: Missing parameter"
@@ -58,7 +55,6 @@ function dwnld-file() {
     # Execute download via aria2
     aria2c --file-allocation=none -c -x 10 -s 10 -d "$1" "$2"
 }
-
 
 ##############################
 #
@@ -89,13 +85,11 @@ gl() {
               xargs -I % sh -c 'vim fugitive://\$(git rev-parse --show-toplevel)/.git//% < /dev/tty'"
 }
 
-
 ##############################
 #
 # DOTFILES
 #
 ##############################
-
 
 cp-dotfiles() {
   local df_path="/home/niko/dev/github/personal/dotfiles/"
@@ -124,91 +118,8 @@ cp-dotfiles() {
   cpr -rq --ignore-errors ~/.config/rofi "${df_path}"
   cpr -rq --ignore-errors ~/.config/dunst "${df_path}"
   cpr -rq --ignore-errors ~/.config/redshift "${df_path}"
-  cpr -rq --ignore-errors ~/.config/proji "${df_path}"
   cpr -rq --exclude 'vim_plug' --exclude 'undodir' --ignore-errors ~/.config/nvim "${df_path}"
   
   echo "Done..."
 }
 
-
-#####################################################
-#
-# BORG BACKUP
-#
-#####################################################
-
-
-### Remote
-
-# Mounten eines Remote-Borg-Backups.
-# @param $1 Name des zu mountenden Remote-Archivs
-# @param $2 Mount Pfad
-function borg-mount-backup() {
-    # Check parameter
-    if [ ! -n "$1" ] || [ ! -n "$2" ]; then
-        echo "Error: Missing parameter"
-        echo "Syntax: borg-mount-backup <repo-name> <mount-path>"
-        return 1
-    fi
-
-    # Execute borg mount
-    borg mount borg@192.168.10.250:/betty/vault/backups/$HOST::"$1" "$2"
-}
-
-
-# Extrahieren eines Remote-Borg-Backups.
-# @param $1 Name des zu mountenden Remote-Archivs
-# Optional: @param $2 Unterordner des Archivs
-function borg-extract-backup() {
-    # Check parameter
-    if [ ! -n "$1" ] && [ ! -n "$2" ]; then
-        echo "Error: Missing parameter"
-        echo "Syntax: borg-extract-backup <repo-name> [Optional: archive-folder]"
-        return 1
-    fi
-
-    # Execute borg extract
-    if [ -n "$1" ] && [ -n "$2" ]; then
-        borg extract borg@192.168.10.250:/betty/vault/backups/$HOST::"$1" "$2"
-    else
-        borg extract borg@192.168.10.250:/betty/vault/backups/$HOST::"$1"
-    fi
-}
-
-
-### USB
-
-# Mounten eines Remote-Borg-Backups.
-# @param $1 Name des zu mountenden Remote-Archivs
-# @param $2 Mount Pfad
-function borg-mount-backup() {
-    # Check parameter
-    if [ ! -n "$1" ] || [ ! -n "$2" ]; then
-        echo "Error: Missing parameter"
-        echo "Syntax: borg-mount-backup <repo-name> <mount-path>"
-        return 1
-    fi
-
-    # Execute borg mount
-    borg mount borg@192.168.10.250:/betty/vault/backups/$HOST::"$1" "$2"
-}
-
-
-# Extrahieren eines Remote-Borg-Backups.
-# @param $1 Name des zu mountenden Remote-Archivs
-# Optional: @param $2 Unterordner des Archivs
-function borg-extract-backup() {
-    # Check parameter
-    if [ ! -n "$1" ] && [ ! -n "$2" ]; then
-        echo "Error: Missing parameter"
-        echo "Syntax: borg-extract-backup <repo-name> [Optional: archive-folder]"
-        return 1
-    fi
-
-    # Execute borg extract
-    if [ -n "$1" ] && [ -n "$2" ]; then
-        borg extract borg@192.168.10.250:/betty/vault/backups/$HOST::"$1" "$2"
-    else
-        borg extract borg@192.168.10.250:/betty/vault/backups/$HOST::"$1"
-    fi
-}

@@ -52,7 +52,7 @@ let g:coc_global_extensions = [
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use tab to trigger completion and navigate.
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-o>"
 
 " ctrl-space to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -138,7 +138,7 @@ command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Coc explorer
-nmap <space>e :CocCommand explorer<CR>
+nmap <leader>e :CocCommand explorer<CR>
 
 " Coc lists
 " Grep

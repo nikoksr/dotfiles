@@ -1,24 +1,23 @@
 # ~/.zprofile
 
-
-##############################
-#
-# ENVIRONMENT             
-#
-##############################
-
-
+#####################
+# ENV               #
+#####################
 export GOPATH=$HOME/dev/go
 export DENO_INSTALL="/home/niko/.deno"
 export PATH="$PATH:$GOPATH/bin:/usr/local/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.scripts:/opt/osxcross/bin:$HOME/.node_modules/bin:$DENO_INSTALL/bin:/snap/bin"
 
-export LANG=en_US.UTF-8
-
-export EDITOR='vim'
-export VISUAL='code'
+export EDITOR='nvim'
+export VISUAL=$EDITOR
 export TERM='xterm-256color'
+export PAGER='delta'
+export SHELL='/bin/zsh'
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
 
-# Global npm packages for current user
+#####################
+# NPM PACKAGES      #
+#####################
 export npm_config_prefix=~/.node_modules
 
 if test “${PS1+set}”; then 
@@ -34,8 +33,14 @@ if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
     export color0_alpha="#22${color0/'#'}"
 fi
 
-# GPG Signing
+#####################
+# GPG               #
+#####################
 export GPG_TTY=$(tty)
 
-# osxcross
+
+#####################
+# OSX CROSS         #
+#####################
 export LD_LIBRARY_PATH="/opt/osxcross/lib"
+
