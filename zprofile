@@ -24,13 +24,16 @@ if test “${PS1+set}”; then
     export CDPATH="$CDPATH:/home/niko/dev/github/personal"
 fi
 
-if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
+if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]] || [[ ! -z "$SWAYSOCK" ]]; then
     # Import colorscheme from 'wal' asynchronously
-    (cat ~/.cache/wal/sequences &)
+    # (cat ~/.cache/wal/sequences &)
 
     # Background color with transparency
-    source ~/.cache/wal/colors.sh
-    export color0_alpha="#22${color0/'#'}"
+    # source ~/.cache/wal/colors.sh
+    # export color0_alpha="#22${color0/'#'}"
+
+    (cat ~/.cache/wal/sequences &)
+    export MOZ_ENABLE_WAYLAND=1
 fi
 
 #####################

@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =0
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/niko/.config/proji-backup/templates'
 let g:netrw_dirhist_0='/etc/NetworkManager/system-connections'
 let g:netrw_dirhist_9='/home/niko/.config/android-x86'
 let g:netrw_dirhist_8='/home/niko/.zinit/plugins/romkatv---powerlevel10k/config'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_5='/home/niko/.config/flameshot'
 let g:netrw_dirhist_4='/home/niko/dev/github/personal/lsdv/client/public'
 let g:netrw_dirhist_3='/home/niko/dev/github/personal/lsdv/server/pkg/feeder/locations/store'
 let g:netrw_dirhist_2='/home/niko/dev/github/personal/lsdv/server/pkg/feeder/locations'
-let g:netrw_dirhist_1='/home/niko/dev/github/personal/lsdv/server/internal/database/queries'

@@ -20,7 +20,6 @@
   "editor.tabCompletion": "on",
   "editor.maxTokenizationLineLength": 20000000,
   "editor.fontFamily": "JetBrainsMono Nerd Font",
-  "editor.fontSize": 12,
   // WORKBENCH
   "workbench.startupEditor": "newUntitledFile",
   "workbench.enableExperiments": false,

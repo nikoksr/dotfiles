@@ -74,7 +74,7 @@ alias mvr='rsync --size-only --inplace --human-readable --progress --remove-sour
 alias ls='lsd -lh --group-dirs=first'
 
 # ls recursive
-alias ls-rec='lsd --tree --group-dirs=first'
+alias lsr='lsd --tree --group-dirs=first'
 
 # Find alternative
 alias fd='fd -j 6 -c auto -E betty -E usbdevices'
