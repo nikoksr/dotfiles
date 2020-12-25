@@ -69,7 +69,7 @@ f() {
   key=$(head -1 <<< "$out")
   file=$(head -2 <<< "$out" | tail -1)
   if [ -n "$file" ]; then
-    [ "$key" = ctrl-e ] && ${EDITOR:-vim} "$file" || xdg-open "$file" 2> /dev/null 
+    [ "$key" = ctrl-e ] && ${EDITOR:-vim} "$file" || xdg-open "$file" 2> /dev/null
   fi
 }
 
@@ -93,41 +93,39 @@ gl() {
 
 cp-dotfiles() {
   local df_path="/home/niko/dev/github/personal/dotfiles/"
+  local conf_path="${df_path}config/"
+  local vscode_path="${conf_path}Code - OSS/User/"
 
-  if [ -z "$df_path" ]; then
-      echo "Error: No path was provided."
-      return
-  fi
+  mkdir -p "$vscode_path"
 
   echo "Copying files..."
   cpr -q --ignore-errors ~/.aliases "${df_path}aliases"
   cpr -q --ignore-errors ~/.functions "${df_path}functions"
   cpr -q --ignore-errors ~/.gitconfig "${df_path}gitconfig"
   cpr -q --ignore-errors ~/.gitmessage "${df_path}gitmessage"
-  cpr -q --ignore-errors ~/.vimrc "${df_path}vim/vimrc"
+  cpr -q --ignore-errors ~/.vimrc "${df_path}vimrc"
   cpr -q --ignore-errors ~/.Xresources "${df_path}Xresources"
   cpr -q --ignore-errors ~/.zshrc "${df_path}zshrc"
   cpr -q --ignore-errors ~/.zprofile "${df_path}zprofile"
-  cpr -q --ignore-errors ~/.config/picom.conf "${df_path}"
-  cpr -q --ignore-errors ~/.config/alacritty/alacritty.yml "${df_path}"
-  cpr -q --ignore-errors ~/.config/Code\ -\ OSS/User/settings.json "${df_path}/vscode/"
-  cpr -q --ignore-errors ~/.config/starship.toml "${df_path}starship.toml"
-  cpr -q --ignore-errors ~/.config/gammastep.conf "${df_path}gammastep.conf"
+  cpr -q --ignore-errors ~/.config/picom.conf "${conf_path}"
+  cpr -q --ignore-errors ~/.config/alacritty/alacritty.yml "${conf_path}alacritty/"
+  cpr -q --ignore-errors ~/.config/Code\ -\ OSS/User/settings.json "$vscode_path"
+  cpr -q --ignore-errors ~/.config/starship.toml "${conf_path}"
+  cpr -q --ignore-errors ~/.config/gammastep.conf "${conf_path}"
 
   echo "Copying folders..."
-  cpr -rq --ignore-errors ~/.config/i3 "${df_path}"
-  cpr -rq --ignore-errors ~/.config/polybar "${df_path}"
-  cpr -rq --ignore-errors ~/.config/rofi "${df_path}"
-  cpr -rq --ignore-errors ~/.config/wofi "${df_path}"
-  cpr -rq --ignore-errors ~/.config/dunst "${df_path}"
-  cpr -rq --ignore-errors ~/.config/redshift "${df_path}"
-  cpr -rq --ignore-errors ~/.config/sway "${df_path}"
-  cpr -rq --ignore-errors ~/.config/waybar "${df_path}"
-  cpr -rq --ignore-errors ~/.config/mako "${df_path}"
-  cpr -rq --ignore-errors ~/.config/swappy "${df_path}"
-  cpr -rq --ignore-errors ~/.config/mako "${df_path}"
-  cpr -rq --exclude 'vim_plug' --exclude 'undodir' --ignore-errors ~/.config/nvim "${df_path}"
-  
+  cpr -rq --ignore-errors ~/.config/i3 "${conf_path}"
+  cpr -rq --ignore-errors ~/.config/polybar "${conf_path}"
+  cpr -rq --ignore-errors ~/.config/rofi "${conf_path}"
+  cpr -rq --ignore-errors ~/.config/wofi "${conf_path}"
+  cpr -rq --ignore-errors ~/.config/dunst "${conf_path}"
+  cpr -rq --ignore-errors ~/.config/redshift "${conf_path}"
+  cpr -rq --ignore-errors ~/.config/sway "${conf_path}"
+  cpr -rq --ignore-errors ~/.config/waybar "${conf_path}"
+  cpr -rq --ignore-errors ~/.config/mako "${conf_path}"
+  cpr -rq --ignore-errors ~/.config/swappy "${conf_path}"
+  cpr -rq --ignore-errors ~/.config/mako "${conf_path}"
+  cpr -rq --exclude 'vim_plug' --exclude 'undodir' --ignore-errors ~/.config/nvim "${conf_path}"
+
   echo "Done..."
 }
-
