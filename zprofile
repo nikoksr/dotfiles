@@ -21,7 +21,7 @@ export LC_ALL='en_US.UTF-8'
 export npm_config_prefix=~/.node_modules
 
 if test “${PS1+set}”; then 
-    export CDPATH="$CDPATH:/home/niko/dev/github/personal"
+    export CDPATH="$CDPATH:/home/niko/dev/github/personal:/home/niko/dev/github/org/deploi"
 fi
 
 if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]] || [[ ! -z "$SWAYSOCK" ]]; then
