@@ -117,5 +117,6 @@
   ],
   "go.formatTool": "gofumports",
   "editor.renameOnType": true,
-  "files.enableTrash": false
+  "files.enableTrash": false,
+  "lua-local.interpreter": "lua"
 }
