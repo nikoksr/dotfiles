@@ -137,7 +137,7 @@ cp-dotfiles() {
   cpr -rq --ignore-errors ~/.config/swappy "${conf_path}"
   cpr -rq --ignore-errors ~/.config/mako "${conf_path}"
   cpr -rq --ignore-errors ~/.config/wal/templates "${conf_path}wal/"
-  cpr -rq --exclude 'vim_plug' --exclude 'undodir' --ignore-errors ~/.config/nvim "${conf_path}"
+  cpr -rq --exclude 'vim_plug' --exclude '.netrwhist' --exclude 'undodir' --ignore-errors ~/.config/nvim "${conf_path}"
   cpr -rq --ignore-errors ~/.scripts/ "${df_path}scripts/"
 
   echo "Done..."
