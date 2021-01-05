@@ -4,8 +4,7 @@
 # ENV               #
 #####################
 export GOPATH=$HOME/dev/go
-export DENO_INSTALL="/home/niko/.deno"
-export PATH="$PATH:$GOPATH/bin:/usr/local/bin:$HOME/.local/bin:$GOPATH/bin:$HOME/.scripts:/opt/osxcross/bin:$HOME/.node_modules/bin:$DENO_INSTALL/bin:/snap/bin"
+export PATH="$PATH:$GOPATH/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.node_modules/bin:$HOME/.scripts"
 
 export EDITOR='nvim'
 export VISUAL=$EDITOR
@@ -24,26 +23,24 @@ if test “${PS1+set}”; then
     export CDPATH="$CDPATH:/home/niko/dev/github/personal:/home/niko/dev/github/org/deploi"
 fi
 
-if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]] || [[ ! -z "$SWAYSOCK" ]]; then
-    # Import colorscheme from 'wal' asynchronously
-    # (cat ~/.cache/wal/sequences &)
+#####################
+# WINDOW MANAGER    #
+#####################
+# Import colorscheme from 'wal' asynchronously
+(cat ~/.cache/wal/sequences &)
 
-    # Background color with transparency
-    # source ~/.cache/wal/colors.sh
-    # export color0_alpha="#22${color0/'#'}"
 
-    (cat ~/.cache/wal/sequences &)
-    export MOZ_ENABLE_WAYLAND=1
+if [[ ! -z "$SWAYSOCK" ]]; then
+    export QT_QPA_PLATFORMTHEME=qt5ct
+    export _JAVA_AWT_WM_NONREPARENTING=1
 fi
+
+# if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+    # export MOZ_ENABLE_WAYLAND=1
+# fi
 
 #####################
 # GPG               #
 #####################
 export GPG_TTY=$(tty)
-
-
-#####################
-# OSX CROSS         #
-#####################
-export LD_LIBRARY_PATH="/opt/osxcross/lib"
 
