@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+# Fzf: Preview and open files with xdg-open (Enter) or editor(CTRL-E).
+local out file key
+IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-e --preview 'bat --color=always {}')")
+key=$(head -1 <<< "$out")
+file=$(head -2 <<< "$out" | tail -1)
+if [ -n "$file" ]; then
+  [ "$key" = ctrl-e ] && ${EDITOR:-vim} "$file" || xdg-open "$file" 2> /dev/null
+fi
