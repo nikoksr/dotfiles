@@ -56,21 +56,32 @@ function get-file() {
     aria2c --file-allocation=none -c -x 10 -s 10 -d "$1" "$2"
 }
 
+# Downloading a file via Aria2c
+# @param $1 - destination
+# @param $2 - url to download
+function ytdl() {
+    # Check parameter
+    if [ ! -n "$1" ]; then
+        echo "Error: Missing parameter"
+        echo "Syntax: ytdl <url> ..."
+        return 1
+    fi
+
+    youtube-dl -x --audio-quality 0 -i -o "%(title)s.%(ext)s" "$@"
+}
+
 ##############################
 #
 # FZF
 #
 ##############################
 
-# Fzf: Preview and open files with xdg-open (Enter) or editor(CTRL-E).
-f() {
-  local out file key
-  IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-e --preview 'bat --color=always {}')")
-  key=$(head -1 <<< "$out")
-  file=$(head -2 <<< "$out" | tail -1)
-  if [ -n "$file" ]; then
-    [ "$key" = ctrl-e ] && ${EDITOR:-vim} "$file" || xdg-open "$file" 2> /dev/null
-  fi
+# Fzf: Search command history
+fh() {
+    local cmd="$(history -1 -500 | fzf --reverse | cut -c 8-)"
+    echo $cmd
+    eval $cmd
+    zle reset-prompt
 }
 
 # fgl - git commit browser
@@ -125,7 +136,9 @@ cp-dotfiles() {
   cpr -rq --ignore-errors ~/.config/mako "${conf_path}"
   cpr -rq --ignore-errors ~/.config/swappy "${conf_path}"
   cpr -rq --ignore-errors ~/.config/mako "${conf_path}"
+  cpr -rq --ignore-errors ~/.config/wal/templates "${conf_path}wal/"
   cpr -rq --exclude 'vim_plug' --exclude 'undodir' --ignore-errors ~/.config/nvim "${conf_path}"
+  cpr -rq --ignore-errors ~/.scripts/ "${df_path}scripts/"
 
   echo "Done..."
 }
