@@ -5,7 +5,6 @@ set $mod Mod1
 set $sup Mod4
 set $term alacritty
 set $screenshot grim -g "$(slurp)" - | swappy -f -
-# set $menu rofi -show drun
 set $menu rofi -m $(swaymsg -t get_outputs | jq 'map(select(.active) | .focused) | index(true)') -show drun -run-command 'swaymsg exec -- {cmd}'
 set $browser firefox-developer-edition
 set $gnomeschema org.gnome.desktop.interface
@@ -61,6 +60,15 @@ output * {
     bg $wallpaper fill
 }
 
+# Keyboard
+input type:keyboard {
+    xkb_layout de
+    xkb_variant nodeadkeys
+    xkb_numlock enable
+    repeat_delay 200
+    repeat_rate 30
+}
+
 # Touchpad
 input type:touchpad {
     accel_profile adaptive
@@ -75,22 +83,14 @@ input type:mouse {
     accel_profile flat
 }
 
-# Keyboard
-input type:keyboard {
-    xkb_layout de
-    xkb_variant nodeadkeys
-    xkb_numlock enable
-    repeat_delay 150
-    repeat_rate 30
-}
-
 # Autostart
-exec --no-startup-id mako
-exec --no-startup-id bluetooth off
+exec systemctl --user import-environment
 
+exec --no-startup-id mako
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec udiskie
+exec udiskie --appindicator -s
 exec wal -R
+exec vorta -d
 
 # Shortcuts
 bindsym $mod+Return exec $term
@@ -105,9 +105,13 @@ bindsym $sup+c exec "code -n"
 bindsym $sup+d exec dbeaver
 bindsym $sup+v exec virt-manager
 bindsym $sup+r exec remmina
-bindsym $sup+t exec "wal -t -i /home/niko/pictures/wallpapers/wal"
+bindsym $sup+t exec "wal -t -q --saturate 0.6 -i /home/niko/pictures/wallpapers/wal"
 bindsym $sup+e exec nautilus
 bindsym $sup+n exec $wifi
+bindsym $sup+m exec "$term -e 'ncmpcpp'"
+
+bindsym F2 exec "$term -t 'fzf: Find File' -d 200 50 -e 'find-file'"
+bindsym F3 exec "$term -t 'fzf: Find Text In File' -d 200 50 -e 'find-text-in-file'"
 
 # Sway
 bindsym $mod+Shift+q kill
@@ -115,7 +119,6 @@ floating_modifier $mod normal
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+x exec $lock
 bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?' -b 'Yes' 'swaymsg exit'
-
 
 # Notifications
 bindsym Control+Space exec makoctl dismiss
@@ -125,7 +128,9 @@ bindsym Control+Shift+Space exec makoctl dismiss --all
 bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
 bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
 bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle
-bindsym --locked XF86AudioPlay exec playerctl play-pause
+
+bindsym --locked XF86AudioPlay exec playerctl play
+bindsym --locked XF86AudioPause exec playerctl pause
 bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioPrev exec playerctl previous
 
@@ -187,7 +192,7 @@ bindsym $mod+v splitv
 # Switch the current container between different layout styles
 # bindsym $mod+s layout stacking
 # bindsym $mod+w layout tabbed
-# bindsym $mod+e layout toggle srlit
+bindsym $mod+e layout toggle split
 
 # Make the current focus fullscreen
 bindsym $mod+f fullscreen
@@ -214,10 +219,6 @@ bindsym $mod+minus scratchpad show
 
 # Resizing containers
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
     bindsym $up resize shrink height 10px
@@ -229,23 +230,26 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-for_window [app_id="pavucontrol"]              floating enable
-for_window [app_id="virt-manager"]             floating enable
-for_window [app_id="nm-connection-editor"]     floating enable
+for_window [app_id="Alacritty" title="fzf: Find File"]           floating enable
+for_window [app_id="Alacritty" title="fzf: Find Text In File"]   floating enable
 
-for_window [class="jetbrains-.*" title="win0|Welcome to .*"] floating enable
-for_window [class="VirtualBox"] floating enable
+for_window [app_id="pavucontrol"]                                floating enable
+for_window [app_id="virt-manager"]                               floating enable
+for_window [app_id="nm-connection-editor"]                       floating enable
 
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="bubble"] floating enable
-for_window [window_role="dialog"] floating enable
-for_window [window_type="dialog"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [window_role="Preferences"] floating enable
-for_window [window_role="Open Files"] floating enable sticky
-for_window [window_role="File Operation Progress"] floating enable sticky
-for_window [window_role="Save As"] floating enable
-for_window [window_type="menu"] floating enable
+for_window [class="jetbrains-.*" title="win0|Welcome to .*"]     floating enable
+for_window [class="VirtualBox"]                                  floating enable
+
+for_window [window_role="pop-up"]                                floating enable
+for_window [window_role="bubble"]                                floating enable
+for_window [window_role="dialog"]                                floating enable
+for_window [window_type="dialog"]                                floating enable
+for_window [window_role="task_dialog"]                           floating enable
+for_window [window_role="Preferences"]                           floating enable
+for_window [window_role="Open Files"]                            floating enable sticky
+for_window [window_role="File Operation Progress"]               floating enable sticky
+for_window [window_role="Save As"]                               floating enable
+for_window [window_type="menu"]                                  floating enable
 
 # Status Bar
 bar {
