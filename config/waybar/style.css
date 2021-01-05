@@ -1,99 +1,91 @@
+@import url("/home/niko/.cache/wal/colors-custom-gtk3.css");
+
 * {
     border: none;
     border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font";
-    font-size: 13px;
+    color: @foreground;
+    font-family: JetBrainsMono Nerd Font, sans-serif;
+    font-size: 14px;
     min-height: 0;
-}
-
-window#waybar {
-    background: transparent;
-    color: white;
 }
 
 #window {
     font-weight: bold;
-    font-family: "JetBrainsMono";
 }
-/*
-#workspaces {
-    padding: 0 5px;
+
+window#waybar {
+    background: @backgroundAlpha;
+    border-bottom: 3px solid @color0Alpha;
 }
-*/
 
 #workspaces button {
     padding: 0 5px;
     background: transparent;
-    color: white;
-    border-top: 2px solid transparent;
+    border-bottom: 3px solid transparent;
 }
 
-#workspaces button.focused {
-    color: #c9545d;
-    border-top: 2px solid #c9545d;
+/* Removes Strange Hover effect */
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
 }
 
-#mode {
-    background: #64727D;
-    border-bottom: 3px solid white;
+#workspaces button.focused,
+#mode
+{
+    background: @color2Alpha;
+    border-bottom: 3px solid @foreground;
 }
 
-#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode {
-    padding: 0 3px;
-    margin: 0 2px;
-}
-
-#clock {
-    font-weight: bold;
-}
-
-#battery {
-}
-
-#battery icon {
-    color: red;
+#clock,
+#battery,
+#cpu,
+#memory,
+#network,
+#mode,
+#backlight,
+#pulseaudio,
+#mpd,
+#tray
+{
+    padding: 0 5px;
+    margin: 0 5px;
+    border-bottom: 3px solid @color0Alpha;
 }
 
 #battery.charging {
+    border-bottom: 3px solid #b4ecb4;
 }
 
-@keyframes blink {
+@keyframes blink-warning {
     to {
-        background-color: #ffffff;
-        color: black;
+        border-bottom: 3px solid #e8d62c;
     }
 }
 
 #battery.warning:not(.charging) {
-    color: white;
-    animation-name: blink;
+    animation-name: blink-warning;
+    animation-duration: 1.0s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink-critical {
+    to {
+        border-bottom: 3px solid #fe3943;
+    }
+}
+
+#battery.critical:not(.charging) {
+    animation-name: blink-critical;
     animation-duration: 0.5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
 
-#cpu {
-}
-
-#memory {
-}
-
-#network {
-}
-
 #network.disconnected {
-    background: #f53c3c;
+    border-bottom: 3px solid #fe3943;
 }
-
-#pulseaudio {
-}
-
-#pulseaudio.muted {
-}
-
-
-#tray {
-}
-
 
