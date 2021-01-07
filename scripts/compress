@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+# Multithreaded compression via tar and pigz
+# @param $1 - file or directory to compress
+# Check parameter
+if [ ! -n "$1" ]; then
+    echo "Error: You have to specify a file or folder to compress"
+    echo "Syntax: compress <file>"
+        return 1
+    fi
+
+# Execute compression
+tar cf - "$1" | pigz --best > "$1".tar.gz
+

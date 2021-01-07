@@ -1,0 +1,43 @@
+#!/usr/bin/bash
+
+copy="rsync --size-only --inplace --human-readable --progress -q --ignore-errors"
+
+df_path="/home/niko/dev/github/personal/dotfiles/"
+conf_path="${df_path}config/"
+
+mkdir -p "${conf_path}Code - OSS/User/"
+
+echo "Copying files..."
+eval "$copy ~/.aliases ${df_path}aliases"
+eval "$copy ~/.functions ${df_path}functions"
+eval "$copy ~/.gitconfig ${df_path}gitconfig"
+eval "$copy ~/.gitmessage ${df_path}gitmessage"
+eval "$copy ~/.vimrc ${df_path}vimrc"
+eval "$copy ~/.Xresources ${df_path}Xresources"
+eval "$copy ~/.zshrc ${df_path}zshrc"
+eval "$copy ~/.zprofile ${df_path}zprofile"
+eval "$copy ~/.config/picom.conf ${conf_path}"
+eval "$copy ~/.config/alacritty/alacritty.yml ${conf_path}alacritty/"
+eval "$copy ~/.config/Code\ -\ OSS/User/settings.json ${conf_path}Code\ -\ OSS/User/"
+eval "$copy ~/.config/starship.toml ${conf_path}"
+eval "$copy ~/.config/gammastep.conf ${conf_path}"
+
+echo "Copying folders..."
+eval "$copy -r ~/.config/i3 ${conf_path}"
+eval "$copy -r ~/.config/polybar ${conf_path}"
+eval "$copy -r ~/.config/rofi ${conf_path}"
+eval "$copy -r ~/.config/wofi ${conf_path}"
+eval "$copy -r ~/.config/dunst ${conf_path}"
+eval "$copy -r ~/.config/redshift ${conf_path}"
+eval "$copy -r ~/.config/sway ${conf_path}"
+eval "$copy -r ~/.config/waybar ${conf_path}"
+eval "$copy -r ~/.config/mako ${conf_path}"
+eval "$copy -r ~/.config/swappy ${conf_path}"
+eval "$copy -r ~/.config/mako ${conf_path}"
+eval "$copy -r ~/.config/fish ${df_path}"
+eval "$copy -r ~/.config/wal/templates ${conf_path}wal/"
+eval "$copy -r ~/.scripts/ ${df_path}scripts/"
+eval "$copy -r ~/.scripts/ ${df_path}scripts/"
+eval "$copy -r --exclude 'vim_plug' --exclude '.netrwhist' --exclude 'undodir' ~/.config/nvim ${conf_path}"
+
+echo "Done..."

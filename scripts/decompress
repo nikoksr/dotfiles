@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+# Decompression via tar and pigz
+# @param $1 - compressed input
+# Check parameter
+if [ ! -n "$1" ]; then
+    echo "Error: You have to specify a file or folder to compress"
+    echo "Syntax: decompress <file>"
+    return 1
+fi
+
+# Execute decompression
+pigz -dc "$1" | tar xf -
+
