@@ -34,10 +34,10 @@ eval "$copy -r ~/.config/waybar ${conf_path}"
 eval "$copy -r ~/.config/mako ${conf_path}"
 eval "$copy -r ~/.config/swappy ${conf_path}"
 eval "$copy -r ~/.config/mako ${conf_path}"
-eval "$copy -r ~/.config/fish ${df_path}"
 eval "$copy -r ~/.config/wal/templates ${conf_path}wal/"
 eval "$copy -r ~/.scripts/ ${df_path}scripts/"
-eval "$copy -r ~/.scripts/ ${df_path}scripts/"
+
+eval "$copy -r --exclude 'secrets.fish' ~/.config/fish ${df_path}"
 eval "$copy -r --exclude 'vim_plug' --exclude '.netrwhist' --exclude 'undodir' ~/.config/nvim ${conf_path}"
 
 echo "Done..."
