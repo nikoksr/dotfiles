@@ -12,8 +12,8 @@ set -gx PATH $PATH ~/.local/bin
 set -gx PATH $PATH /usr/local/sbin
 set -gx PATH $PATH /usr/local/bin
 set -gx PATH $PATH $GOPATH/bin
-set -gx PATH $PATH $HOME/.node_modules/bin
 set -gx PATH $PATH $HOME/.scripts
+set -gx PATH $PATH $HOME/.yarn/bin
 
 # Set locale
 set -gx LC_ALL en_US.UTF-8
@@ -28,10 +28,7 @@ set -gx EDITOR nvim
 set -gx VISUAL nvim
 
 # Set term
-set -gx TERM xterm-256color
-
-# Npm
-set -gx npm_config_prefix $HOME/.node_modules
+# set -gx TERM xterm-256color
 
 # Sway specific vars
 if test -n "$SWAYSOCK"

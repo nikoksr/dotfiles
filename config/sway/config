@@ -38,20 +38,21 @@ client.urgent           $color0   $color2     $color15    $color2  $color0
 client.background       $color0
 
 # Window borders
-default_border pixel 1
-default_floating_border normal
-hide_edge_borders smart
-
+default_border pixel 2
+titlebar_border_thickness 2
 smart_gaps on
-gaps inner 10
+gaps outer 5
+gaps inner 5
 
 # GTK theming
 exec_always {
     gsettings set $gnomeschema gtk-theme 'Arc-Darker'
     gsettings set $gnomeschema icon-theme 'Papirus-Dark'
-    gsettings set $gnomeschema cursor-theme 'Vimix Cursors'
+    gsettings set $gnomeschema cursor-theme 'Vimix-cursors'
     gsettings set $gnomeschema font-name 'JetBrainsMono Regular 10'
 }
+
+seat seat0 xcursor_theme Vimix-cursors 24
 
 # Output
 output eDP-1 pos 0 0
@@ -85,12 +86,13 @@ input type:mouse {
 
 # Autostart
 exec systemctl --user import-environment
-
 exec --no-startup-id mako
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec udiskie --appindicator -s
+exec udiskie -t --appindicator
 exec wal -R
 exec vorta -d
+
+exec_always adaptive-powersave
 
 # Shortcuts
 bindsym $mod+Return exec $term
@@ -110,9 +112,9 @@ bindsym $sup+e exec nautilus
 bindsym $sup+n exec $wifi
 bindsym $sup+m exec "$term -e 'ncmpcpp'"
 
-bindsym $sup+p exec "$term -t 'htop: Interactive Process Viewer' -d 200 50 -e 'htop'"
-bindsym $mod+F2 exec "$term -t 'fzf: Find File' -d 200 50 -e 'find-file'"
-bindsym $mod+F3 exec "$term -t 'fzf: Find Text In File' -d 200 50 -e 'find-text-in-file'"
+bindsym $sup+p exec "$term -t 'htop: Interactive Process Viewer' -o window.dimensions.columns=200 -o window.dimensions.lines=50 -e 'htop'"
+bindsym $mod+F2 exec "$term -t 'fzf: Find File' -o window.dimensions.columns=200 -o window.dimensions.lines=50 -e 'find-file'"
+bindsym $mod+F3 exec "$term -t 'fzf: Find Text In File' -o window.dimensions.columns=200 -o window.dimensions.lines=50 -e 'find-text-in-file'"
 
 # Sway
 bindsym $mod+Shift+q kill
@@ -142,7 +144,7 @@ bindsym --locked XF86MonBrightnessDown exec --no-startup-id light -U 10
 # Idle configuration
 # Lock after 4:30min, turn off screen after 5 minutes and susped after 20 minutes.
 exec swayidle -w \
-    timeout 300 'swaymsg "output * dpms off"' \
+    timeout 600 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
     timeout 270 '$lock' \
     timeout 1200 'systemctl suspend' \
@@ -231,28 +233,28 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-for_window [app_id="Alacritty" title="htop: Interactive Process Viewer"]     floating enable
-for_window [app_id="Alacritty" title="fzf: Find File"]                       floating enable
-for_window [app_id="Alacritty" title="fzf: Find Text In File"]               floating enable
+for_window [app_id="Alacritty" title="htop: Interactive Process Viewer"]                           floating enable
+for_window [app_id="Alacritty" title="fzf: Find File"]                                             floating enable
+for_window [app_id="Alacritty" title="fzf: Find Text In File"]                                     floating enable
 
-for_window [app_id="pavucontrol"]                                            floating enable
-for_window [app_id="virt-manager"]                                           floating enable
-for_window [app_id="nm-connection-editor"]                                   floating enable
+for_window [app_id="pavucontrol"]                                                                  floating enable
+for_window [app_id="virt-manager"]                                                                 floating enable
+for_window [app_id="nm-connection-editor"]                                                         floating enable
 
-for_window [class="jetbrains-.*" title="win0|Welcome to .*"]                 floating enable
-for_window [class="VirtualBox"]                                              floating enable
+for_window [class="jetbrains-.*" title="win0|Welcome to .*|Open Project|Rename|Go to Line/Column"] floating enable
+for_window [class="VirtualBox"]                                                                    floating enable
 
-for_window [window_role="pop-up"]                                            floating enable
-for_window [window_role="bubble"]                                            floating enable
-for_window [window_role="dialog"]                                            floating enable
-for_window [window_type="dialog"]                                            floating enable
-for_window [window_role="task_dialog"]                                       floating enable
-for_window [window_role="Preferences"]                                       floating enable
-for_window [window_role="Open Files"]                                        floating enable sticky
-for_window [window_role="File Operation Progress"]                           floating enable sticky
-for_window [window_role="Save As"]                                           floating enable
-for_window [window_type="menu"]                                              floating enable
-for_window [window_role="page-info"]                                         floating enable
+for_window [window_role="pop-up"]                                                                  floating enable
+for_window [window_role="bubble"]                                                                  floating enable
+for_window [window_role="dialog"]                                                                  floating enable
+for_window [window_type="dialog"]                                                                  floating enable
+for_window [window_role="task_dialog"]                                                             floating enable
+for_window [window_role="Preferences"]                                                             floating enable
+for_window [window_role="Open Files"]                                                              floating enable sticky
+for_window [window_role="File Operation Progress"]                                                 floating enable sticky
+for_window [window_role="Save As"]                                                                 floating enable
+for_window [window_type="menu"]                                                                    floating enable
+for_window [window_role="page-info"]                                                               floating enable
 
 # Status Bar
 bar {

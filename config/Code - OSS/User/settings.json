@@ -56,40 +56,6 @@
   "go.autocompleteUnimportedPackages": true,
   "go.docsTool": "gogetdoc",
   "go.useLanguageServer": true,
-  // VIM
-  "vim.easymotion": false,
-  "vim.incsearch": true,
-  "vim.useSystemClipboard": true,
-  "vim.useCtrlKeys": true,
-  "vim.hlsearch": true,
-  "vim.statusBarColorControl": false,
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": ["<C-n>"],
-      "commands": [":nohl"]
-    },
-    {
-      "before": ["leader", "w"],
-      "commands": ["workbench.action.files.save"]
-    },
-    {
-      "before": ["leader", "o"],
-      "commands": ["workbench.action.files.openFile"]
-    },
-    {
-      "before": ["leader", "n"],
-      "commands": ["workbench.action.files.newUntitledFile"]
-    },
-    {
-      "before": [":"],
-      "commands": ["workbench.action.showCommands"]
-    }
-  ],
-  "vim.leader": "<space>",
-  "vim.handleKeys": {
-    "<C-a>": false,
-    "<C-f>": false
-  },
   // OTHER
   "search.smartCase": true,
   "terminal.integrated.cursorBlinking": true,
@@ -99,15 +65,7 @@
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
   "window.zoomLevel": 0,
-  "python.jediEnabled": false,
-  "[markdown]": {
-    "editor.defaultFormatter": "mrmlnc.vscode-remark"
-  },
   "liveServer.settings.donotShowInfoMsg": true,
-  "prettier.packageManager": "yarn",
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "typescript.updateImportsOnFileMove.enabled": "always",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "Night Owl",
@@ -116,7 +74,14 @@
     "**/node_modules/*"
   ],
   "go.formatTool": "gofumports",
-  "editor.renameOnType": true,
   "files.enableTrash": false,
-  "lua-local.interpreter": "lua"
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.format.semicolons": "insert",
+  "prettier.eslintIntegration": true
+
 }

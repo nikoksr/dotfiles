@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+if [ "$(cat /sys/class/power_supply/BAT0/status)" = "Discharging" ]; then
+    light -S 20
+else
+    light -S 100
+fi
+
